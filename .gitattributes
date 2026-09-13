@@ -1,0 +1,8 @@
+# Hash-pinned evaluation input must be byte-identical on every platform.
+tests/fixtures/rag_router_heldout_v1.json text eol=lf
+
+# Executable shell entrypoints must stay runnable after a Windows checkout.
+*.sh text eol=lf
+*.command text eol=lf
+.githooks/* text eol=lf
+integrations/openclaw/offerclaw-launcher.sh.tmpl text eol=lf

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "adv01",
+    "q": "vLLM 的 PagedAttention 具体怎么把 KV cache 切成 block 管理，显存碎片是怎么算出来的",
+    "note": "KB 的 RAG/推理章节讲检索链路和量化，从未讲推理服务框架的 KV cache 分页/block 分配与显存计算。'KV 缓存''prefix caching''分页注意力'在 md 正文 0 命中；PagedAttention 仅在图注/json 素材里出现，正文无原理解释。属于 in-domain-sounding 但 KB 无答案。"
+  },
+  {
+    "id": "adv02",
+    "q": "Mixture-of-Experts (MoE) 的负载均衡损失 auxiliary loss 怎么设计，专家路由不均衡怎么解决",
+    "note": "'负载均衡损失''auxiliary loss''Mixture-of-Experts'在 KB md 0 命中。MoE 全库仅作为 'Llama 4 采用 MoE 架构' 一句名词带过（hello_agents 里），从不解释 gating/路由/均衡损失。问的是 KB 完全没有的训练细节。"
+  },
+  {
+    "id": "adv03",
+    "q": "GraphRAG 的社区检测用的是哪种算法，Leiden 聚类的分辨率参数怎么调",
+    "note": "KB 的 rag技术入门里 GraphRAG 只讲'知识图谱检索'概念（对应 rag15 positive），从不涉及社区检测算法/Leiden/分辨率参数。'GraphRAG 社区检测算法'phrase 0 命中；'社区检测''Leiden'仅在 json 素材出现，md 正文无算法实现。paraphrase 把 ask 移到了未覆盖的图算法细节。"
+  },
+  {
+    "id": "adv04",
+    "q": "分组查询注意力 GQA 和多查询注意力 MQA 的原理是什么，KV head 是怎么分组共享的",
+    "note": "'分组查询注意力'在 md 0 命中；'GQA'仅作为技术全景图里一个 bullet 名词（'MQA / GQA'）出现，从无原理解释。Transformer 章只讲标准 multi-head self-attention，不讲 GQA/MQA 的 KV head 共享。听起来是 Transformer 八股，实则 KB 未覆盖。"
+  },
+  {
+    "id": "adv05",
+    "q": "推测解码 speculative decoding 的投机采样怎么用小模型草稿加速大模型推理，接受率怎么保证分布一致",
+    "note": "'推测解码''投机采样'在 KB md 0 命中。模型压缩章讲蒸馏/剪枝/量化，从不讲 speculative decoding 这条推理加速路线，也不讲草稿模型/接受率/分布无损。in-domain 推理优化话题但 KB 无答案。"
+  },
+  {
+    "id": "adv06",
+    "q": "长上下文外推怎么做，YaRN 和 NTK-aware 插值对 RoPE 的缩放公式是怎么推的",
+    "note": "'YaRN''长上下文外推'在 KB md 0 命中。Transformer 章讲了位置编码/RoPE 的基础概念，但完全不涉及长度外推、NTK-aware、YaRN 这类扩窗技术的缩放公式。paraphrase 从'位置编码是什么'（已覆盖）移到了'外推公式怎么推'（未覆盖）。"
+  },
+  {
+    "id": "adv07",
+    "q": "向量检索里乘积量化 PQ 和 IVF-PQ 是怎么压缩向量、加速 ANN 的，和 HNSW 相比取舍在哪",
+    "note": "'乘积量化''标量量化''IVFPQ'在 md 0 命中，'IVF'仅 1 处名词。KB 的 rag_full_chain 讲了 HNSW（对应 rag11 positive），但从不讲 PQ/IVF-PQ 的量化压缩原理与取舍。听起来是向量检索八股，KB 只覆盖 HNSW 一种、不覆盖量化型索引。"
+  },
+  {
+    "id": "adv08",
+    "q": "微服务里服务熔断 circuit breaker 怎么实现，半开状态和滑动窗口统计怎么设计，和限流算法怎么配合",
+    "note": "'熔断''circuit breaker''限流算法'在 KB md 0 命中。backend 八股覆盖 network/OS/MySQL/Redis/MQ/设计模式，没有服务治理/熔断/限流章节（'限流'仅在 MQ 消费端一句话带过令牌桶，无熔断/半开/滑窗）。in-domain-sounding 后端题但 KB 无答案。"
+  },
+  {
+    "id": "adv09",
+    "q": "分布式事务的 TCC、SAGA、本地消息表几种方案怎么选，最终一致性怎么保证",
+    "note": "'分布式事务''TCC''SAGA''本地消息表'在 KB md 0 命中（TCC/SAGA 仅在 json 素材/audit 出现，非正文）。MySQL 章讲的是单机事务 ACID/隔离级别（对应 be04 positive），完全不涉及分布式事务方案。paraphrase 把'事务隔离级别'的 ask 移到未覆盖的分布式一致性方案。"
+  },
+  {
+    "id": "adv10",
+    "q": "大模型训练的 ZeRO 三个 stage、FSDP、张量并行、流水线并行怎么组合切分显存",
+    "note": "'FSDP'在 md 0 命中；'张量并行''流水线并行''ZeRO'仅在技术全景图/planner 章作为名词罗列，从无 stage 切分/组合原理。训练全过程章讲预训练/SFT/RLHF 的流程（对应 alg05/alg09），不讲分布式并行显存切分实现。听起来是训练八股，实则 KB 未覆盖并行策略细节。"
+  },
+  {
+    "id": "adv11",
+    "q": "RAG 生产环境怎么加语义缓存 semantic cache，query embedding 相似度命中阈值怎么定才不返回错答案",
+    "note": "'语义缓存''semantic cache''prefix caching'在 KB md 0 命中。rag_full_chain 讲了上下文压缩/rerank/CRAG 等链路优化（rag07/rag10/rag12 positives），但从不讲基于 embedding 相似度的语义缓存层及命中阈值。in-domain RAG 工程话题但 KB 无答案。"
+  },
+  {
+    "id": "adv12",
+    "q": "多个微调后的模型怎么用 MergeKit 做模型融合，任务向量 task vector 相加会不会互相干扰",
+    "note": "'MergeKit''模型融合''任务向量''task vector'在 KB md 0 命中。LoRA 章讲的是单模型低秩微调省显存（对应 alg04 positive），完全不涉及模型合并/task arithmetic/权重融合。paraphrase 从'LoRA 怎么省显存'（已覆盖）移到了'多模型融合怎么做'（未覆盖）。"
+  }
+]

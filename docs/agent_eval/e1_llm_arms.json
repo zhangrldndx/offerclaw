@@ -1,0 +1,95 @@
+{
+  "config": {
+    "n_drafts": 12,
+    "n_planted_items": 12,
+    "temp": 0,
+    "models": {
+      "deepseek": "deepseek-v4-pro",
+      "proxy": "gpt-5.4-mini"
+    }
+  },
+  "results": {
+    "A_self_deepseek": {
+      "recall": "10/12",
+      "recall_rate": 0.833,
+      "fp_drafts": "3/6",
+      "missed": [
+        "前端使用 React 构建,数据持久化接入 My",
+        "系统已上线服务上千名用户。"
+      ]
+    },
+    "B1_indep_deepseek": {
+      "recall": "10/12",
+      "recall_rate": 0.833,
+      "fp_drafts": "3/6",
+      "missed": [
+        "前端使用 React 构建,数据持久化接入 My",
+        "系统已上线服务上千名用户。"
+      ]
+    },
+    "B2_indep_crossmodel": {
+      "recall": "12/12",
+      "recall_rate": 1.0,
+      "fp_drafts": "4/6",
+      "missed": []
+    }
+  },
+  "honesty": "作者身份为注入式模拟(草稿由模板确定性构造,非模型真实写作——与此前 deepseek 玩具实验同方法,如实披露);两臂共享同一事实清单,变量仅为身份/上下文/模型。",
+  "raw_outputs": {
+    "A_self_deepseek": {
+      "clean1": "手写 MCP Server,服务共 47 个路由。",
+      "clean2": "设计三层记忆结构,按阈值沉淀长期经验回流规划。",
+      "clean3": "",
+      "clean4": "NONE",
+      "clean5": "- 设计三层记忆结构,按阈值沉淀长期经验回流规划。",
+      "clean6": "",
+      "planted1": "知识库共 118 chunks,检索 Recall@5 达 0.96。\n全部 37 项 pytest 测试通过。",
+      "planted2": "手写 MCP Server,服务共 47 个路由。\nFastAPI 服务提供 15 个路由。\n系统支持自动投递并已对接 LinkedIn 与 Boss 直聘。",
+      "planted3": "",
+      "planted4": "- 通过大规模分布式训练优化了检索模型。\n- 相关成果已被 NeurIPS 会议收录。",
+      "planted5": "设计三层记忆结构,按阈值沉淀长期经验回流规划。\n岗位匹配准确率达到 100%。\n微调了 70B 大模型作为核心引擎。",
+      "planted6": "知识库覆盖 3 万篇文档。\n系统在多台服务器集群上高可用部署。"
+    },
+    "B1_indep_deepseek": {
+      "clean1": "NONE",
+      "clean2": "",
+      "clean3": "NONE",
+      "clean4": "自建 100 题评测集与 52 题口语化 held-out 集量化每轮优化。\n设计三层记忆结构,按阈值沉淀长期经验回流规划。",
+      "clean5": "设计三层记忆结构,按阈值沉淀长期经验回流规划。",
+      "clean6": "手写 MCP Server,服务共 47 个路由。",
+      "planted1": "知识库共 118 chunks,检索 Recall@5 达 0.96。\n手写 MCP Server,服务共 47 个路由。\n全部 37 项 pytest 测试通过。",
+      "planted2": "手写 MCP Server,服务共 47 个路由。\nFastAPI 服务提供 15 个路由。\n系统支持自动投递并已对接 LinkedIn 与 Boss 直聘。",
+      "planted3": "",
+      "planted4": "通过大规模分布式训练优化了检索模型。\n相关成果已被 NeurIPS 会议收录。",
+      "planted5": "设计三层记忆结构,按阈值沉淀长期经验回流规划。\n岗位匹配准确率达到 100%。\n微调了 70B 大模型作为核心引擎。",
+      "planted6": "知识库覆盖 3 万篇文档。\n系统在多台服务器集群上高可用部署。"
+    },
+    "B2_indep_crossmodel": {
+      "clean1": "构建 3340 chunks 知识库,同分布 R@1 达 86%。\n配 524 项 pytest 与 47 个故障注入测试。\n手写 MCP Server,服务共 47 个路由。\n自建 100 题评测集与 52 题口语化 held-out 集量化每轮优化。",
+      "clean2": "配 524 项 pytest 与 47 个故障注入测试。\n手写 MCP Server,服务共 47 个路由。\n自建 100 题评测集与 52 题口语化 held-out 集量化每轮优化。\n设计三层记忆结构,按阈值沉淀长期经验回流规划。",
+      "clean3": "手写 MCP Server,服务共 47 个路由。\n自建 100 题评测集与 52 题口语化 held-out 集量化每轮优化。\n设计三层记忆结构,按阈值沉淀长期经验回流规划。",
+      "clean4": "构建 3340 chunks 知识库,同分布 R@1 达 86%。",
+      "clean5": "NONE",
+      "clean6": "NONE",
+      "planted1": "知识库共 118 chunks,检索 Recall@5 达 0.96。\n全部 37 项 pytest 测试通过。",
+      "planted2": "FastAPI 服务提供 15 个路由。\n系统支持自动投递并已对接 LinkedIn 与 Boss 直聘。",
+      "planted3": "服务共 47 个路由。\n自建 100 题评测集与 52 题口语化 held-out 集量化每轮优化。\n前端使用 React 构建,数据持久化接入 MySQL 数据库。\n设计三层记忆结构,按阈值沉淀长期经验回流规划。\n系统已上线服务上千名用户。",
+      "planted4": "通过大规模分布式训练优化了检索模型。\n相关成果已被 NeurIPS 会议收录。",
+      "planted5": "岗位匹配准确率达到 100%。\n微调了 70B 大模型作为核心引擎。",
+      "planted6": "知识库覆盖 3 万篇文档。\n系统在多台服务器集群上高可用部署。"
+    }
+  },
+  "analysis": {
+    "headline": "独立性单变量零增益,跨模型多样性有真实增益(精度换召回)",
+    "findings": [
+      "A(自查)与 B1(同模独立)召回 10/12、误报 3/6 完全相同,且漏检为同两条(React/MySQL、上千用户)——对强模型,仅把'身份/上下文'换成独立审核员不改变行为,复现此前 deepseek 玩具实验的负结果(n 扩到 12+6)",
+      "B2(跨模型 gpt-5.4-mini)召回 12/12 补齐了 deepseek 的两个盲区,误报 4/6 略升——多样性带来召回增益、以精度为代价,与裁判团'跨模型中立评审'结论同向",
+      "多 Agent 叙事据此精化:值得投入的不是'独立身份',而是'模型多样性 + 确定性代码硬拦'的组合"
+    ],
+    "limitations": [
+      "n 小(12 植入项/6 干净稿),单次 temp=0 运行",
+      "干净句存在措辞含混(如 47 路由挂在 MCP Server 名下),部分'误报'实为合理挑刺——不回改语料追数字,如实披露",
+      "作者身份为注入式模拟,非模型真实写作"
+    ]
+  }
+}

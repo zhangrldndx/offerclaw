@@ -1,0 +1,365 @@
+{
+ "description": "Final 拒答集 v1(trivial 30 + adversarial 30,用户独立出题)",
+ "items": [
+  {
+   "id": "nf01",
+   "kind": "trivial",
+   "q": "上海今天晚上会不会下雨，出门要带伞吗？",
+   "note": "知识库没有实时天气。"
+  },
+  {
+   "id": "nf02",
+   "kind": "trivial",
+   "q": "今天人民币兑美元的实时汇率是多少？",
+   "note": "知识库没有实时外汇行情。"
+  },
+  {
+   "id": "nf03",
+   "kind": "trivial",
+   "q": "昨晚 NBA 湖人队比赛最终比分是多少？",
+   "note": "知识库没有体育赛果。"
+  },
+  {
+   "id": "nf04",
+   "kind": "trivial",
+   "q": "现在贵州茅台的股价和今日涨跌幅是多少？",
+   "note": "知识库没有实时股票行情。"
+  },
+  {
+   "id": "nf05",
+   "kind": "trivial",
+   "q": "明天从上海飞北京的 MU5101 会不会延误？",
+   "note": "知识库没有航班动态。"
+  },
+  {
+   "id": "nf06",
+   "kind": "trivial",
+   "q": "我这个快递单号现在送到哪个网点了？",
+   "note": "知识库没有物流跟踪数据。"
+  },
+  {
+   "id": "nf07",
+   "kind": "trivial",
+   "q": "周末杭州西湖附近哪家餐厅评分最高？",
+   "note": "知识库没有餐厅与点评数据。"
+  },
+  {
+   "id": "nf08",
+   "kind": "trivial",
+   "q": "红烧肉怎么做才能肥而不腻？",
+   "note": "知识库没有菜谱。"
+  },
+  {
+   "id": "nf09",
+   "kind": "trivial",
+   "q": "最近哪位明星官宣结婚了？",
+   "note": "知识库没有娱乐新闻。"
+  },
+  {
+   "id": "nf10",
+   "kind": "trivial",
+   "q": "今年暑期档票房最高的电影是哪一部？",
+   "note": "知识库没有实时票房数据。"
+  },
+  {
+   "id": "nf11",
+   "kind": "trivial",
+   "q": "我是天秤座，今天的感情运势怎么样？",
+   "note": "知识库没有星座运势。"
+  },
+  {
+   "id": "nf12",
+   "kind": "trivial",
+   "q": "北京故宫明天几点开门，还有余票吗？",
+   "note": "知识库没有景点实时信息。"
+  },
+  {
+   "id": "nf13",
+   "kind": "trivial",
+   "q": "iPhone 最新款在京东现在卖多少钱？",
+   "note": "知识库没有商品价格。"
+  },
+  {
+   "id": "nf14",
+   "kind": "trivial",
+   "q": "《英雄联盟》这个版本哪个英雄胜率最高？",
+   "note": "知识库没有游戏版本数据。"
+  },
+  {
+   "id": "nf15",
+   "kind": "trivial",
+   "q": "帮我推荐一首适合婚礼入场的流行歌。",
+   "note": "知识库没有音乐推荐资料。"
+  },
+  {
+   "id": "nf16",
+   "kind": "trivial",
+   "q": "把《某首流行歌》的完整歌词发给我。",
+   "note": "知识库没有歌词，且不应靠 RAG 编造。"
+  },
+  {
+   "id": "nf17",
+   "kind": "trivial",
+   "q": "清朝乾隆皇帝一共有多少个儿子？",
+   "note": "知识库不覆盖通史问答。"
+  },
+  {
+   "id": "nf18",
+   "kind": "trivial",
+   "q": "用法语怎么说“祝你生日快乐”？",
+   "note": "知识库不覆盖通用翻译。"
+  },
+  {
+   "id": "nf19",
+   "kind": "trivial",
+   "q": "1234567 乘以 891011 等于多少？",
+   "note": "知识库不是计算器语料。"
+  },
+  {
+   "id": "nf20",
+   "kind": "trivial",
+   "q": "2027 年 1 月 1 日是星期几？",
+   "note": "知识库不提供日历计算。"
+  },
+  {
+   "id": "nf21",
+   "kind": "trivial",
+   "q": "我头痛还发烧两天了，应该吃什么药？",
+   "note": "知识库没有医疗诊断与用药依据，应拒绝或转专业渠道。"
+  },
+  {
+   "id": "nf22",
+   "kind": "trivial",
+   "q": "租房合同里押金不退，我现在起诉能赢吗？",
+   "note": "知识库没有法律案情与现行法规依据。"
+  },
+  {
+   "id": "nf23",
+   "kind": "trivial",
+   "q": "我有十万元闲钱，现在全买比特币合适吗？",
+   "note": "知识库没有个人投资决策依据。"
+  },
+  {
+   "id": "nf24",
+   "kind": "trivial",
+   "q": "帮我制定一个三个月减重二十公斤的食谱。",
+   "note": "知识库没有营养与健康方案。"
+  },
+  {
+   "id": "nf25",
+   "kind": "trivial",
+   "q": "上海早高峰现在从浦东到虹桥要开多久？",
+   "note": "知识库没有实时路况。"
+  },
+  {
+   "id": "nf26",
+   "kind": "trivial",
+   "q": "今年世界杯预选赛中国队小组排名第几？",
+   "note": "知识库没有体育排名。"
+  },
+  {
+   "id": "nf27",
+   "kind": "trivial",
+   "q": "今天微博热搜第一是什么？",
+   "note": "知识库没有社交平台实时热点。"
+  },
+  {
+   "id": "nf28",
+   "kind": "trivial",
+   "q": "附近哪家宠物医院现在还营业？",
+   "note": "知识库没有本地商户状态。"
+  },
+  {
+   "id": "nf29",
+   "kind": "trivial",
+   "q": "帮我查一下本周六上海到苏州最便宜的高铁票。",
+   "note": "知识库没有票务价格与余票。"
+  },
+  {
+   "id": "nf30",
+   "kind": "trivial",
+   "q": "今天国内最重要的三条新闻是什么？",
+   "note": "知识库没有实时新闻源。"
+  },
+  {
+   "id": "nf31",
+   "kind": "adversarial",
+   "q": "SPLADE 怎样通过词表维度的稀疏扩展同时学习关键词权重，它的 FLOPS 正则项为什么能控制索引稀疏度？",
+   "note": "RAG 域看似覆盖，但 `SPLADE`、`FLOPS regularizer` 在正式库 0 命中。"
+  },
+  {
+   "id": "nf32",
+   "kind": "adversarial",
+   "q": "SPTAG 的 BKT 索引怎样建多棵聚类树，查询时又怎样配合图搜索缩小近邻候选？",
+   "note": "向量检索域看似覆盖，但 `SPTAG`、`BKT index` 0 命中。"
+  },
+  {
+   "id": "nf33",
+   "kind": "adversarial",
+   "q": "NSG 索引里的 Navigating Node 怎么选，MRNG 剪边为什么能保留单调搜索路径？",
+   "note": "ANN 域看似覆盖，但 `NSG`、`Navigating Spreading-out Graph` 0 命中。"
+  },
+  {
+   "id": "nf34",
+   "kind": "adversarial",
+   "q": "DPR 训练双编码器时，in-batch negatives 的损失怎样构造，为什么同一批里的其他 passage 可以直接当负样本？",
+   "note": "Embedding 域看似覆盖，但 `DPR in-batch negatives` 0 命中。"
+  },
+  {
+   "id": "nf35",
+   "kind": "adversarial",
+   "q": "Magentic-One 的 Orchestrator Ledger 具体保存哪些任务事实、计划和进度，它什么时候会触发重新规划？",
+   "note": "Agent 规划域看似覆盖，但 `Magentic-One`、`Orchestrator Ledger` 0 命中。"
+  },
+  {
+   "id": "nf36",
+   "kind": "adversarial",
+   "q": "ReWOO 为什么把 Planner、Worker 和 Solver 分开，它怎样在执行工具前一次性生成带变量引用的完整计划？",
+   "note": "Agent 规划域看似覆盖，但 `ReWOO` 0 命中。"
+  },
+  {
+   "id": "nf37",
+   "kind": "adversarial",
+   "q": "BDI 智能体怎样在 belief、desire 和 intention 之间更新状态，承诺策略什么时候会放弃一个 intention？",
+   "note": "Agent 架构域看似覆盖，但 `belief-desire-intention` 0 命中。"
+  },
+  {
+   "id": "nf38",
+   "kind": "adversarial",
+   "q": "行为树里的 Selector、Sequence 和 Blackboard 怎样配合，节点返回 SUCCESS、FAILURE、RUNNING 时控制流怎么走？",
+   "note": "Planner 域看似覆盖，但 `behavior tree`、`blackboard node` 0 命中。"
+  },
+  {
+   "id": "nf39",
+   "kind": "adversarial",
+   "q": "OpenAI Agents SDK 的输入和输出 Guardrail 如何用 tripwire 中断运行，被触发后会抛出什么结果并怎样处理？",
+   "note": "工具与 Agent 域看似覆盖，但 `tripwire guardrail` 0 命中。"
+  },
+  {
+   "id": "nf40",
+   "kind": "adversarial",
+   "q": "MCP 的 sampling/createMessage 和 elicitation/create 分别让 Server 向 Client 请求什么能力，两者的权限边界有什么不同？",
+   "note": "MCP 基础已覆盖，但 `sampling/createMessage`、`elicitation/create` 0 命中。"
+  },
+  {
+   "id": "nf41",
+   "kind": "adversarial",
+   "q": "InnoDB Change Buffer 在什么条件下缓存二级索引页修改，后台合并时怎样降低随机 I/O？",
+   "note": "MySQL 域已覆盖，但 `Change Buffer` 0 命中。"
+  },
+  {
+   "id": "nf42",
+   "kind": "adversarial",
+   "q": "InnoDB 自适应哈希索引什么时候从 B+ 树访问模式中自动建立，发生争用时为什么可能反而拖慢性能？",
+   "note": "MySQL 索引域已覆盖，但 `adaptive hash index` 0 命中。"
+  },
+  {
+   "id": "nf43",
+   "kind": "adversarial",
+   "q": "InnoDB Doublewrite Buffer 怎样避免数据页只写了一半，崩溃恢复时如何判断该用双写区还是 redo log？",
+   "note": "MySQL 日志与恢复域已覆盖，但 `doublewrite buffer` 0 命中。"
+  },
+  {
+   "id": "nf44",
+   "kind": "adversarial",
+   "q": "PostgreSQL 的 VACUUM FREEZE 为什么要处理事务 ID 回卷，冻结元组后可见性判断发生什么变化？",
+   "note": "数据库 MVCC 域已覆盖，但 `VACUUM FREEZE`、`PostgreSQL MVCC` 0 命中。"
+  },
+  {
+   "id": "nf45",
+   "kind": "adversarial",
+   "q": "Redis 的 LFU 不是简单加一计数，它的对数计数器和衰减时间怎样共同避免老热点永远占优势？",
+   "note": "Redis 淘汰域已覆盖，但 `lfu-log-factor`、`lfu-decay-time` 0 命中。"
+  },
+  {
+   "id": "nf46",
+   "kind": "adversarial",
+   "q": "Redis active defragmentation 怎样边运行边搬迁对象并修正指针，它和直接重启实例整理碎片相比有什么代价？",
+   "note": "Redis 内存域已覆盖，但 `active defragmentation` 0 命中。"
+  },
+  {
+   "id": "nf47",
+   "kind": "adversarial",
+   "q": "Kafka 的幂等生产者、事务协调器和 read_committed 隔离怎样组合成端到端 exactly-once semantics？",
+   "note": "MQ 域已覆盖，但 `idempotent producer`、`transaction coordinator` 0 命中。"
+  },
+  {
+   "id": "nf48",
+   "kind": "adversarial",
+   "q": "RocketMQ 的 CommitLog、ConsumeQueue 和 IndexFile 各自存什么，消费者按主题查消息时要经过哪几层？",
+   "note": "MQ 域已覆盖，但 `CommitLog`、`ConsumeQueue` 0 命中。"
+  },
+  {
+   "id": "nf49",
+   "kind": "adversarial",
+   "q": "RabbitMQ quorum queue 怎样用 Raft 复制日志，leader 故障后未确认消息如何在新 leader 上继续保证一致性？",
+   "note": "MQ 域已覆盖，但 `quorum queue` 0 命中。"
+  },
+  {
+   "id": "nf50",
+   "kind": "adversarial",
+   "q": "eBPF 程序加载前，Verifier 怎样证明循环可终止和内存访问安全，Map 与 tail call 又怎样扩展程序能力？",
+   "note": "操作系统域已覆盖，但 `eBPF`、`BPF verifier`、`tail call` 0 命中。"
+  },
+  {
+   "id": "nf51",
+   "kind": "adversarial",
+   "q": "PiSSA 为什么用权重矩阵的主奇异向量初始化低秩适配器，这和随机初始化 LoRA 的收敛差别是什么？",
+   "note": "LoRA 域已覆盖，但 `PiSSA`、`SVD initialization` 0 命中。"
+  },
+  {
+   "id": "nf52",
+   "kind": "adversarial",
+   "q": "ReFT 不改权重而在隐藏表示上学习低秩干预时，干预位置和表示子空间怎样选择？",
+   "note": "微调域已覆盖，但 `ReFT`、`representation fine-tuning` 0 命中。"
+  },
+  {
+   "id": "nf53",
+   "kind": "adversarial",
+   "q": "RWKV 的 WKV recurrence 怎样把 Transformer 式训练并行与 RNN 式常数内存推理结合起来？",
+   "note": "模型架构域已覆盖，但 `RWKV`、`WKV recurrence` 0 命中。"
+  },
+  {
+   "id": "nf54",
+   "kind": "adversarial",
+   "q": "扩散模型的 classifier-free guidance 为什么要把有条件和无条件噪声预测做线性组合，CFG scale 太大有什么副作用？",
+   "note": "大模型算法域看似覆盖，但 `classifier-free guidance`、`CFG scale` 0 命中。"
+  },
+  {
+   "id": "nf55",
+   "kind": "adversarial",
+   "q": "LoRA+ 为什么给 A、B 两个低秩矩阵设置不同学习率，学习率比值对大宽度模型的训练效率有什么影响？",
+   "note": "LoRA 域已覆盖，但 `LoRA+`、`LoRA Plus` 0 命中。"
+  },
+  {
+   "id": "nf56",
+   "kind": "adversarial",
+   "q": "Ring Attention 怎样把超长序列分到多张卡上，并通过环形传递 K/V 块避免每张卡保存完整上下文？",
+   "note": "长上下文域看似覆盖，但 `Ring Attention` 0 命中。"
+  },
+  {
+   "id": "nf57",
+   "kind": "adversarial",
+   "q": "DeepSpeed Ulysses 的序列并行为什么需要 all-to-all，把注意力头和序列维度来回转置时通信量怎么算？",
+   "note": "分布式训练域看似覆盖，但 `DeepSpeed Ulysses` 0 命中。"
+  },
+  {
+   "id": "nf58",
+   "kind": "adversarial",
+   "q": "EAGLE-2 的动态草稿树怎样根据置信度扩展节点，目标模型一次验证多条候选路径时接受规则是什么？",
+   "note": "推理加速域看似覆盖，但 `EAGLE-2` 0 命中。"
+  },
+  {
+   "id": "nf59",
+   "kind": "adversarial",
+   "q": "Mixture of Depths 怎样给每个 token 决定是否跳过某一层，固定计算预算下的路由容量约束怎么实现？",
+   "note": "Transformer 优化域看似覆盖，但 `Mixture of Depths`、`MoD routing` 0 命中。"
+  },
+  {
+   "id": "nf60",
+   "kind": "adversarial",
+   "q": "BitNet b1.58 把权重量化为 -1、0、1 时怎样保持训练稳定，激活量化和缩放因子如何计算？",
+   "note": "模型量化域已覆盖，但 `BitNet`、`1.58-bit` 0 命中。"
+  }
+ ]
+}

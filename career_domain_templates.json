@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "description": "OfferClaw 通用职业域规则模板。仅用于旧技术岗规则未覆盖时的方向归一、相关专业解释和非技术能力词抽取；不修改用户画像，不参与硬门槛自由裁决。",
+  "domains": [
+    {
+      "id": "software_engineering",
+      "name": "软件研发",
+      "title_aliases": ["软件工程师", "开发工程师", "后端工程师", "后端开发", "服务端开发", "前端工程师", "前端开发", "全栈工程师", "客户端工程师", "测试开发", "运维开发", "数据工程师", "数据工程", "devops", "sre"],
+      "competency_keywords": ["软件开发", "系统设计", "接口开发", "数据库", "分布式", "自动化测试", "持续集成", "故障排查"],
+      "major_keywords": ["计算机", "软件", "网络工程", "信息安全", "电子信息", "自动化"],
+      "related_domains": ["data_analytics", "product"]
+    },
+    {
+      "id": "ai_engineering",
+      "name": "人工智能",
+      "title_aliases": ["人工智能工程师", "算法工程师", "机器学习工程师", "大模型工程师", "大模型应用", "大模型训练", "智能体工程师", "推荐算法", "多模态算法", "语音算法", "ai工程师", "ai应用开发"],
+      "competency_keywords": ["机器学习", "深度学习", "模型训练", "模型评测", "大模型", "llm", "agent", "prompt", "workflow", "智能体", "rag", "检索增强", "自然语言处理", "计算机视觉", "推荐系统", "多模态"],
+      "major_keywords": ["人工智能", "计算机", "软件", "通信", "电子", "信息", "数据", "自动化", "数学", "统计"],
+      "related_domains": ["software_engineering", "data_analytics"]
+    },
+    {
+      "id": "data_analytics",
+      "name": "数据分析",
+      "title_aliases": ["数据分析师", "商业分析师", "经营分析", "数据运营", "bi分析师", "数据科学家"],
+      "competency_keywords": ["数据分析", "指标体系", "数据可视化", "商业分析", "经营分析", "统计分析", "实验分析", "用户分析", "报表"],
+      "major_keywords": ["统计", "数学", "数据", "计算机", "经济", "金融", "管理科学", "信息管理"],
+      "related_domains": ["product", "operations", "finance", "software_engineering"]
+    },
+    {
+      "id": "product",
+      "name": "产品",
+      "title_aliases": ["产品经理", "产品专员", "产品助理", "策略产品", "商业产品", "平台产品", "增长产品", "产品策划"],
+      "competency_keywords": ["需求分析", "用户研究", "竞品分析", "产品规划", "原型设计", "需求文档", "产品迭代", "项目推进", "数据分析"],
+      "major_keywords": ["计算机", "软件", "信息管理", "工业工程", "工商管理", "市场营销", "心理学", "设计"],
+      "related_domains": ["operations", "data_analytics", "design", "software_engineering"]
+    },
+    {
+      "id": "operations",
+      "name": "运营",
+      "title_aliases": ["用户运营", "内容运营", "活动运营", "增长运营", "社区运营", "商家运营", "品类运营", "新媒体运营", "产品运营", "运营专员"],
+      "competency_keywords": ["用户增长", "用户分层", "活动策划", "内容策划", "社群运营", "渠道运营", "转化率", "留存率", "复盘", "数据分析"],
+      "major_keywords": ["市场营销", "工商管理", "新闻", "传播", "中文", "广告", "电子商务", "经济", "统计"],
+      "related_domains": ["product", "marketing_sales", "data_analytics", "customer_service"]
+    },
+    {
+      "id": "design",
+      "name": "设计",
+      "title_aliases": ["ui设计师", "ux设计师", "交互设计师", "视觉设计师", "平面设计师", "工业设计师", "产品设计师", "用户体验设计师"],
+      "competency_keywords": ["交互设计", "视觉设计", "用户体验", "用户研究", "设计系统", "原型设计", "可用性测试", "作品集", "品牌设计"],
+      "major_keywords": ["视觉传达", "工业设计", "交互设计", "数字媒体", "美术", "艺术设计", "心理学"],
+      "related_domains": ["product", "operations", "marketing_sales"]
+    },
+    {
+      "id": "marketing_sales",
+      "name": "市场与销售",
+      "title_aliases": ["市场专员", "市场经理", "品牌专员", "品牌经理", "销售代表", "销售经理", "商务拓展", "客户经理", "渠道经理", "广告投放"],
+      "competency_keywords": ["市场调研", "品牌营销", "营销策划", "广告投放", "渠道拓展", "客户开发", "商务谈判", "销售业绩", "客户关系", "线索转化"],
+      "major_keywords": ["市场营销", "工商管理", "广告", "传播", "经济", "国际贸易", "电子商务"],
+      "related_domains": ["operations", "customer_service", "product"]
+    },
+    {
+      "id": "finance",
+      "name": "财务金融",
+      "title_aliases": ["财务分析", "财务专员", "会计", "审计", "税务", "金融分析师", "风控分析师", "投研助理"],
+      "competency_keywords": ["财务分析", "会计核算", "预算管理", "成本分析", "审计", "税务", "风险控制", "估值", "财务报表"],
+      "major_keywords": ["会计", "财务管理", "金融", "经济", "审计", "税务", "统计"],
+      "related_domains": ["data_analytics"]
+    },
+    {
+      "id": "human_resources",
+      "name": "人力资源",
+      "title_aliases": ["人力资源专员", "招聘专员", "hrbp", "培训专员", "薪酬绩效", "员工关系"],
+      "competency_keywords": ["人才招聘", "面试组织", "员工关系", "培训发展", "绩效管理", "薪酬福利", "组织发展", "人才盘点"],
+      "major_keywords": ["人力资源", "工商管理", "劳动关系", "心理学", "社会学", "法学"],
+      "related_domains": ["operations"]
+    },
+    {
+      "id": "customer_service",
+      "name": "客户服务",
+      "title_aliases": ["客户服务", "客服专员", "售后支持", "技术支持", "客户成功", "服务运营"],
+      "competency_keywords": ["客户沟通", "工单处理", "问题解决", "客户满意度", "服务流程", "投诉处理", "客户成功", "续约"],
+      "major_keywords": ["工商管理", "市场营销", "电子商务", "旅游管理", "酒店管理", "计算机"],
+      "related_domains": ["operations", "marketing_sales"]
+    },
+    {
+      "id": "chip_hardware",
+      "name": "芯片与硬件研发",
+      "title_aliases": ["芯片设计工程师", "数字IC工程师", "模拟IC工程师", "FPGA工程师", "ASIC工程师", "芯片验证工程师", "嵌入式硬件工程师"],
+      "competency_keywords": ["芯片设计", "RTL", "Verilog", "SystemVerilog", "FPGA", "ASIC", "时序分析", "版图", "硬件验证"],
+      "major_keywords": ["微电子", "集成电路", "电子", "通信", "自动化", "计算机", "物理"],
+      "related_domains": ["software_engineering"]
+    },
+    {
+      "id": "biomedical_research",
+      "name": "医药与生命科学研究",
+      "title_aliases": ["药物研发", "医药科研", "临床研究", "生物信息工程师", "计算生物学", "医学研究员", "研发科学家"],
+      "competency_keywords": ["药物研发", "临床研究", "生物信息", "实验设计", "分子生物学", "药理", "医学统计", "文献研究"],
+      "major_keywords": ["医学", "药学", "生物", "化学", "公共卫生", "统计"],
+      "related_domains": ["data_analytics"]
+    }
+  ]
+}

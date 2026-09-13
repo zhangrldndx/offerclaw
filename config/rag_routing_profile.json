@@ -1,0 +1,9 @@
+{
+  "version": "routing-profile-v1",
+  "semantic_accept_score": 0.7,
+  "semantic_margin": 0.08,
+  "conflict_margin": 0.1,
+  "top_k_per_task": 3,
+  "max_routes": 8,
+  "calibration_status": "development-defaults; freeze after held-out calibration"
+}

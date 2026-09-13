@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+# Restricted OpenClaw entry point. Arguments are forwarded as an array, never eval'd.
+set -euo pipefail
+umask 077
+
+readonly OFFERCLAW_DIR="{{OFFERCLAW_DIR}}"
+readonly PYTHON_BIN="{{PYTHON_BIN}}"
+export OFFERCLAW_WINDOWS_PYTHON="{{WINDOWS_PYTHON}}"
+export OFFERCLAW_WINDOWS_BRIDGE_SCRIPT="{{WINDOWS_BRIDGE_SCRIPT}}"
+export OFFERCLAW_WINDOWS_REPO_WSL="{{WINDOWS_REPO_WSL}}"
+export OFFERCLAW_REAL_INDEX_DIR="{{REAL_INDEX_DIR}}"
+export OFFERCLAW_REAL_INDEX_MANIFEST="{{REAL_INDEX_MANIFEST}}"
+readonly WECHAT_SCOPE_CONFIG="{{WECHAT_SCOPE_CONFIG}}"
+
+load_wechat_scope() {
+  [[ -r "$WECHAT_SCOPE_CONFIG" ]] || {
+    printf 'offerclaw-launcher: private scope is unavailable\n' >&2
+    exit 77
+  }
+  local scope_values=()
+  mapfile -t scope_values < <("$PYTHON_BIN" -c '
+import json,re,sys
+from pathlib import Path
+try:
+    value=json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+    accounts=value.get("account_ids")
+    senders=value.get("sender_ids")
+    valid=lambda rows: (isinstance(rows,list) and len(rows)==1
+                        and isinstance(rows[0],str)
+                        and re.fullmatch(r"[A-Za-z0-9_.@-]{1,256}", rows[0]))
+    if not valid(accounts) or not valid(senders):
+        raise ValueError("invalid scope")
+    print(accounts[0])
+    print(senders[0])
+except Exception:
+    raise SystemExit(1)
+' "$WECHAT_SCOPE_CONFIG")
+  [[ ${#scope_values[@]} -eq 2 ]] || {
+    printf 'offerclaw-launcher: private scope is invalid\n' >&2
+    exit 77
+  }
+  export OFFERCLAW_WECHAT_ALLOWED_ACCOUNT_IDS="${scope_values[0]}"
+  export OFFERCLAW_WECHAT_ALLOWED_SENDER_IDS="${scope_values[1]}"
+}
+
+# The dispatcher is intentionally short-lived. Point sentence-transformers at
+# the verified local snapshot so requests do not contact a model registry.
+readonly LOCAL_EMBEDDING_CACHE="${OFFERCLAW_LOCAL_EMBEDDING_MODEL:-$HOME/.cache/modelscope/BAAI/bge-base-zh-v1.5}"
+if [[ -d "$LOCAL_EMBEDDING_CACHE" ]]; then
+  export EMBEDDING_PROVIDER=local
+  export EMBEDDING_MODEL="$LOCAL_EMBEDDING_CACHE"
+fi
+
+command_name="${1:-}"
+if [[ -z "$command_name" ]]; then
+  printf 'usage: offerclaw-launcher <command> [args]\n' >&2
+  exit 64
+fi
+shift
+
+# Keep relative state and dotenv lookups inside the isolated application snapshot.
+cd "$OFFERCLAW_DIR"
+
+case "$command_name" in
+  wechat-dispatch)
+    [[ "${1:-}" == "--stdin" && ( $# -eq 1 || ( $# -eq 2 && "${2:-}" == "--reply-text" ) ) ]] || {
+      printf 'offerclaw-launcher: wechat-dispatch requires --stdin [--reply-text]\n' >&2
+      exit 64
+    }
+    load_wechat_scope
+    if [[ $# -eq 2 ]]; then
+      exec "$PYTHON_BIN" "$OFFERCLAW_DIR/wechat_dispatch.py" --reply-text
+    fi
+    exec "$PYTHON_BIN" "$OFFERCLAW_DIR/wechat_dispatch.py"
+    ;;
+  wechat-index-sync)
+    [[ $# -eq 0 ]] || {
+      printf 'offerclaw-launcher: wechat-index-sync takes no arguments\n' >&2
+      exit 64
+    }
+    exec "$PYTHON_BIN" "$OFFERCLAW_DIR/wechat_index.py" --sync
+    ;;
+  wechat-query-health)
+    [[ $# -eq 0 ]] || {
+      printf 'offerclaw-launcher: wechat-query-health takes no arguments\n' >&2
+      exit 64
+    }
+    printf '%s' '{"schema_version":"offerclaw.windows-bridge.request.v1","operation":"query.health","payload":{}}' \
+      | exec "$OFFERCLAW_WINDOWS_PYTHON" -X utf8 "$OFFERCLAW_WINDOWS_BRIDGE_SCRIPT"
+    ;;
+  *)
+    printf 'offerclaw-launcher: command not allowed: %s\n' "$command_name" >&2
+    exit 64
+    ;;
+esac

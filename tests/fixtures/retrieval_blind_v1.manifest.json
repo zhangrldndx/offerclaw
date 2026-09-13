@@ -1,0 +1,21 @@
+{
+  "dataset_id": "retrieval_blind_v1",
+  "set_kind": "private_blind",
+  "dataset_file": "retrieval_blind_v1.json",
+  "expected_count": 100,
+  "sha256": null,
+  "status": "not_provisioned",
+  "schema_file": "retrieval_blind_v1.schema.json",
+  "minimum_coverage": {
+    "real_user": 50,
+    "independent_author": 50,
+    "non_template_questions": 100,
+    "direct_qrels": 100
+  },
+  "significance_gate": {
+    "method": "mcnemar_or_paired_bootstrap",
+    "mcnemar_p_lt": 0.05,
+    "bootstrap_ci_lower_gt": 0.0
+  },
+  "note": "Set sha256 only after independent authors freeze the repository-external corpus. Questions, qrels and failure rows must not be committed."
+}

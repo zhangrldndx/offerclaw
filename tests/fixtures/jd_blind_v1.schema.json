@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OfferClaw private full-document JD blind set v1",
+  "type": "object",
+  "required": ["version", "items"],
+  "properties": {
+    "version": {"const": "jd_blind_v1"},
+    "items": {
+      "type": "array",
+      "minItems": 120,
+      "maxItems": 120,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "category", "jd_text", "requirements"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "category": {"enum": ["zh_technical", "zh_nontechnical", "english", "mixed_language", "web_or_pdf_noise"]},
+          "jd_text": {"type": "string", "minLength": 800, "maxLength": 30000},
+          "expected_fields": {"type": "object"},
+          "annotation": {
+            "type": "object",
+            "properties": {
+              "double_annotated": {"type": "boolean"},
+              "adjudicated": {"type": "boolean"},
+              "agreement_kappa": {"type": ["number", "null"], "minimum": 0, "maximum": 1}
+            }
+          },
+          "requirements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["requirement_id", "text", "start", "end", "kind", "modality"],
+              "properties": {
+                "requirement_id": {"type": "string", "minLength": 1},
+                "text": {"type": "string", "minLength": 1},
+                "start": {"type": "integer", "minimum": 0},
+                "end": {"type": "integer", "minimum": 1},
+                "kind": {"enum": ["hard", "skill", "experience", "responsibility", "nice_to_have"]},
+                "modality": {"enum": ["required", "preferred", "alternative", "context", "unknown"]},
+                "alternative_group": {"type": ["string", "null"]},
+                "keywords": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

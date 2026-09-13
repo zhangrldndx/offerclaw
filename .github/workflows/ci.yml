@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Secret history scan
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_VERSION: 8.30.0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 单元测试（RAG_RERANK=0，CI 不下载 1GB 重排模型；与 conftest 一致）
+        env:
+          RAG_RERANK: "0"
+        run: python -m pytest tests/ -q
+      - name: 文档指标口径门禁（verify_docs v2 · 读 metrics.json 单一事实源，冲突值即拦截）
+        run: python verify_docs.py --privacy-revision HEAD
+
+# 注：RAG 基准回归门禁 `python eval_rag_bench.py --fail-under 0.83` 依赖 chroma_db 与本地
+# bge 模型（均 gitignore，CI 环境没有），故不在 CI 跑；它已落地为 **`.githooks/pre-push`**
+# （改检索代码即自动跑，R@1 跌破阈值退出码 1 阻断 push）。新 clone 一次性激活：
+#   git config core.hooksPath .githooks
+# 见 docs/AGENT_OPTIMIZATION_LOG.md · B3。

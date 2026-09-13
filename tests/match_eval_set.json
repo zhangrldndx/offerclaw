@@ -1,0 +1,286 @@
+{
+ "schema_version": "1.0",
+ "description": "OfferClaw match_job 纯合成规则回归集；每题给定虚构 profile_id + JD，标签按 target_rules 契约人工推导，不含真实个人画像，共 30 题",
+ "statuses": [
+  "当前适合投递",
+  "当前暂不建议投递",
+  "中长期可转向"
+ ],
+ "directions": [
+  "主方向",
+  "派生方向",
+  "不考虑"
+ ],
+ "items": [
+  {
+   "id": "m01",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "AI Agent 应用开发实习生(成都)",
+   "jd_text": "岗位名称：AI Agent 应用开发实习生\n公司：示例\n工作地点：成都\n学历要求：硕士及以上\n专业要求：计算机/人工智能\n经验要求：实习\n技术要求：Python / LangGraph / RAG / Agent / FastAPI / Prompt 工程\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "合成画像学历、成都地域和 AI 应用主方向均命中"
+  },
+  {
+   "id": "m02",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "Java 后端开发实习",
+   "jd_text": "岗位名称：Java 后端开发实习\n公司：示例\n工作地点：成都\n学历要求：本科及以上\n专业要求：计算机/软件\n经验要求：实习\n技术要求：精通 Java / SpringBoot / MySQL\n工作性质：日常实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "主方向",
+   "rationale": "岗位同属后端目标族，但 Java 是合成画像明确排除的技术主线"
+  },
+  {
+   "id": "m03",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "大模型应用开发实习生(深圳)",
+   "jd_text": "岗位名称：大模型应用开发实习生\n公司：示例\n工作地点：深圳\n学历要求：本科及以上\n专业要求：计算机/AI\n经验要求：实习\n技术要求：Python / LLM / Prompt / RAG / Embedding\n工作性质：实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "主方向",
+   "rationale": "JD 地点 深圳 不在 profile 可接受地域，硬门槛 ✗"
+  },
+  {
+   "id": "m04",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "Coding Agent 算法实习生(成都)",
+   "jd_text": "岗位名称：Coding Agent 算法实习生\n公司：示例\n工作地点：成都\n学历要求：硕士\n专业要求：计算机/人工智能\n经验要求：相关项目经验优先\n技术要求：Python, PyTorch, RLHF, PPO, DPO, SFT, Coding Agent\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "项目经验为软化加分项不构成硬门槛; 主方向命中 Coding Agent/Python/RLHF 等"
+  },
+  {
+   "id": "m05",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "数据分析实习(数据处理)",
+   "jd_text": "岗位名称：数据分析实习生\n公司：示例\n工作地点：成都\n学历要求：本科及以上\n专业要求：不限\n经验要求：实习\n技术要求：Python / SQL / 数据处理 / 数据可视化\n工作性质：实习\n",
+   "expected_status": "中长期可转向",
+   "expected_direction": "派生方向",
+   "rationale": "数据分析不是合成画像主方向，只有 Python/SQL 可迁移技能，综合中长期"
+  },
+  {
+   "id": "m06",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "前端开发实习生(精通 React)",
+   "jd_text": "岗位名称：前端开发实习生\n公司：示例\n工作地点：成都\n学历要求：本科\n专业要求：计算机\n经验要求：实习\n技术要求：精通 React / TypeScript / CSS / HTML5\n工作性质：实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "派生方向",
+   "rationale": "前端与后端同属软件研发相邻工作族，但合成画像明确排除前端"
+  },
+  {
+   "id": "m07",
+   "profile_id": "p2_cs_backend_intern",
+   "jd_title": "Java 后端开发实习生(上海)",
+   "jd_text": "岗位名称：Java 后端开发实习生\n公司：示例\n工作地点：上海\n学历要求：本科\n专业要求：计算机/软件\n经验要求：实习\n技术要求：Java / SpringBoot / MySQL / Redis\n工作性质：日常实习\n",
+   "expected_status": "中长期可转向",
+   "expected_direction": "主方向",
+   "rationale": "p2 是 Python 后端 persona, Java JD 技能维度命中 MySQL/Redis 但主语言不一致, 综合中长期"
+  },
+  {
+   "id": "m08",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "AI 应用开发(远程)",
+   "jd_text": "岗位名称：AI 应用开发工程师\n公司：示例\n工作地点：远程\n学历要求：硕士\n专业要求：计算机/AI\n经验要求：实习\n技术要求：Python / LangGraph / RAG / Agent / Embedding / ChromaDB\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "远程在可接受地域, 主方向命中, 多技能命中"
+  },
+  {
+   "id": "m09",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "信息不足型 JD",
+   "jd_text": "我们在招实习生，欢迎对 AI 感兴趣的同学。\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "不考虑",
+   "rationale": "信息严重不足, 软性维度大量未命中, 当前不建议直接投递"
+  },
+  {
+   "id": "m10",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "Python 后端开发(派生方向)",
+   "jd_text": "岗位名称：Python 后端开发实习生\n公司：示例\n工作地点：重庆\n学历要求：硕士\n专业要求：计算机\n经验要求：实习\n技术要求：Python / FastAPI / MySQL / Redis\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "直接命中合成画像的 Python 后端目标，学历、地域和核心技能通过"
+  },
+  {
+   "id": "m11",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "RAG 应用开发实习生(重庆)",
+   "jd_text": "岗位名称：RAG 应用开发实习生\n公司：示例\n工作地点：重庆\n学历要求：本科及以上\n专业要求：计算机/软件工程/数据科学\n经验要求：实习\n技术要求：Python / RAG / 向量数据库 / Prompt 工程\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "合成画像学历、计算机专业、重庆地域和 Python/RAG/Prompt 均命中"
+  },
+  {
+   "id": "m12",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "LLM 应用开发实习(远程)",
+   "jd_text": "岗位名称：LLM 应用开发实习生\n公司：示例\n工作地点：远程\n学历要求：硕士及以上\n专业要求：不限\n经验要求：实习\n技术要求：Python / LangChain / Prompt / Agent\n工作性质：远程实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "远程在可接受地域✓ 硕士=要求✓ 专业不限✓;Agent/Prompt/Python 命中"
+  },
+  {
+   "id": "m13",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "Agent 平台开发实习(成都)",
+   "jd_text": "岗位名称：Agent 平台开发实习生\n公司：示例\n工作地点：成都\n学历要求：本科及以上\n专业要求：计算机/软件工程类\n经验要求：有项目经验优先\n技术要求：Python / Agent / 工具调用 / FastAPI\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "合成画像地域、学历、专业和 Python/Agent/FastAPI 均命中"
+  },
+  {
+   "id": "m14",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "Prompt 工程实习生(成都)",
+   "jd_text": "岗位名称：Prompt 工程实习生\n公司：示例\n工作地点：成都\n学历要求：不限\n专业要求：不限\n经验要求：不限\n技术要求：Prompt 设计 / 工作流编排 / 基础 Python\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "硬门槛全无约束;方向=Prompt/Workflow 工程(优先级第三)"
+  },
+  {
+   "id": "m15",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "AI 应用开发实习(重庆)",
+   "jd_text": "岗位名称：AI 应用开发实习生\n公司：示例\n工作地点：重庆\n学历要求：硕士在读\n专业要求：计算机/软件工程相关\n经验要求：实习\n技术要求：Python / RAG / 大模型 API\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "合成画像地域、学历、计算机专业、技能与方向均命中"
+  },
+  {
+   "id": "m16",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "大模型应用实习生(成都)",
+   "jd_text": "岗位名称：大模型应用实习生\n公司：示例\n工作地点：成都\n学历要求：本科及以上\n专业要求：不限\n经验要求：实习\n技术要求：Python / Agent / RAG / 评测\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "合成画像成都地域及 Agent/RAG 主方向命中"
+  },
+  {
+   "id": "m17",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "智能体开发实习生(成都)",
+   "jd_text": "岗位名称：智能体开发实习生\n公司：示例\n工作地点：成都\n学历要求：硕士及以上\n专业要求：计算机/AI/软件工程\n经验要求：实习\n技术要求：LangGraph / RAG / Python / 多轮对话\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "六项硬门槛全命中;LangGraph/RAG 为项目主栈"
+  },
+  {
+   "id": "m18",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "C++ 推理引擎实习(成都)",
+   "jd_text": "岗位名称：C++ 推理引擎开发实习生\n公司：示例\n工作地点：成都\n学历要求：本科及以上\n专业要求：计算机\n经验要求：实习\n技术要求：精通 C++ / CUDA / 推理优化\n工作性质：实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "不考虑",
+   "rationale": "技术主线硬门槛:强制 C++ 非优先主线(§3 点名) → 未命中"
+  },
+  {
+   "id": "m19",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "Java 大模型平台实习(重庆)",
+   "jd_text": "岗位名称：Java 大模型平台开发实习生\n公司：示例\n工作地点：重庆\n学历要求：本科及以上\n专业要求：计算机/软件\n经验要求：实习\n技术要求：精通 Java / SpringBoot / 大模型平台接入\n工作性质：实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "主方向",
+   "rationale": "java 在「明确不做」清单 → 技术主线未命中(同 m02)"
+  },
+  {
+   "id": "m20",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "大模型算法研究实习(博士优先)",
+   "jd_text": "岗位名称：大模型算法研究实习生\n公司：示例\n工作地点：成都\n学历要求：博士\n专业要求：计算机/数学\n经验要求：有顶会论文\n技术要求：PyTorch / 预训练 / 论文复现\n工作性质：实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "派生方向",
+   "rationale": "学历硬门槛:要求博士,画像硕士 → 未命中"
+  },
+  {
+   "id": "m21",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "AI 应用实习(北京线下)",
+   "jd_text": "岗位名称：AI 应用开发实习生\n公司：示例\n工作地点：北京(强制线下坐班)\n学历要求：本科及以上\n专业要求：不限\n经验要求：实习\n技术要求：Python / RAG\n工作性质：线下实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "主方向",
+   "rationale": "地域硬门槛:强制线下北京,不在可接受地域清单 → 未命中;方向本身主方向"
+  },
+  {
+   "id": "m22",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "海外 AI 支持工程实习(全英文)",
+   "jd_text": "岗位名称：AI 解决方案支持实习生\n公司：示例\n工作地点：远程\n学历要求：本科及以上\n专业要求：不限\n经验要求：实习\n语言要求：英语流利,全英文工作环境,需口语面试\n技术要求：Python / LLM API\n工作性质：远程实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "主方向",
+   "rationale": "语言硬门槛:要求英语流利+口语,画像英语自评 2 → 未命中"
+  },
+  {
+   "id": "m23",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "LLM 应用工程师(社招 3 年)",
+   "jd_text": "岗位名称：LLM 应用工程师\n公司：示例\n工作地点：成都\n学历要求：本科及以上\n专业要求：计算机\n经验要求：5 年以上相关工作经验（硬性要求，不接受实习替代）\n技术要求：Python / RAG / Agent\n工作性质：全职\n",
+   "expected_status": "中长期可转向",
+   "expected_direction": "主方向",
+   "rationale": "五年全职经验缺少可核验证据，保留机会但不判为当前适合"
+  },
+  {
+   "id": "m24",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "量化 C++ 开发实习(成都)",
+   "jd_text": "岗位名称：量化系统 C++ 开发实习生\n公司：示例\n工作地点：成都\n学历要求：硕士及以上\n专业要求：计算机/数学\n经验要求：实习\n技术要求：精通 C++ / 低延迟系统\n工作性质：实习\n",
+   "expected_status": "当前暂不建议投递",
+   "expected_direction": "不考虑",
+   "rationale": "技术主线硬门槛:强制 C++ → 未命中"
+  },
+  {
+   "id": "m25",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "大模型训练 Infra 实习(成都)",
+   "jd_text": "岗位名称：大模型训练平台实习生\n公司：示例\n工作地点：成都\n学历要求：本科及以上\n专业要求：不限\n经验要求：实习\n技术要求：Python / CUDA / 分布式训练 / K8s\n工作性质：实习\n",
+   "expected_status": "中长期可转向",
+   "expected_direction": "派生方向",
+   "rationale": "六项硬门槛不违例(Python 非禁止主线);软性:CUDA/分布式/K8s 重叠低,方向相邻 → 值得规划不宜立投"
+  },
+  {
+   "id": "m26",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "多模态算法实习(重庆)",
+   "jd_text": "岗位名称：多模态算法实习生\n公司：示例\n工作地点：重庆\n学历要求：硕士及以上\n专业要求：计算机/数据科学\n经验要求：论文或竞赛经历优先\n技术要求：PyTorch / 深度学习 / 多模态\n工作性质：实习\n",
+   "expected_status": "中长期可转向",
+   "expected_direction": "派生方向",
+   "rationale": "硬门槛全过(论文为'优先'非强制);软性:PyTorch 重叠低,算法向≠应用向 → 中长期"
+  },
+  {
+   "id": "m27",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "数据工程实习(成都)",
+   "jd_text": "岗位名称：数据工程实习生\n公司：示例\n工作地点：成都\n学历要求：本科及以上\n专业要求：不限\n经验要求：实习\n技术要求：Python / Spark / 数据仓库 / SQL\n工作性质：实习\n",
+   "expected_status": "中长期可转向",
+   "expected_direction": "派生方向",
+   "rationale": "硬门槛全过;软性:仅 Python 重叠,方向不一致但可规划"
+  },
+  {
+   "id": "m28",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "推荐系统实习(成都)",
+   "jd_text": "岗位名称：推荐算法实习生\n公司：示例\n工作地点：成都\n学历要求：硕士及以上\n专业要求：计算机/数据科学\n经验要求：实习\n技术要求：Python / 召回排序 / 特征工程\n工作性质：实习\n",
+   "expected_status": "中长期可转向",
+   "expected_direction": "派生方向",
+   "rationale": "硬门槛通过；召回排序与 RAG 有可迁移概念但无直接项目证据"
+  },
+  {
+   "id": "m29",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "语音算法实习(重庆)",
+   "jd_text": "岗位名称：语音算法实习生\n公司：示例\n工作地点：重庆\n学历要求：硕士\n专业要求：计算机/数据科学优先\n经验要求：实习\n技术要求：Python / 信号处理 / 语音识别\n工作性质：实习\n",
+   "expected_status": "中长期可转向",
+   "expected_direction": "派生方向",
+   "rationale": "硬门槛通过，但合成画像没有语音项目证据，属于中长期方向"
+  },
+  {
+   "id": "m30",
+   "profile_id": "p1_demo_ai",
+   "jd_title": "Python 后端开发实习(重庆)",
+   "jd_text": "岗位名称：Python 后端开发实习生\n公司：示例\n工作地点：重庆\n学历要求：本科及以上\n专业要求：不限\n经验要求：实习\n技术要求：Python / FastAPI / MySQL / Redis\n工作性质：实习\n",
+   "expected_status": "当前适合投递",
+   "expected_direction": "主方向",
+   "rationale": "直接命中合成画像的 Python 后端目标，地域和核心技能通过"
+  }
+ ]
+}

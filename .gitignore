@@ -1,0 +1,117 @@
+# OfferClaw · Git 忽略清单
+# 公开仓库只提交代码、文档和明确标注的合成夹具。
+
+# ===== 敏感凭证：绝对不能入库 =====
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+
+# ===== Python 构建产物 =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+
+# ===== macOS 本地文件 =====
+.DS_Store
+
+# ===== 虚拟环境 =====
+.venv/
+venv/
+env/
+
+# ===== IDE / Agent CLI =====
+.vscode/
+.idea/
+.claude/
+.playwright-cli/
+*.swp
+
+# ===== 本地导出与评测运行产物 =====
+output/
+docs/screenshots/
+# 原始评估会包含本地知识片段、查询、模型回复或真实 JD，只留在本机。
+docs/rag_eval/**
+!docs/rag_eval/
+!docs/rag_eval/README.md
+
+# ===== 历史参考文档（不由项目维护） =====
+OfferClaw_Claude_直接投喂提示词.md
+OfferClaw_项目与竞赛推进指导报告.docx
+OfferClaw_整体演进规划方案.md
+OfferClaw_CareerOps_项目优化实验规划报告.md
+
+# ===== OfferClaw 运行时产物 =====
+# 向量数据库（本地目录，不入 git）
+chroma_db/
+chroma_db_test/
+memory.json
+memory/
+plans/
+resume_drafts/
+summaries/
+logs/
+application_jds/
+data/archive/
+*.lock
+
+# ===== 本地私密备忘 =====
+# 命令速查 / 笔记 / 临时文件，不入 git
+1
+1.txt
+2
+notes.txt
+*.local.md
+docs/archive/
+
+_local_notes/
+test_fastapi1.py
+
+# 知识库原始暂存区（doc2kb/采集中间产物，不入 git）
+knowledge_base/_pending/
+
+# 知识库数据（含爬取的第三方图文，属本地私有数据，不入公开仓库）
+knowledge_base/
+
+# 缺口信息库（目标 JD + 缺口累积，个人求职数据，本地私有）
+gap_store.json
+
+# 简历模板（个人文件，仅保留 README 说明）
+resume_templates/*
+!resume_templates/README.md
+
+# 图转文缓存（生成物）
+knowledge_base/_image_captions.json
+# .env 备份
+.env.local.bak*
+
+# 个人求职数据（隐私，本地保留不上传）— 2026-06 隐私清理
+user_profile.md
+daily_log.md
+daily_attachments/
+applications.md
+growth_journal.md
+interview_story_bank.md
+jd_candidates.md
+profiles/private_*.json
+profiles/*_local.json
+target_rules.local.md
+
+# Explicitly public, fictional fixtures used by the disposable OpenClaw lab.
+!integrations/openclaw/lab-fixtures/user_profile.md
+!integrations/openclaw/lab-fixtures/daily_log.md
+!integrations/openclaw/lab-fixtures/applications.md
+!integrations/openclaw/lab-fixtures/interview_story_bank.md
+!integrations/openclaw/lab-fixtures/plans/
+!integrations/openclaw/lab-fixtures/plans/*.md
+
+# [L3] CareerFlow checkpoint 落盘目录（运行态，不入 git）
+.offerclaw/
+_gpt_exports/
+
+# langgraph dev 运行时目录(本地状态,勿提交)
+.langgraph_api/

@@ -1,0 +1,114 @@
+{
+  "description": "英文提问→英文论文小集(2026-08-09):验证'英文任务是否基本可用'——bge-base-zh 的英文向量弱,但英文query的词法通道是完全体,实测定论。",
+  "match": "substring",
+  "items": [
+    {
+      "id": "en01",
+      "domain": "english",
+      "q": "What problem of chain-of-thought reasoning does ReAct address by interleaving reasoning and acting?",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en02",
+      "domain": "english",
+      "q": "Which external tool does ReAct use on HotpotQA to gather information?",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en03",
+      "domain": "english",
+      "q": "How much does ReAct improve success rates over imitation and reinforcement learning on ALFWorld and WebShop?",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en04",
+      "domain": "english",
+      "q": "What role do reasoning traces play in the ReAct framework?",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en05",
+      "domain": "english",
+      "q": "What operating system mechanism does MemGPT borrow to work beyond limited context windows?",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en06",
+      "domain": "english",
+      "q": "How does the LLM in MemGPT move data between main context and external storage?",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en07",
+      "domain": "english",
+      "q": "In which two domains is MemGPT evaluated?",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en08",
+      "domain": "english",
+      "q": "Why is naively extending transformer context length considered costly?",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en09",
+      "domain": "english",
+      "q": "What does Memory Sandbox turn conversational memories into so users can manipulate them?",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en10",
+      "domain": "english",
+      "q": "What operations can users perform on memory objects in Memory Sandbox?",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en11",
+      "domain": "english",
+      "q": "What interface framework and backing model does the Memory Sandbox system use?",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en12",
+      "domain": "english",
+      "q": "What are the two stated contributions of the Memory Sandbox paper?",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": false
+    }
+  ]
+}

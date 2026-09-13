@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OfferClaw top chat v3 private blind set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "authoring", "items"],
+  "properties": {
+    "version": {"const": "top_chat_v3_blind_v1"},
+    "authoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["independent", "unseen_implementation", "frozen_at"],
+      "properties": {
+        "independent": {"const": true},
+        "unseen_implementation": {"const": true},
+        "frozen_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 220,
+      "maxItems": 220,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "category", "coverage_tags", "question", "expected"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "category": {"enum": ["action_query_contrast", "multi_turn", "ambiguity"]},
+          "coverage_tags": {
+            "type": "array",
+            "contains": {"const": "independent_author"},
+            "items": {"enum": ["independent_author", "unseen_wording", "command", "query", "how_to", "correction", "topic_switch", "singular_reference", "plural_reference", "negated", "hypothetical", "reported"]}
+          },
+          "question": {"type": "string", "minLength": 1},
+          "prior_turns": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["turn_id", "topic", "service_mode", "output_contracts", "resolved_entities"],
+              "properties": {
+                "turn_id": {"type": "string", "minLength": 1},
+                "topic": {"type": "string", "minLength": 1},
+                "service_mode": {"enum": ["guide", "recall", "explain", "advise", "diagnose"]},
+                "output_contracts": {"type": "array", "items": {"type": "object"}},
+                "resolved_entities": {"type": "object"},
+                "capability_ids": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["decision", "interaction_kind", "turn_relation", "service_mode", "route_keys"],
+            "properties": {
+              "decision": {"enum": ["answer", "clarify"]},
+              "interaction_kind": {"enum": ["query", "command", "how_to"]},
+              "turn_relation": {"enum": ["standalone", "continuation", "correction"]},
+              "service_mode": {"enum": ["guide", "recall", "explain", "advise", "diagnose"]},
+              "route_keys": {"type": "array", "items": {"type": "string"}},
+              "capability_id": {"type": "string"},
+              "action": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["verb", "target_type", "commitment", "field_changes"],
+                "properties": {
+                  "verb": {"enum": ["create", "update", "delete", "link", "generate", "approve", "reject", "archive", "restore"]},
+                  "target_type": {"enum": ["application", "application_jd", "profile", "plan", "resume", "daily_log", "reflection", "knowledge", "memory", "project"]},
+                  "commitment": {"enum": ["requested", "hypothetical", "negated", "reported"]},
+                  "field_changes": {"type": "array", "items": {"type": "object"}}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

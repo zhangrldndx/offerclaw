@@ -1,0 +1,228 @@
+{
+  "schema_version": "offerclaw-product-acceptance-v2",
+  "release_status": "integration_regression_not_blind",
+  "isolation": {
+    "external_llm": false,
+    "real_user_writes": false,
+    "raw_output_location": "outside_repository",
+    "notes": "Cases reuse deterministic, tmp_path-isolated contracts. This is a product integration regression set, not a blind generalization benchmark. v2 (2026-08-31) extends v1's 24 cases to 36: each of the six areas gains two cross-module invariants (COMPLETE_TEST_PLAN §8.1) - suggestion governance, schema hard-reject, API-level veto, keyword-boundary safety, idempotent saves, bidirectional sync, illegal status rejection, unbound-JD fencing, corrupted-memory recovery, concurrent-append integrity, node degradation, and replay idempotency."
+  },
+  "cases": [
+    {
+      "id": "profile-01",
+      "area": "profile_governance",
+      "contract": "All synthetic persona fixtures satisfy the profile schema.",
+      "nodeid": "tests/test_schema_and_memory.py::test_all_three_persona_fixtures_pass_schema"
+    },
+    {
+      "id": "profile-02",
+      "area": "profile_governance",
+      "contract": "A missing profile file degrades to the documented fallback without writing user data.",
+      "nodeid": "tests/test_profile_loader.py::test_load_profile_falls_back_when_md_missing"
+    },
+    {
+      "id": "profile-03",
+      "area": "profile_governance",
+      "contract": "Profile reads reflect an isolated file edit instead of stale cached state.",
+      "nodeid": "tests/test_profile_loader.py::test_load_profile_actually_responds_to_md_edits"
+    },
+    {
+      "id": "profile-04",
+      "area": "profile_governance",
+      "contract": "Conflicting profile writes and suggestion decisions preserve optimistic concurrency.",
+      "nodeid": "tests/test_profile_reflection_plan_upgrade.py::test_profile_edit_conflict_and_suggestion_decision"
+    },
+    {
+      "id": "profile-05",
+      "area": "profile_governance",
+      "contract": "A rejected profile suggestion cannot be re-approved without new verified evidence.",
+      "nodeid": "tests/test_profile_reflection_plan_upgrade.py::test_rejected_profile_suggestion_needs_new_verified_evidence"
+    },
+    {
+      "id": "profile-06",
+      "area": "profile_governance",
+      "contract": "The profile schema hard-rejects a record missing a required field instead of silently accepting it.",
+      "nodeid": "tests/test_schema_and_memory.py::test_schema_rejects_missing_required_field"
+    },
+    {
+      "id": "match-01",
+      "area": "jd_match",
+      "contract": "The frozen synthetic JD match set meets its deterministic acceptance threshold.",
+      "nodeid": "tests/test_eval_match.py::test_baseline_runs_and_meets_threshold"
+    },
+    {
+      "id": "match-02",
+      "area": "jd_match",
+      "contract": "Preferred education wording is not misread as a hard requirement when the JD says no restriction.",
+      "nodeid": "tests/test_jd_match_safety.py::test_preferred_education_with_explicit_no_restriction_is_not_rejected"
+    },
+    {
+      "id": "match-03",
+      "area": "jd_match",
+      "contract": "Preferred experience wording is not misread as a hard requirement when no experience is allowed.",
+      "nodeid": "tests/test_jd_match_safety.py::test_preferred_experience_with_no_experience_allowed_is_not_rejected"
+    },
+    {
+      "id": "match-04",
+      "area": "jd_match",
+      "contract": "Explicit remote support overrides an otherwise incompatible office-city check.",
+      "nodeid": "tests/test_jd_match_safety.py::test_explicit_remote_support_overrides_office_city_mismatch"
+    },
+    {
+      "id": "match-05",
+      "area": "jd_match",
+      "contract": "A clearly unsuitable JD is vetoed through the public /api/match endpoint by rules alone, without any LLM call.",
+      "nodeid": "tests/test_api.py::test_match_with_clearly_unsuitable_jd"
+    },
+    {
+      "id": "match-06",
+      "area": "jd_match",
+      "contract": "Short latin keywords do not false-match inside longer unrelated words.",
+      "nodeid": "tests/test_jd_match_safety.py::test_short_english_terms_do_not_match_inside_other_words"
+    },
+    {
+      "id": "plan-01",
+      "area": "plan_today",
+      "contract": "The exact date view resolves the expected daily plan tasks.",
+      "nodeid": "tests/test_plan_today.py::test_view_exact_today"
+    },
+    {
+      "id": "plan-02",
+      "area": "plan_today",
+      "contract": "Saving today's tasks round-trips and synchronizes in an isolated plan directory.",
+      "nodeid": "tests/test_plan_today.py::test_save_today_persists_and_syncs"
+    },
+    {
+      "id": "plan-03",
+      "area": "plan_today",
+      "contract": "A stale plan modification time is rejected rather than overwriting newer work.",
+      "nodeid": "tests/test_plan_today.py::test_save_today_stale_mtime_guard"
+    },
+    {
+      "id": "plan-04",
+      "area": "plan_today",
+      "contract": "Multiple missed days raise a visible plan-drift warning.",
+      "nodeid": "tests/test_plan_automation.py::test_plan_drift_warn_on_multi_day_miss"
+    },
+    {
+      "id": "plan-05",
+      "area": "plan_today",
+      "contract": "Replacing a day's tasks round-trips losslessly, so repeated saves stay idempotent.",
+      "nodeid": "tests/test_plan_today.py::test_replace_roundtrip_lossless"
+    },
+    {
+      "id": "plan-06",
+      "area": "plan_today",
+      "contract": "The plan API keeps the day view and the overall plan synchronized in both directions.",
+      "nodeid": "tests/test_plan_today.py::test_api_bidirectional_sync"
+    },
+    {
+      "id": "application-01",
+      "area": "application_lifecycle",
+      "contract": "Legacy applications gain stable IDs without inventing a JD binding.",
+      "nodeid": "tests/test_application_jd_links.py::test_schema_migration_assigns_id_but_never_guesses_jd"
+    },
+    {
+      "id": "application-02",
+      "area": "application_lifecycle",
+      "contract": "Approved JD and match artifacts are immutable and reproducible.",
+      "nodeid": "tests/test_application_jd_links.py::test_approved_jd_version_and_match_are_immutable_artifacts"
+    },
+    {
+      "id": "application-03",
+      "area": "application_lifecycle",
+      "contract": "Changing JD text creates a new version instead of mutating history.",
+      "nodeid": "tests/test_application_jd_links.py::test_changed_text_creates_new_version"
+    },
+    {
+      "id": "application-04",
+      "area": "application_lifecycle",
+      "contract": "A changed application target marks the plan snapshot stale without rewriting the plan.",
+      "nodeid": "tests/test_application_jd_links.py::test_plan_snapshot_becomes_stale_without_rewriting_plan"
+    },
+    {
+      "id": "application-05",
+      "area": "application_lifecycle",
+      "contract": "The application store rejects an illegal status value instead of recording it.",
+      "nodeid": "tests/test_applications_and_resume_project.py::test_upsert_rejects_bad_status"
+    },
+    {
+      "id": "application-06",
+      "area": "application_lifecycle",
+      "contract": "An application without a bound JD cannot enter the JD-driven plan flow.",
+      "nodeid": "tests/test_application_jd_links.py::test_bare_application_cannot_enter_jd_driven_plan"
+    },
+    {
+      "id": "reflection-01",
+      "area": "reflection_memory",
+      "contract": "A reflection event round-trips through isolated episodic memory.",
+      "nodeid": "tests/test_reflection_loop.py::test_record_reflection_roundtrip"
+    },
+    {
+      "id": "reflection-02",
+      "area": "reflection_memory",
+      "contract": "A high-deviation streak is distilled into a persistent adjustment.",
+      "nodeid": "tests/test_reflection_loop.py::test_distill_high_deviation_streak"
+    },
+    {
+      "id": "reflection-03",
+      "area": "reflection_memory",
+      "contract": "Repeated reflections for the same task are deduplicated within one day.",
+      "nodeid": "tests/test_reflection_loop.py::test_distill_dedup_same_task_within_one_day"
+    },
+    {
+      "id": "reflection-04",
+      "area": "reflection_memory",
+      "contract": "A verifier-corrected value reaches episodic memory and recent lessons.",
+      "nodeid": "tests/test_loop_l6_reflection_verifier.py::test_corrected_value_flows_to_episodic_and_lessons"
+    },
+    {
+      "id": "reflection-05",
+      "area": "reflection_memory",
+      "contract": "A corrupted semantic memory file is backed up and recovered without losing distilled sediment.",
+      "nodeid": "tests/test_memory_resilience.py::test_semantic_corrupt_preserves_sediment"
+    },
+    {
+      "id": "reflection-06",
+      "area": "reflection_memory",
+      "contract": "Concurrent episodic appends never interleave records.",
+      "nodeid": "tests/test_memory_resilience.py::test_episodic_concurrent_append_no_interleave"
+    },
+    {
+      "id": "resume-01",
+      "area": "resume_and_flow",
+      "contract": "Unsupported auto-apply and LinkedIn claims are flagged as fabrication.",
+      "nodeid": "tests/test_multiagent_p1.py::test_fabrication_blacklist_flag"
+    },
+    {
+      "id": "resume-02",
+      "area": "resume_and_flow",
+      "contract": "The resume critic rejects a fabricated capability before approval.",
+      "nodeid": "tests/test_multiagent_p1.py::test_critic_verdict_reject_on_fabrication"
+    },
+    {
+      "id": "resume-03",
+      "area": "resume_and_flow",
+      "contract": "Resume workshop selection uses the JD bound to an application, not temporary analysis text.",
+      "nodeid": "tests/test_application_jd_links.py::test_resume_workshop_selects_bound_application_jd_instead_of_temporary_analysis"
+    },
+    {
+      "id": "resume-04",
+      "area": "resume_and_flow",
+      "contract": "A suitable synthetic JD traverses the complete routed CareerFlow without live LLM calls.",
+      "nodeid": "tests/test_career_flow_routing.py::test_routed_suitable_runs_full_path"
+    },
+    {
+      "id": "resume-05",
+      "area": "resume_and_flow",
+      "contract": "A non-critical CareerFlow node failure degrades gracefully and is recorded instead of crashing the flow.",
+      "nodeid": "tests/test_career_flow_guard.py::test_node_guard_catches_records_continues"
+    },
+    {
+      "id": "resume-06",
+      "area": "resume_and_flow",
+      "contract": "Application proposals carry stable IDs and replaying a proposal is idempotent.",
+      "nodeid": "tests/test_career_flow_stage12.py::test_application_proposal_has_stable_id_and_replay_is_idempotent"
+    }
+  ]
+}

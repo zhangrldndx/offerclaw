@@ -1,0 +1,49 @@
+{
+  "description": "OfferClaw RAG 分域评估集：覆盖知识库 4 大领域 + 门槛负样本，用于测域内召回、跨域混淆、in_kb 门槛准确率。",
+  "domains": {
+    "llm_app": "大模型应用/面试八股（RAG/Agent/Planner/Skills/Harness）→ source 前缀 llm_app_interview",
+    "backend": "后端基础（网络/OS/MySQL/Redis/MQ/设计模式）→ source 前缀 backend_basic",
+    "algorithm": "大模型算法（Transformer/GPT/压缩/LoRA）→ source 前缀 llm_algorithm",
+    "career": "入门路线/转型（零基础/后端转/算法转）→ source 前缀 llm_app_intro"
+  },
+  "items": [
+    {"id": "la1", "domain": "llm_app", "q": "RAG 全链路包括哪些环节", "expect_prefix": "llm_app_interview"},
+    {"id": "la2", "domain": "llm_app", "q": "什么是 ReAct 推理行动框架", "expect_prefix": "llm_app_interview"},
+    {"id": "la3", "domain": "llm_app", "q": "大模型 Agent 的 Planner 规划是什么", "expect_prefix": "llm_app_interview"},
+    {"id": "la4", "domain": "llm_app", "q": "Function Calling 工具调用怎么实现", "expect_prefix": "llm_app_interview"},
+    {"id": "la5", "domain": "llm_app", "q": "Agent Skills 是什么", "expect_prefix": "llm_app_interview"},
+    {"id": "la6", "domain": "llm_app", "q": "Harness Engineering 是什么", "expect_prefix": "llm_app_interview"},
+
+    {"id": "be1", "domain": "backend", "q": "MySQL 的 MVCC 多版本并发控制是什么", "expect_prefix": "backend_basic"},
+    {"id": "be2", "domain": "backend", "q": "Redis 持久化有哪些方式", "expect_prefix": "backend_basic"},
+    {"id": "be3", "domain": "backend", "q": "MySQL 的 B+ 树索引原理", "expect_prefix": "backend_basic"},
+    {"id": "be4", "domain": "backend", "q": "TCP 三次握手过程", "expect_prefix": "backend_basic"},
+    {"id": "be5", "domain": "backend", "q": "Redis 缓存穿透怎么解决", "expect_prefix": "backend_basic"},
+    {"id": "be6", "domain": "backend", "q": "消息队列 MQ 有什么作用", "expect_prefix": "backend_basic"},
+
+    {"id": "al1", "domain": "algorithm", "q": "Transformer 的结构是怎样的", "expect_prefix": "llm_algorithm"},
+    {"id": "al2", "domain": "algorithm", "q": "LoRA 微调的原理", "expect_prefix": "llm_algorithm"},
+    {"id": "al3", "domain": "algorithm", "q": "模型蒸馏剪枝量化是什么", "expect_prefix": "llm_algorithm"},
+    {"id": "al4", "domain": "algorithm", "q": "GPT BERT T5 的区别", "expect_prefix": "llm_algorithm"},
+    {"id": "al5", "domain": "algorithm", "q": "大模型训练全过程有哪些阶段", "expect_prefix": "llm_algorithm"},
+
+    {"id": "ca1", "domain": "career", "q": "零基础怎么学大模型应用开发", "expect_prefix": "llm_app_intro"},
+    {"id": "ca2", "domain": "career", "q": "后端开发怎么转大模型应用开发", "expect_prefix": "llm_app_intro"},
+    {"id": "ca3", "domain": "career", "q": "大模型应用开发岗位需要学哪些技术栈", "expect_prefix": "llm_app_intro"},
+    {"id": "ca4", "domain": "career", "q": "大模型应用开发面试难度怎么样", "expect_prefix": "llm_app_intro"}
+  ],
+  "gate_negatives": [
+    "什么是 Vue3 前端框架",
+    "Spring Boot 怎么用",
+    "怎么做红烧肉",
+    "今天天气怎么样",
+    "推荐几部好看的电影"
+  ],
+  "gate_positives": [
+    "什么是 RAG",
+    "什么是 react",
+    "MySQL 索引",
+    "LoRA 是什么",
+    "零基础学大模型应用"
+  ]
+}

@@ -1,0 +1,1037 @@
+{
+  "version": "1.0",
+  "description": "OfferClaw 多意图路由评测集：30 状态、20 个人记忆、20 通用知识、30 混合、20 歧义/否定/缺数据。expected 为 source.operation 白名单。",
+  "count": 120,
+  "items": [
+    {
+      "id": "route_001",
+      "category": "state",
+      "question": "我投了哪几家公司？",
+      "expected": [
+        "application_state.list_ever_applied"
+      ]
+    },
+    {
+      "id": "route_002",
+      "category": "state",
+      "question": "帮我列出投过哪些企业",
+      "expected": [
+        "application_state.list_ever_applied"
+      ]
+    },
+    {
+      "id": "route_003",
+      "category": "state",
+      "question": "统计我已经投了几份简历",
+      "expected": [
+        "application_state.list_ever_applied"
+      ]
+    },
+    {
+      "id": "route_004",
+      "category": "state",
+      "question": "我已投递的公司名单是什么",
+      "expected": [
+        "application_state.list_ever_applied"
+      ]
+    },
+    {
+      "id": "route_005",
+      "category": "state",
+      "question": "回顾我投出去的岗位",
+      "expected": [
+        "application_state.list_ever_applied"
+      ]
+    },
+    {
+      "id": "route_006",
+      "category": "state",
+      "question": "哪些公司我投过？",
+      "expected": [
+        "application_state.list_ever_applied"
+      ]
+    },
+    {
+      "id": "route_007",
+      "category": "state",
+      "question": "目前有哪些岗位已经投递",
+      "expected": [
+        "application_state.list_ever_applied"
+      ]
+    },
+    {
+      "id": "route_008",
+      "category": "state",
+      "question": "为我统计投过几家企业",
+      "expected": [
+        "application_state.list_ever_applied"
+      ]
+    },
+    {
+      "id": "route_009",
+      "category": "state",
+      "question": "我还没投哪些公司？",
+      "expected": [
+        "application_state.list_pending_submission"
+      ]
+    },
+    {
+      "id": "route_010",
+      "category": "state",
+      "question": "哪些岗位还需要投？",
+      "expected": [
+        "application_state.list_pending_submission",
+        "application_state.get_next_actions"
+      ]
+    },
+    {
+      "id": "route_011",
+      "category": "state",
+      "question": "列出待投企业",
+      "expected": [
+        "application_state.list_pending_submission"
+      ]
+    },
+    {
+      "id": "route_012",
+      "category": "state",
+      "question": "准备投递的公司有哪些",
+      "expected": [
+        "application_state.list_pending_submission"
+      ]
+    },
+    {
+      "id": "route_013",
+      "category": "state",
+      "question": "我需要去哪些公司官网（投递）",
+      "expected": [
+        "application_state.list_pending_submission",
+        "application_state.get_next_actions"
+      ]
+    },
+    {
+      "id": "route_014",
+      "category": "state",
+      "question": "帮我看还需要投的岗位",
+      "expected": [
+        "application_state.list_pending_submission",
+        "application_state.get_next_actions"
+      ]
+    },
+    {
+      "id": "route_015",
+      "category": "state",
+      "question": "当前准备投简历的企业",
+      "expected": [
+        "application_state.list_pending_submission"
+      ]
+    },
+    {
+      "id": "route_016",
+      "category": "state",
+      "question": "接下来要去哪些公司官网投递？",
+      "expected": [
+        "application_state.list_pending_submission",
+        "application_state.get_next_actions"
+      ]
+    },
+    {
+      "id": "route_017",
+      "category": "state",
+      "question": "我失败企业有哪些？",
+      "expected": [
+        "application_state.list_failed"
+      ]
+    },
+    {
+      "id": "route_018",
+      "category": "state",
+      "question": "哪些公司把我拒绝了",
+      "expected": [
+        "application_state.list_failed"
+      ]
+    },
+    {
+      "id": "route_019",
+      "category": "state",
+      "question": "列出我被拒的岗位",
+      "expected": [
+        "application_state.list_failed"
+      ]
+    },
+    {
+      "id": "route_020",
+      "category": "state",
+      "question": "我在哪些企业挂了",
+      "expected": [
+        "application_state.list_failed"
+      ]
+    },
+    {
+      "id": "route_021",
+      "category": "state",
+      "question": "当前已拒绝的公司",
+      "expected": [
+        "application_state.list_failed"
+      ]
+    },
+    {
+      "id": "route_022",
+      "category": "state",
+      "question": "我没通过哪些公司",
+      "expected": [
+        "application_state.list_failed"
+      ]
+    },
+    {
+      "id": "route_023",
+      "category": "state",
+      "question": "查看我的投递记录",
+      "expected": [
+        "application_state.list_current"
+      ]
+    },
+    {
+      "id": "route_024",
+      "category": "state",
+      "question": "我的投递状态如何",
+      "expected": [
+        "application_state.list_current"
+      ]
+    },
+    {
+      "id": "route_025",
+      "category": "state",
+      "question": "当前求职进度",
+      "expected": [
+        "application_state.list_current"
+      ]
+    },
+    {
+      "id": "route_026",
+      "category": "state",
+      "question": "投递池里现在有什么",
+      "expected": [
+        "application_state.list_current"
+      ]
+    },
+    {
+      "id": "route_027",
+      "category": "state",
+      "question": "我的学习计划是什么",
+      "expected": [
+        "profile_plan.get_plan"
+      ]
+    },
+    {
+      "id": "route_028",
+      "category": "state",
+      "question": "最近我学了什么",
+      "expected": [
+        "reflection_memory.get_recent"
+      ]
+    },
+    {
+      "id": "route_029",
+      "category": "state",
+      "question": "我缺少什么能力",
+      "expected": [
+        "profile_plan.get_gaps"
+      ]
+    },
+    {
+      "id": "route_030",
+      "category": "state",
+      "question": "今天的计划任务",
+      "expected": [
+        "profile_plan.get_plan"
+      ]
+    },
+    {
+      "id": "route_031",
+      "category": "personal",
+      "question": "根据我的经验总结做复盘",
+      "expected": [
+        "application_experience.search"
+      ]
+    },
+    {
+      "id": "route_032",
+      "category": "personal",
+      "question": "读取我的面经",
+      "expected": [
+        "application_experience.search"
+      ]
+    },
+    {
+      "id": "route_033",
+      "category": "personal",
+      "question": "我的笔试经验里记录了什么",
+      "expected": [
+        "application_experience.search"
+      ]
+    },
+    {
+      "id": "route_034",
+      "category": "personal",
+      "question": "从之前面试中总结教训",
+      "expected": [
+        "application_experience.search"
+      ]
+    },
+    {
+      "id": "route_035",
+      "category": "personal",
+      "question": "总结我的投递经验",
+      "expected": [
+        "application_experience.search"
+      ]
+    },
+    {
+      "id": "route_036",
+      "category": "personal",
+      "question": "我的面试经验说明了什么",
+      "expected": [
+        "application_experience.search"
+      ]
+    },
+    {
+      "id": "route_037",
+      "category": "personal",
+      "question": "亲历材料中有哪些失败原因",
+      "expected": [
+        "application_experience.search"
+      ]
+    },
+    {
+      "id": "route_038",
+      "category": "personal",
+      "question": "介绍我的项目内容",
+      "expected": [
+        "project_memory.search"
+      ]
+    },
+    {
+      "id": "route_039",
+      "category": "personal",
+      "question": "我的项目用了哪些技术",
+      "expected": [
+        "project_memory.search"
+      ]
+    },
+    {
+      "id": "route_040",
+      "category": "personal",
+      "question": "检索我做的项目",
+      "expected": [
+        "project_memory.search"
+      ]
+    },
+    {
+      "id": "route_041",
+      "category": "personal",
+      "question": "项目材料中有哪些量化结果",
+      "expected": [
+        "project_memory.search"
+      ]
+    },
+    {
+      "id": "route_042",
+      "category": "personal",
+      "question": "根据我的项目经历生成介绍",
+      "expected": [
+        "project_memory.search"
+      ]
+    },
+    {
+      "id": "route_043",
+      "category": "personal",
+      "question": "OfferClaw项目的架构记录",
+      "expected": [
+        "project_memory.search"
+      ]
+    },
+    {
+      "id": "route_044",
+      "category": "personal",
+      "question": "我的项目记忆有哪些",
+      "expected": [
+        "project_memory.list_catalog"
+      ]
+    },
+    {
+      "id": "route_045",
+      "category": "personal",
+      "question": "我的简历格式是什么",
+      "expected": [
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_046",
+      "category": "personal",
+      "question": "按我的格式调整表述",
+      "expected": [
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_047",
+      "category": "personal",
+      "question": "读取简历模板规则",
+      "expected": [
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_048",
+      "category": "personal",
+      "question": "我的简历写法偏好",
+      "expected": [
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_049",
+      "category": "personal",
+      "question": "写作指导要求什么",
+      "expected": [
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_050",
+      "category": "personal",
+      "question": "简历规则中如何量化",
+      "expected": [
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_051",
+      "category": "reference",
+      "question": "什么是 ReAct 框架？",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_052",
+      "category": "reference",
+      "question": "解释一下混合检索",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_053",
+      "category": "reference",
+      "question": "介绍一下向量数据库概念",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_054",
+      "category": "reference",
+      "question": "RRF 的原理是什么",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_055",
+      "category": "reference",
+      "question": "BM25 如何实现关键词召回",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_056",
+      "category": "reference",
+      "question": "什么是 CrossEncoder 重排",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_057",
+      "category": "reference",
+      "question": "解释 RAG 评估指标",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_058",
+      "category": "reference",
+      "question": "介绍一下 Agent 工具调用",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_059",
+      "category": "reference",
+      "question": "学习资料里怎么讲 Embedding",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_060",
+      "category": "reference",
+      "question": "参考资料中有哪些检索优化方法",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_061",
+      "category": "reference",
+      "question": "博客里如何实现 SSE 流式输出",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_062",
+      "category": "reference",
+      "question": "什么是 groundedness",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_063",
+      "category": "reference",
+      "question": "解释召回率和精确率",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_064",
+      "category": "reference",
+      "question": "介绍一下查询改写",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_065",
+      "category": "reference",
+      "question": "技术应用中如何使用 LoRA",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_066",
+      "category": "reference",
+      "question": "什么是知识库分块",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_067",
+      "category": "reference",
+      "question": "解释语义检索与词法检索",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_068",
+      "category": "reference",
+      "question": "教程中如何设计 RAG 门控",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_069",
+      "category": "reference",
+      "question": "什么是幻觉检测",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_070",
+      "category": "reference",
+      "question": "介绍一下 LangGraph 概念",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_071",
+      "category": "mixed",
+      "question": "结合我的投递状态，解释等待反馈阶段该怎么做",
+      "expected": [
+        "application_state.list_current",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_072",
+      "category": "mixed",
+      "question": "我准备投递的岗位需要哪些 RAG 能力，结合学习资料说明",
+      "expected": [
+        "application_state.list_pending_submission",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_073",
+      "category": "mixed",
+      "question": "我被拒的公司反映什么能力问题，参考资料解释",
+      "expected": [
+        "application_state.list_failed",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_074",
+      "category": "mixed",
+      "question": "我投过哪些公司，并解释向量数据库概念",
+      "expected": [
+        "application_state.list_ever_applied",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_075",
+      "category": "mixed",
+      "question": "我的投递记录里哪些处于面试中，介绍一下面试准备方法",
+      "expected": [
+        "application_experience.search",
+        "application_jd.search_bound_jd",
+        "application_state.list_current",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_076",
+      "category": "mixed",
+      "question": "当前投递进度如何，结合知识库给建议",
+      "expected": [
+        "application_state.list_current",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_077",
+      "category": "mixed",
+      "question": "我还没投的岗位需要怎么准备，参考学习资料",
+      "expected": [
+        "application_experience.search",
+        "application_jd.search_bound_jd",
+        "application_state.list_pending_submission",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_078",
+      "category": "mixed",
+      "question": "我下一步要投哪些企业，同时解释岗位所需技术",
+      "expected": [
+        "application_jd.search_bound_jd",
+        "application_state.get_next_actions",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_079",
+      "category": "mixed",
+      "question": "已投递公司后续怎么跟进，结合教程回答",
+      "expected": [
+        "application_experience.search",
+        "application_jd.search_bound_jd",
+        "application_state.list_ever_applied",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_080",
+      "category": "mixed",
+      "question": "投递池里有哪些岗位，并解释 RAG 工程师职责",
+      "expected": [
+        "application_state.list_current",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_081",
+      "category": "mixed",
+      "question": "目前我失败企业中，根据我的经验总结说明缺少什么能力，结合参考资料普及概念，给出下一步学习建议",
+      "expected": [
+        "application_state.list_failed",
+        "application_state.get_next_actions",
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "profile_plan.get_plan",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_082",
+      "category": "mixed",
+      "question": "根据我的被拒原因和面试经验，列出能力缺口并结合参考资料说明",
+      "expected": [
+        "application_state.list_failed",
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_083",
+      "category": "mixed",
+      "question": "复盘失败企业的亲历，结合博客解释技术并给学习建议",
+      "expected": [
+        "application_state.list_failed",
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "profile_plan.get_plan",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_084",
+      "category": "mixed",
+      "question": "从我的经验总结判断欠缺什么，结合教程给学习建议",
+      "expected": [
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "profile_plan.get_plan",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_085",
+      "category": "mixed",
+      "question": "我的面经显示 RAG 评估薄弱，我还缺什么，结合学习资料给下一步学习建议",
+      "expected": [
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "profile_plan.get_plan",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_086",
+      "category": "mixed",
+      "question": "根据投递经验和当前计划，解释相关概念并给学习建议",
+      "expected": [
+        "application_experience.search",
+        "profile_plan.get_plan",
+        "profile_plan.get_gaps",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_087",
+      "category": "mixed",
+      "question": "结合亲历复盘、能力缺口和参考资料给学习建议",
+      "expected": [
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "profile_plan.get_plan",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_088",
+      "category": "mixed",
+      "question": "从失败原因找能力缺口，结合博客给学习建议",
+      "expected": [
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "profile_plan.get_plan",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_089",
+      "category": "mixed",
+      "question": "我的笔试经验暴露哪些能力缺口，结合教程给下一步学习建议",
+      "expected": [
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "profile_plan.get_plan",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_090",
+      "category": "mixed",
+      "question": "分析我的面试经验说明缺少什么能力，结合参考资料给学习建议",
+      "expected": [
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "profile_plan.get_plan",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_091",
+      "category": "mixed",
+      "question": "根据我的项目内容，按我的简历格式解释如何突出 RAG 能力",
+      "expected": [
+        "project_memory.search",
+        "resume_rules.search",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_092",
+      "category": "mixed",
+      "question": "结合项目材料和简历模板，给出项目经历写法",
+      "expected": [
+        "project_memory.search",
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_093",
+      "category": "mixed",
+      "question": "用我的项目记忆，依据写作指导介绍技术亮点",
+      "expected": [
+        "project_memory.search",
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_094",
+      "category": "mixed",
+      "question": "检查我的项目经历是否符合简历规则，并解释改进原则",
+      "expected": [
+        "project_memory.search",
+        "resume_rules.search",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_095",
+      "category": "mixed",
+      "question": "从 OfferClaw 项目和我的简历中总结适合的表达格式",
+      "expected": [
+        "project_memory.search",
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_096",
+      "category": "mixed",
+      "question": "结合我的项目与论文解释 Agent 技术",
+      "expected": [
+        "project_memory.search",
+        "paper_kb.search",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_097",
+      "category": "mixed",
+      "question": "根据我的面试经验和研究文献说明能力缺口",
+      "expected": [
+        "application_experience.search",
+        "profile_plan.get_gaps",
+        "paper_kb.search"
+      ]
+    },
+    {
+      "id": "route_098",
+      "category": "mixed",
+      "question": "用论文和参考资料解释 RAG 的研究发展",
+      "expected": [
+        "paper_kb.search",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_099",
+      "category": "mixed",
+      "question": "我的失败企业经验与论文能说明什么技术短板",
+      "expected": [
+        "application_state.list_failed",
+        "application_experience.search",
+        "paper_kb.search"
+      ]
+    },
+    {
+      "id": "route_100",
+      "category": "mixed",
+      "question": "结合当前学习计划和学术研究介绍技术应用",
+      "expected": [
+        "profile_plan.get_plan",
+        "paper_kb.search",
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_101",
+      "category": "ambiguous",
+      "question": "不要查询我的投递，解释一下 RAG",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_102",
+      "category": "ambiguous",
+      "question": "不用读取论文，解释向量检索概念",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_103",
+      "category": "ambiguous",
+      "question": "这不是我的项目，解释一下 Agent",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_104",
+      "category": "ambiguous",
+      "question": "不要使用我的简历，介绍一下 BM25",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_105",
+      "category": "ambiguous",
+      "question": "无需结合我的经验总结，介绍一下向量数据库",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_106",
+      "category": "ambiguous",
+      "question": "我没问投递，只想知道什么是 RRF",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_107",
+      "category": "ambiguous",
+      "question": "给我一些建议",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_108",
+      "category": "ambiguous",
+      "question": "这个技术靠谱吗",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_109",
+      "category": "ambiguous",
+      "question": "帮我分析一下",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_110",
+      "category": "ambiguous",
+      "question": "有哪些注意事项",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_111",
+      "category": "ambiguous",
+      "question": "应该从哪里开始",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_112",
+      "category": "ambiguous",
+      "question": "怎么改进效果",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_113",
+      "category": "ambiguous",
+      "question": "给出一个简短回答",
+      "expected": [
+        "reference_kb.search"
+      ]
+    },
+    {
+      "id": "route_114",
+      "category": "ambiguous",
+      "question": "我的官网链接记录了吗",
+      "expected": [
+        "application_state.list_current"
+      ]
+    },
+    {
+      "id": "route_115",
+      "category": "ambiguous",
+      "question": "经验总结为空时还能分析吗",
+      "expected": [
+        "application_experience.search"
+      ]
+    },
+    {
+      "id": "route_116",
+      "category": "ambiguous",
+      "question": "我的项目材料里没有日期怎么办",
+      "expected": [
+        "project_memory.search"
+      ]
+    },
+    {
+      "id": "route_117",
+      "category": "ambiguous",
+      "question": "简历模板没有项目段时怎么处理",
+      "expected": [
+        "resume_rules.search"
+      ]
+    },
+    {
+      "id": "route_118",
+      "category": "ambiguous",
+      "question": "当前没有投递记录吗",
+      "expected": [
+        "application_state.list_current"
+      ]
+    },
+    {
+      "id": "route_119",
+      "category": "ambiguous",
+      "question": "我的学习计划不存在时给出提示",
+      "expected": [
+        "profile_plan.get_plan"
+      ]
+    },
+    {
+      "id": "route_120",
+      "category": "ambiguous",
+      "question": "找不到论文时不要用通用知识编造",
+      "expected": [
+        "paper_kb.search"
+      ]
+    }
+  ]
+}

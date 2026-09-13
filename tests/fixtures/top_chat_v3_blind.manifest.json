@@ -1,0 +1,29 @@
+{
+  "dataset_id": "top_chat_v3_blind_v1",
+  "set_kind": "private_blind",
+  "dataset_file": "top_chat_v3_blind_v1.json",
+  "expected_count": 220,
+  "sha256": null,
+  "status": "not_provisioned",
+  "schema_file": "top_chat_v3_blind_v1.schema.json",
+  "quotas": {
+    "action_query_contrast": 120,
+    "multi_turn": 60,
+    "ambiguity": 40
+  },
+  "minimum_coverage": {
+    "independent_author": 220,
+    "unseen_wording": 220
+  },
+  "thresholds": {
+    "action_capability_accuracy": 0.98,
+    "guide_recall_confusion_rate_lt": 0.01,
+    "write_command_recall_count": 0,
+    "clarify_precision": 0.95,
+    "clarify_recall": 0.95,
+    "timeout_rate_lte": 0.01,
+    "planning_p95_ms_lte": 5000,
+    "business_or_memory_event_writes": 0
+  },
+  "note": "Questions and gold labels must be authored by people who have not read the router implementation, kept outside the repository, and pinned here only by SHA-256."
+}

@@ -1,0 +1,560 @@
+{
+ "description": "OfferClaw RAG 真实世界（held-out / 释义）评测集：把 rag_bench_set.json 里的问题重写成求职者口语化提问，刻意避开目标文件标题里的技术术语，用来测量检索在'表述漂移'下的真实召回（非分布内天花板）。expect_sources 与原题保持一致（仍指向同一目标文件），orig_id 回指原题。schema 与 rag_bench_set.json 完全一致：{id, domain, q, expect_sources, hard, orig_id}。 | R9 扩充: +28 题(agent 精读文档起草→标题词零重叠+去重过滤),共 52 题,2026-07-04 冻结",
+ "match": "substring_lower",
+ "items": [
+  {
+   "id": "pp01",
+   "domain": "llm_app",
+   "q": "给大模型接个外部资料库，让它先查资料再回答，这一整套流程大概分几步走",
+   "expect_sources": [
+    "rag_full_chain",
+    "rag_basics"
+   ],
+   "hard": false,
+   "orig_id": "rag01"
+  },
+  {
+   "id": "pp02",
+   "domain": "llm_app",
+   "q": "为啥非得给模型外挂知识，直接问它不香吗，它自己答有什么毛病",
+   "expect_sources": [
+    "rag_basics"
+   ],
+   "hard": false,
+   "orig_id": "rag02"
+  },
+  {
+   "id": "pp03",
+   "domain": "llm_app",
+   "q": "把长文档切成小段喂给模型，是按字数硬切还是按意思切，怎么选不吃亏",
+   "expect_sources": [
+    "rag_basics"
+   ],
+   "hard": false,
+   "orig_id": "rag04"
+  },
+  {
+   "id": "pp04",
+   "domain": "llm_app",
+   "q": "有种技巧是先让模型编一段假答案，再拿这段去库里找相似的，这招叫啥怎么起作用的",
+   "expect_sources": [
+    "rag_full_chain"
+   ],
+   "hard": true,
+   "orig_id": "rag05"
+  },
+  {
+   "id": "pp05",
+   "domain": "llm_app",
+   "q": "把用户一个问题改写成好几个再分别去搜，然后把几批结果按名次合到一块，这么搞有啥好处",
+   "expect_sources": [
+    "rag_full_chain"
+   ],
+   "hard": true,
+   "orig_id": "rag06"
+  },
+  {
+   "id": "pp06",
+   "domain": "llm_app",
+   "q": "切块切太碎会丢上下文，有没有办法命中小块的同时把它周围或者所属的大段一起带出来",
+   "expect_sources": [
+    "rag_basics",
+    "rag_full_chain"
+   ],
+   "hard": true,
+   "orig_id": "rag08"
+  },
+  {
+   "id": "pp07",
+   "domain": "llm_app",
+   "q": "又看语义又看关键词，两种搜法一起上互相补，这种组合搜索一般怎么落地",
+   "expect_sources": [
+    "rag_basics",
+    "rag_full_chain",
+    "rag技术入门"
+   ],
+   "hard": false,
+   "orig_id": "rag09"
+  },
+  {
+   "id": "pp08",
+   "domain": "llm_app",
+   "q": "模型自己会调外部函数去查天气查数据库那套东西，底层是怎么让它学会开工具的",
+   "expect_sources": [
+    "agent_tool_calling"
+   ],
+   "hard": false,
+   "orig_id": "agt02"
+  },
+  {
+   "id": "pp09",
+   "domain": "llm_app",
+   "q": "有的智能体一步到底照计划走，有的是走一步看一步随时改路子，这两种打法差在哪",
+   "expect_sources": [
+    "planner_l1_linear",
+    "planner_l2_reactive"
+   ],
+   "hard": true,
+   "orig_id": "agt04"
+  },
+  {
+   "id": "pp10",
+   "domain": "algorithm",
+   "q": "一句话里每个词都去看看别的词、按相关程度分配注意力，这个让模型互相'关注'的机制是怎么算的",
+   "expect_sources": [
+    "transformer"
+   ],
+   "hard": false,
+   "orig_id": "alg01"
+  },
+  {
+   "id": "pp11",
+   "domain": "algorithm",
+   "q": "有的模型只会往后续写，有的擅长理解填空，还有的把啥任务都当翻译来做，这几派架构区别在哪",
+   "expect_sources": [
+    "gpt_bert_t5"
+   ],
+   "hard": false,
+   "orig_id": "alg02"
+  },
+  {
+   "id": "pp12",
+   "domain": "algorithm",
+   "q": "想让大模型跑得更小更省，让小模型学大模型、砍掉没用的连接、把精度降低这几种办法分别是啥",
+   "expect_sources": [
+    "蒸馏_剪枝_量化"
+   ],
+   "hard": false,
+   "orig_id": "alg03"
+  },
+  {
+   "id": "pp13",
+   "domain": "algorithm",
+   "q": "微调不想动全部参数，只在旁边挂两个小矩阵来省显存那个方法，是怎么做到少占内存的",
+   "expect_sources": [
+    "lora"
+   ],
+   "hard": false,
+   "orig_id": "alg04"
+  },
+  {
+   "id": "pp14",
+   "domain": "backend",
+   "q": "数据库怎么做到读的时候不挡着写、而且每个事务看到的数据版本还能各不一样",
+   "expect_sources": [
+    "mysql_mvcc"
+   ],
+   "hard": false,
+   "orig_id": "be01"
+  },
+  {
+   "id": "pp15",
+   "domain": "backend",
+   "q": "建了个好几列的联合索引，为啥查询条件不从第一列开始写就用不上索引了",
+   "expect_sources": [
+    "leftmost_prefix"
+   ],
+   "hard": true,
+   "orig_id": "be03"
+  },
+  {
+   "id": "pp16",
+   "domain": "backend",
+   "q": "同一份数据被多个请求一起改，怎么保证不打架、要么全成功要么全回退，隔离做到什么程度",
+   "expect_sources": [
+    "mysql_transactions"
+   ],
+   "hard": false,
+   "orig_id": "be04"
+  },
+  {
+   "id": "pp17",
+   "domain": "backend",
+   "q": "就一根线在干活的那个缓存，凭什么扛得住那么高的并发还不卡",
+   "expect_sources": [
+    "redis_fast_reasons",
+    "redis_single_thread"
+   ],
+   "hard": true,
+   "orig_id": "be05"
+  },
+  {
+   "id": "pp18",
+   "domain": "backend",
+   "q": "查一个根本不存在的 key、热点 key 突然过期、还有一堆 key 同时失效，这三种把库打崩的情况怎么防",
+   "expect_sources": [
+    "redis_cache_problems"
+   ],
+   "hard": false,
+   "orig_id": "be06"
+  },
+  {
+   "id": "pp19",
+   "domain": "backend",
+   "q": "内存里的数据怕断电丢，一种是定时存快照一种是把每条写命令记流水，这俩落盘方式怎么权衡",
+   "expect_sources": [
+    "redis_persistence"
+   ],
+   "hard": false,
+   "orig_id": "be08"
+  },
+  {
+   "id": "pp20",
+   "domain": "backend",
+   "q": "跳表在有序集合里到底怎么用来按分数排名和范围查的，为啥不用平衡树",
+   "expect_sources": [
+    "redis_zset_skiplist"
+   ],
+   "hard": true,
+   "orig_id": "be07"
+  },
+  {
+   "id": "pp21",
+   "domain": "backend",
+   "q": "两个系统之间塞个中间件缓冲一下，流量高峰扛得住、模块之间也不用互相等，这东西解决的到底是啥痛点",
+   "expect_sources": [
+    "mq_intro"
+   ],
+   "hard": false,
+   "orig_id": "be11"
+  },
+  {
+   "id": "pp22",
+   "domain": "career",
+   "q": "完全没编程底子想干大模型这行，第一步该学啥、按什么顺序走不容易走弯路",
+   "expect_sources": [
+    "zero_foundation_path"
+   ],
+   "hard": false,
+   "orig_id": "ca01"
+  },
+  {
+   "id": "pp23",
+   "domain": "career",
+   "q": "我现在做后端的，想往大模型应用那边挪，技术栈要补哪些、怎么迁比较顺",
+   "expect_sources": [
+    "backend_transition_path"
+   ],
+   "hard": false,
+   "orig_id": "ca02"
+  },
+  {
+   "id": "pp24",
+   "domain": "career",
+   "q": "这个岗平时到底干啥活、要会哪些东西，招聘市场现在行情怎么样，入行前有些常见疑问想搞清楚",
+   "expect_sources": [
+    "entry_qa"
+   ],
+   "hard": false,
+   "orig_id": "ca06"
+  },
+  {
+   "id": "h9ll01",
+   "domain": "llm_app",
+   "q": "为啥像 ChatGPT 这种 AI 聊天工具有时候会一本正经地胡说八道啊?而且我们公司内部的资料它压根答不上来,是不是它天生就只懂网上公开的那些东西?这背后到底是啥原因?",
+   "expect_sources": [
+    "rag_basics"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "「RAG出现的原因」一节开头三段:\"知识的局限性\"(训练集构建于网络公开数据,实时/非公开/离线数据无从具备)、\"幻觉问题\"(底层基于数学概率所以会一本正经地胡说八道)、\"数据安全性\"(企业不愿把私域数据上传第三方)。"
+  },
+  {
+   "id": "h9ll02",
+   "domain": "llm_app",
+   "q": "就是把文本都转成向量存到库里之后,库一大,想找跟我问题最像的那几条,总不能挨个算一遍距离吧?我听说有种办法是建一个分层的图,上头稀疏、底下密集,先粗着找再细着找,这玩意儿具体是咋一步步找的啊?它跟用夹角余弦去算两个向量像不像的那种度量,又是啥关系?",
+   "expect_sources": [
+    "rag_full_chain"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文采集开头“什么是HNSW算法,和余弦相似度有什么关系”一整段(约 84–141 行):上层稀疏图快速缩小范围、底层密集图精确搜索、逐层下降的搜索过程,以及 HNSW 可用余弦相似度作度量、把 O(n) 暴力计算降到近 O(log n)。"
+  },
+  {
+   "id": "h9ll03",
+   "domain": "llm_app",
+   "q": "为啥有的 AI 回答问题不是光闷头想,还要一会儿上网查点资料、一会儿接着想,来回倒腾好几轮才给结果?光靠它自己想,或者光靠搜,是不是都不太行?",
+   "expect_sources": [
+    "agent_basics"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文 ReAct(融合推理与执行的能力)部分——'为什么结合推理和行动,就会有效增强 LLM 完成任务的能力?'一段:仅推理会幻觉、仅行动得到海量资料无法直接回答、推理+行动则循环迭代直到完成任务。"
+  },
+  {
+   "id": "h9ll04",
+   "domain": "llm_app",
+   "q": "问个可能有点小白的问题哈,就是那种能帮你查天气的 AI,它咋知道要吐出一个格式规整的 JSON、参数名一个都不带错的?是不是必须拿一大堆数据专门训一遍才行?我还听说在提示词里塞几个例子它就能照葫芦画瓢了,那到底哪种路子最省钱省事啊?",
+   "expect_sources": [
+    "agent_tool_calling"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文「大模型学习 Function Calling 能力的方式」部分:微调/少样本提示/强化学习/工程侧优化(JSON Schema 约束)四类方式,及「常用方法」段落指出 Few-shot Prompting + Schema Constraint 是成本最小、最易部署的方案(约第 176-270 行)。"
+  },
+  {
+   "id": "h9ll05",
+   "domain": "llm_app",
+   "q": "我有点搞不懂哈,像那种人提前把每一步都想好写死、程序照着跑的自动化流程,跟现在那种会根据实际反馈自己改下一步咋走的 AI 助手,到底差在哪啊?是不是就是一个死板一个灵活?",
+   "expect_sources": [
+    "agent_planner"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文开头\"为什么需要 Planning 能力\"部分:Workflow 是\"人先想清楚并预设所有步骤,系统照着跑\",Agent 是\"可基于实际反馈实时调整方案确保完成目标\"(约 54–74 行,从\"单次响应式思考\"升级为\"连续目标导向式思考\"的对比段)。"
+  },
+  {
+   "id": "h9ll06",
+   "domain": "llm_app",
+   "q": "问个外行点的问题哈,我发现同一个 AI 放到不同的产品里,干活水平差得离谱,有的特别稳,有的老翻车。是不是就是说,光那个聪明的\"脑子\"强没用,外面还得包一整套系统才行?那这套外面的东西到底都管些啥呀?",
+   "expect_sources": [
+    "harness_engineering"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "「Harness 的定义」段落(Agent=Model+Harness、\"所有不属于模型本体但参与 Agent 执行的代码、配置和运行逻辑\",提供上下文注入/控制/行动/持久化/观察验证)+ 时间线中 Ethan Mollick 段(同一个模型在不同 app 和 harness 中表现会非常不同),开头发动机/方向盘比喻亦可印证。"
+  },
+  {
+   "id": "h9ll07",
+   "domain": "llm_app",
+   "q": "我平时让 AI 帮我写代码,它老是反复犯同一个错,比如总跑错命令、老是找错接口,我每次都得手动帮它纠正一遍,烦死了。是不是有啥办法,能让它以后再也不犯同样的错啊?",
+   "expect_sources": [
+    "harness_core_workflow"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文开头“第 5 步：构建 Harness”部分(约 53-69 行):每当发现 agent 犯错就设计一个让它不再犯的方案,两种形式——更新 AGENTS.md 等隐式提示、写真正的工具脚本;Böckeler 节的“调控循环(steering loop)”段(约 252-254 行)也直接回答(发现一次手动改,反复出现就沉淀进规则/检查/工具)。"
+  },
+  {
+   "id": "h9ll08",
+   "domain": "llm_app",
+   "q": "我平时用那种 AI 聊天工具,这回跟它说了我叫啥、Python 学到哪一步了,过两天新开个窗口再问,它就说抱歉不知道我的学习进度,咋跟压根没见过我似的?这是它天生就记不住事儿吗?想让它一直记得我这个人的情况,一般都是咋整的?",
+   "expect_sources": [
+    "hello_agents"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "第八章 8.1.2「为何智能体需要记忆与RAG」局限一\"无状态导致的对话遗忘\"——含张三学 Python 被遗忘的代码示例,并给出四点问题(上下文丢失/个性化缺失等),解法即引入 8.2 的记忆系统(memory_tool 四种记忆类型)。"
+  },
+  {
+   "id": "h9ll09",
+   "domain": "llm_app",
+   "q": "我看有的工具在容器里或者远程机器上干活,每做一个小操作都得单独跑一次 docker exec 或者 ssh,一次就要等个一两百毫秒,几百个操作下来慢得要死。这种一般咋优化啊?是不是在里面常驻一个小服务,连上一次之后就一直复用那条连接就快了?",
+   "expect_sources": [
+    "localflow"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "docs/AGENT_SERVER.md 开篇段落:DockerWorkspace/RemoteWorkspace 每操作 shell 一次约 100-300ms,改为容器/远端常驻 AgentServer、复用一条 HTTP 连接后降到本机 1-5ms / 局域网 10-50ms(Trade-offs 表同样给出对比)。"
+  },
+  {
+   "id": "h9ll10",
+   "domain": "llm_app",
+   "q": "我看有人给 AI 助手配了一大堆专门干活的说明文件夹,处理表格的、写报告的、填表的都有。我就纳闷,这么多说明书要是每次开聊都全塞给它,上下文窗口不早就爆了吗?它咋做到手边放一堆\"秘籍\"还不占地方的?是不是用到哪本才翻哪本啊?",
+   "expect_sources": [
+    "agent_skills"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "第一节\"如何工作\"与第二节\"渐进式披露\"段:分发现/激活/执行三阶段加载——启动只读每个包的 name+description(约 100 tokens),任务匹配才加载完整主文件(建议低于 5000 tokens、500 行内),脚本和参考资料执行时按需再读。"
+  },
+  {
+   "id": "h9ll11",
+   "domain": "llm_app",
+   "q": "我拿公司文档做了个问答小助手,用户先问\"我在意大利能做什么\",紧接着又问\"那里有什么吃的\",小助手就懵了,根本不知道\"那里\"指哪儿。这种顺着上一句往下追问的情况,一般都咋整啊?",
+   "expect_sources": [
+    "rag_basics"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "「RAG优化方法→用户提问」下的\"Follow Up Questions/查询问题压缩\"段落,原文正是用\"我在意大利能做什么/那里有什么类型的食物\"举例,答案是用 LLM 针对历史对话和当前问题生成一个独立问题再去检索。"
+  },
+  {
+   "id": "h9ll12",
+   "domain": "llm_app",
+   "q": "我在捣鼓那种先从一堆资料里翻出相关内容再让机器人答题的玩意儿,碰到特别复杂的问题效果就很差。听人说可以先把大问题拆成几个小问题分头处理,那拆完之后咋整?是拿第一个小问题的答案接着帮忙答第二个、一环扣一环地往下推,还是每个小问题各答各的、最后再拼成一个总答案?这两种路子是不是都有人用?",
+   "expect_sources": [
+    "rag_full_chain"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文采集中 Decomposition 问题分解策略对应段落(约 163–173 行):复杂问题分解为子问题,两种类型——Answer recursively(用第一个问题的答案+检索回答第二个,依此类推)和 Answer individually(独立解决每个问题最后合并)。"
+  },
+  {
+   "id": "h9ba01",
+   "domain": "backend",
+   "q": "我程序里好几步操作是连着改数据的，比如先扣我账户的钱再给对方加上，万一跑到一半哪步报错了咋整？前面已经改掉的数据能自动退回原样不，还是就那么乱着了？",
+   "expect_sources": [
+    "mysql_transactions"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文\"1. 原子性（Atomicity）\"定义小节（文档第67-70行）：所有操作要么全部完成要么全部不做，执行中出错则所有已执行操作回滚，数据恢复到开始之前的状态。"
+  },
+  {
+   "id": "h9ba02",
+   "domain": "backend",
+   "q": "问个小白问题哈,存数据的那个系统里,我光是查一下数据,跟增删改数据,还有建表删表这种改表结构的操作,底下加的锁是不是都不一样啊?分别都叫啥锁来着?",
+   "expect_sources": [
+    "mysql_mvcc"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文\"数据库并发控制——锁机制\"一节的\"锁的分类\"列表:DQL(SELECT)用读锁、DML(INSERT/DELETE/UPDATE)用写锁、DDL(CREATE/DROP TABLE)用元数据锁"
+  },
+  {
+   "id": "h9ba03",
+   "domain": "backend",
+   "q": "问个事儿,为啥说查东西的时候,中间那几层只放个用来指路的键,真正的内容全都压在最底下那一层?这么搞到底图啥,是不是就是为了少读几次磁盘?",
+   "expect_sources": [
+    "mysql_bplus_tree"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文优化点 a『非叶子节点不存储数据,更适合磁盘存储和 I/O 优化』一段(第 75-77 行):非叶子节点只存键值和指针,内部节点更小,单个磁盘块可容纳更多键值,降低高度、减少磁盘 I/O 次数。"
+  },
+  {
+   "id": "h9ba04",
+   "domain": "backend",
+   "q": "问个事儿,我们每次上线都往内存那层一口气塞一大堆数据,存活时间还全设成一样的,是不是就是说到点儿它们会一块儿没掉,然后请求全涌到后面的存储上把它干趴下?这种咋提前防啊?",
+   "expect_sources": [
+    "redis_cache_problems"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文\"1. 缓存雪崩\"小节:定义与两条原因(相同过期时间导致集中失效、服务宕机),解决方案为失效时间错峰,对比总结表补充缓存预热、高可用集群、限流降级。"
+  },
+  {
+   "id": "h9ba05",
+   "domain": "backend",
+   "q": "我一直纳闷,那种把数据全搁内存里的缓存,机器一重启或者一断电,里面东西不就全没了吗?它到底是咋做到重启之后数据还能找回来的?是不是得想办法往硬盘上也存一份啊,一般都有哪几种存法?",
+   "expect_sources": [
+    "redis_persistence"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文开头段(第48-52行):说明目标是将内存中的数据持久化到磁盘、保证重启后可恢复,并列出 RDB 快照、AOF 记录写操作、混合三种方式。"
+  },
+  {
+   "id": "h9ba06",
+   "domain": "backend",
+   "q": "就是那种把数据放内存里的缓存嘛,东西多到一台机器装不下了,听说可以拆开放到好几台机器上一起扛,那它咋知道哪条数据该归哪台机器管啊?是不是有个啥固定的分法?",
+   "expect_sources": [
+    "redis_cluster"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "「正文内容」开篇第二段:采用分布式哈希方式把数据分片分给不同节点、每个节点只管一部分数据;具体分法见「哈希槽的工作原理」小节(16384 个槽,0~16383)。"
+  },
+  {
+   "id": "h9ba07",
+   "domain": "backend",
+   "q": "我本地起的服务重启的时候老报端口被占用,可我明明已经把进程杀干净了,等个一两分钟再启动就又好了,这到底是咋回事啊?有没有啥设置能让我不用干等、直接就把端口重新绑上?",
+   "expect_sources": [
+    "network_tcp"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文\"TCP 挥手的 TIME_WAIT 状态\"部分:\"3. TIME_WAIT 的持续时间——2MSL\"解释为何要等一段时间,\"4. TIME_WAIT 导致的问题及其解决方案\"给出(1)启用 SO_REUSEADDR/SO_REUSEPORT (2)调整参数 (3)使用长连接。"
+  },
+  {
+   "id": "h9ba08",
+   "domain": "backend",
+   "q": "我写后台服务的时候听人说,一个程序里面开好几个干活的\"小工\",其中随便一个小工出了错,整个程序就全崩了;但要是干脆多跑几个独立的程序,一个挂了其他的还能接着干活。为啥差别这么大啊?是不是它们各自占的内存地盘不一样?",
+   "expect_sources": [
+    "os_process_thread"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "\"进程 VS 线程\"对比表的\"崩溃影响\"行,以及\"线程与进程的区别\"里\"健全性\"一条:进程有独立地址空间、保护模式下崩溃互不影响;线程没有单独地址空间,一个线程死掉等于整个进程死掉。"
+  },
+  {
+   "id": "h9al01",
+   "domain": "algorithm",
+   "q": "听说现在做翻译、写文章的那种模型,不是像人那样一个词一个词按顺序读的,而是把整句话一股脑同时算的。那它咋分得清哪个词在前哪个词在后啊?这个先后顺序的信息是打哪儿来的?",
+   "expect_sources": [
+    "transformer"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文第 3 节\"位置编码(Positional Encoding)\"及\"输入数据的准备\"段:因架构不保留顺序信息,用正弦/余弦函数生成位置编码,按位置加到每个词向量上(x_final = x_embedding + PE_position)。"
+  },
+  {
+   "id": "h9al02",
+   "domain": "algorithm",
+   "q": "我看网上说有种预训练玩法,是把句子里随机挑 15% 的词盖住让模型去猜。但为啥不把选中的词全换成那个特殊的遮挡记号,还要留一成换成随机的别的词、一成干脆原样不动?这么折腾到底图啥?",
+   "expect_sources": [
+    "gpt_bert_t5"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "「二、BERT → MLM → 1.3 掩码的机制」小节(约 119–126 行):80% 用 [MASK]、10% 随机替换、10% 保持不变,原因是推理阶段没有 [MASK] 标记,要让模型学会处理真实词。"
+  },
+  {
+   "id": "h9al03",
+   "domain": "algorithm",
+   "q": "想拿自己的数据把 GPT 那种超大的预训练网络再训一把,可全量更新参数显卡根本扛不住。听说有个省事的路子,原来那一大坨参数全冻住不动,只额外练两个特别小的矩阵就够了?这俩小矩阵到底是咋起作用的,最后又是怎么跟原来的权重合到一块的?",
+   "expect_sources": [
+    "lora"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "「核心原理」小节:W=W0+ΔW、ΔW=AB,冻结 W0 只训练 A、B(第 53–81 行);合并方式见「推理过程-权重相加」y=(W+AB)x(第 298–311 行)"
+  },
+  {
+   "id": "h9al04",
+   "domain": "algorithm",
+   "q": "问个事儿,我看有人训小网络的时候,不直接拿正确答案当目标,反而让它去学一个大网络吐出来的那一串概率,还特意调个什么温度参数把那串概率弄得更平缓。这是图啥呀?直接让小的学标准答案不就完了吗?",
+   "expect_sources": [
+    "蒸馏_剪枝_量化"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文知识蒸馏部分'准备教师模型的输出'(软标签+温度调节公式段)与'关键技术——温度调节'段:软标签经温度 T 平滑后保留类别间相对关系,T>1 时分布更平滑,学生模型由此学到类间关系而不只是最优类别,泛化更好。"
+  },
+  {
+   "id": "h9al05",
+   "domain": "algorithm",
+   "q": "为啥 ChatGPT 这种 AI 一开始据说只会顺着往下接话,后来咋就能听懂人的指令、还知道啥话不该乱说了?是不是中间得分好几步调教啊,每一步都是在干啥?",
+   "expect_sources": [
+    "训练全过程"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "正文开头的三大阶段列表(预训练/SFT/对齐)以及一、二两节中各阶段的\"目标\"段落"
+  },
+  {
+   "id": "h9ca01",
+   "domain": "career",
+   "q": "我基本没怎么写过代码,顶多跟着视频敲过几行 Python,现在想转行去搞那种拿现成 AI 接口搭产品的技术活儿。听说小白和科班出身的人起步顺序完全不一样,像我这种啥都不会的,是不是有专门给我们这类人准备的一条起步安排啊?该先看哪份材料?",
+   "expect_sources": [
+    "learning_path"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "「适用基础」节第一条对'零基础'的界定(没有任何编程基础或只会语言、目标快速入门),以及「路线入口」节第一条指向 llm_app_intro_05_zero_foundation_path.md。"
+  },
+  {
+   "id": "h9ca02",
+   "domain": "career",
+   "q": "我是纯小白,想以后找 AI 方向的活儿,但网上都说得先把计算机网络、操作系统、数据库这些后端基础全啃完才有资格去碰 AI。我时间不太够,到底该先啃 AI 那摊还是先啃后端那摊啊?为啥这么排?",
+   "expect_sources": [
+    "zero_foundation_path"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "文档开头\"页面结构目录\"下方的总述段:零基础先学大模型应用开发技术栈、有机会再补后端、最后看算法岗加分项,理由是内容少学得快 + 田忌赛马策略(胜率 1:1)。"
+  },
+  {
+   "id": "h9ca03",
+   "domain": "career",
+   "q": "最近刷招聘软件有点懵,同样是招人干跟 ChatGPT 那类东西沾边的活儿,有的职位是调现成的接口做产品,有的是要自己炼丹搞训练,还有的写着两样都得会。这几种到底咋区分啊?两样都要会的那种,是不是就是一个人干俩人的活、有点坑?",
+   "expect_sources": [
+    "role_overview"
+   ],
+   "hard": false,
+   "gen": "claude-draft-r9+overlap0+dedupe",
+   "answer_location": "「岗位说明」一节(第 28-30 行):应用岗=调模型 API 落地、与普通前后端及算法岗的界限,合并型岗位被作者称为'一个人干两个人的活儿'、类似 AI 界全栈,微调等是加分项非必备。"
+  }
+ ]
+}

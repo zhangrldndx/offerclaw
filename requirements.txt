@@ -1,0 +1,40 @@
+# OfferClaw · 依赖清单
+# 安装：pip install -r requirements.txt
+
+# RAG 核心
+chromadb>=0.4.0
+langchain-text-splitters>=0.2.0
+langgraph>=1.2.5,<1.3.0
+langgraph-checkpoint-sqlite==3.1.1  # Agent HITL / 服务重启恢复
+rank-bm25>=0.2.2   # Round2 混合检索 BM25 稀疏召回
+jieba>=0.42        # Round2/4 中文分词（BM25 + 路由）
+
+# HTTP API 层
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+
+# HTTP 请求
+requests>=2.31.0
+
+# 数据模型（FastAPI 依赖）
+pydantic>=2.0.0
+
+# 工程自检 / 测试
+pytest>=9.0.0
+jsonschema>=4.0.0
+
+# JD 抓取 SPA 兜底
+playwright>=1.60.0
+
+# 本地 embedding（local provider，可选；不用本地向量可不装）
+sentence-transformers>=3.0
+modelscope>=1.9   # 国内下载向量模型用，HF 不通时回退
+# 直接 import 的依赖显式声明,不依赖间接带入(2026-07-09 验收补齐)
+numpy>=1.24
+psutil>=5.9
+# KB 上传 PDF/Word 文本抽取(2026-08-08)
+pypdf>=4.0
+python-docx>=1.1
+reportlab>=4.0   # 入库 Golden Set 评测:确定性生成测试 PDF(eval/test 用)
+# docling>=2.0   # 第2层评测/可选结构化解析器(A/B 已跑、未默认接线;安装后可用 eval_pdf_parser_ab.py 复现)
+onnxruntime>=1.20  # 分工精排 EN 桥(mMiniLM INT8,第十一轮)

@@ -1,0 +1,9 @@
+{
+  "name": "offerclaw-direct-reply",
+  "version": "1.1.0",
+  "type": "module",
+  "private": true,
+  "openclaw": {
+    "extensions": ["./index.ts"]
+  }
+}

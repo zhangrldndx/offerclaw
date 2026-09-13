@@ -1,0 +1,15 @@
+{
+  "version": "router_reviewed_regression_v1",
+  "set_kind": "reviewed_regression_dev",
+  "expected_count": 240,
+  "note": "Reviewed development/regression questions. No wrapper expansion. This is not an open-world or blind generalisation claim.",
+  "sources": [
+    {"path": "rag_intent_eval_v2.json", "selector": "all_queries", "count": 160},
+    {"path": "top_ask_service_modes_v1.json", "selector": "all_items", "count": 50},
+    {"path": "rag_relationship_dag_eval_v1.json", "selector": "positive", "count": 17,
+     "expected": ["application_state.list_current", "application_jd.search_bound_jd", "application_jd.get_match_snapshot", "project_memory.rank_for_application"],
+     "service_mode": "advise"},
+    {"path": "product_help_intent_eval_v1.json", "selector": "positive", "count": 13,
+     "expected": ["product_help.guide"], "service_mode": "guide"}
+  ]
+}

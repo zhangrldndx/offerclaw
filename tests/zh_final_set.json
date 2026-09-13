@@ -1,0 +1,905 @@
+{
+ "description": "Final 中文业务集 v1(2026-08-21 用户独立出题,未参与任何调参;来源 FINAL_RETRIEVAL_QUESTIONS.md)",
+ "items": [
+  {
+   "id": "zf01",
+   "domain": "career",
+   "q": "一个 JD 主要让我接模型接口、做业务流程和落地优化，模型微调只写成加分项，这更像应用开发岗还是算法岗？判断时看什么？",
+   "expect_sources": [
+    "llm_app_intro_02_role_overview"
+   ],
+   "hard": false,
+   "note": "考岗位职责边界，不直接复述技术栈公式。"
+  },
+  {
+   "id": "zf02",
+   "domain": "career",
+   "q": "RAG 和 Agent 都算 AI 落地，但一个更像给模型补知识，一个更像让模型去办事；这两类工作在目标和技术变化速度上有什么差别？",
+   "expect_sources": [
+    "llm_app_intro_02_role_overview"
+   ],
+   "hard": false,
+   "note": "考知识与行动的岗位侧区分。"
+  },
+  {
+   "id": "zf03",
+   "domain": "career",
+   "q": "面应用开发岗时，Embedding、排序模型和大模型底层需要研究到能自己实现吗，还是掌握选型和特性就够？",
+   "expect_sources": [
+    "llm_app_intro_02_role_overview"
+   ],
+   "hard": false,
+   "note": "目标是岗位职责深度，而非算法原理题。"
+  },
+  {
+   "id": "zf04",
+   "domain": "career",
+   "q": "一个应用开发岗位同时写了后端框架、数据库、消息队列、RAG 和工具调用，我该怎样判断这些要求是不是合理，而不是把它误当纯算法岗？",
+   "expect_sources": [
+    "llm_app_intro_02_role_overview"
+   ],
+   "hard": true,
+   "note": "综合辨认岗位组成。"
+  },
+  {
+   "id": "zf05",
+   "domain": "career",
+   "q": "大模型应用开发的学历门槛应该按普通开发岗看，还是按论文和学校背景都很卷的算法岗看？",
+   "expect_sources": [
+    "llm_app_intro_04_entry_qa"
+   ],
+   "hard": false,
+   "note": "考入场门槛定位。"
+  },
+  {
+   "id": "zf06",
+   "domain": "career",
+   "q": "做大模型应用开发就一定比普通后端工资高吗？材料里对薪资差异给出的判断是什么？",
+   "expect_sources": [
+    "llm_app_intro_04_entry_qa"
+   ],
+   "hard": false,
+   "note": "避免把热点岗位等同于必然高薪。"
+  },
+  {
+   "id": "zf07",
+   "domain": "career",
+   "q": "为什么材料认为大模型应用开发八股和项目面试可能比高级后端面试简单一些？主要有哪几方面原因？",
+   "expect_sources": [
+    "llm_app_intro_04_entry_qa"
+   ],
+   "hard": true,
+   "note": "考岗位新、面试官背景和人才供给。"
+  },
+  {
+   "id": "zf08",
+   "domain": "career",
+   "q": "现在主流还是 Python；如果我用 Java 或 Go，材料分别建议关注哪些大模型应用框架？",
+   "expect_sources": [
+    "llm_app_intro_04_entry_qa"
+   ],
+   "hard": false,
+   "note": "考语言与框架的求职准备。"
+  },
+  {
+   "id": "zf09",
+   "domain": "career",
+   "q": "为什么只会调模型接口往往不够，RAG 和 Agent 项目还需要后端能力把流程串起来？",
+   "expect_sources": [
+    "llm_app_intro_04_entry_qa"
+   ],
+   "hard": false,
+   "note": "考岗位对后端底座的依赖。"
+  },
+  {
+   "id": "zf10",
+   "domain": "career",
+   "q": "我刚开始学 Python，目标是先做 AI 应用，语言应该学到什么程度再进入项目，而不是一开始钻得太深？",
+   "expect_sources": [
+    "llm_app_intro_05_zero_foundation_path"
+   ],
+   "hard": false,
+   "note": "考零基础阶段的学习深度。"
+  },
+  {
+   "id": "zf11",
+   "domain": "career",
+   "q": "零基础路线里为什么把 RAG 和 Agent 各安排成大约五天的基础速通，但又说真正难的是后续优化？",
+   "expect_sources": [
+    "llm_app_intro_05_zero_foundation_path"
+   ],
+   "hard": true,
+   "note": "考“搭流程容易、优化难”。"
+  },
+  {
+   "id": "zf12",
+   "domain": "career",
+   "q": "零基础补后端时，计算机网络、操作系统、MySQL、Redis、消息队列的建议顺序是什么，网络和操作系统分别重点看哪部分？",
+   "expect_sources": [
+    "llm_app_intro_05_zero_foundation_path"
+   ],
+   "hard": false,
+   "note": "考具体路线顺序与重点。"
+  },
+  {
+   "id": "zf13",
+   "domain": "career",
+   "q": "Transformer、训练流程和模型压缩这些算法知识，零基础路线建议什么时候学，为什么不放在最前面？",
+   "expect_sources": [
+    "llm_app_intro_05_zero_foundation_path"
+   ],
+   "hard": false,
+   "note": "考加分项优先级。"
+  },
+  {
+   "id": "zf14",
+   "domain": "career",
+   "q": "我原来写 Java 后端，转 AI 应用后要不要彻底放弃 Java 只写 Python？材料为什么建议两边都保留？",
+   "expect_sources": [
+    "llm_app_intro_06_backend_transition_path"
+   ],
+   "hard": false,
+   "note": "考转语言但不丢原技术栈。"
+  },
+  {
+   "id": "zf15",
+   "domain": "career",
+   "q": "后端转 AI 应用时，为什么几百行把链路串起来不算最难，面试官反而更关注你做过哪些优化？",
+   "expect_sources": [
+    "llm_app_intro_06_backend_transition_path"
+   ],
+   "hard": true,
+   "note": "考项目深度而非 Demo。"
+  },
+  {
+   "id": "zf16",
+   "domain": "career",
+   "q": "已经系统学过后端的人转大模型应用，材料建议先补哪一块、哪些旧知识只需回顾、哪些算法内容最后再看？",
+   "expect_sources": [
+    "llm_app_intro_06_backend_transition_path"
+   ],
+   "hard": false,
+   "note": "考有后端基础者的差异化路线。"
+  },
+  {
+   "id": "zf17",
+   "domain": "career",
+   "q": "我有机器学习基础，学历也不错，但论文和实习竞争力一般，要不要把全部求职筹码都押在算法岗？材料给的风险分散建议是什么？",
+   "expect_sources": [
+    "llm_app_intro_07_algorithm_transition_path"
+   ],
+   "hard": true,
+   "note": "考算法背景求职策略。"
+  },
+  {
+   "id": "zf18",
+   "domain": "career",
+   "q": "有模型微调和部署优化经历的人，为什么既能冲算法岗，也能把应用开发岗作为胜算更高的选择？",
+   "expect_sources": [
+    "llm_app_intro_07_algorithm_transition_path"
+   ],
+   "hard": false,
+   "note": "考经历向两类岗位的迁移。"
+  },
+  {
+   "id": "zf19",
+   "domain": "career",
+   "q": "算法背景的人补应用开发时，后端要求为什么可以适当降低，但仍建议有机会再补网络、数据库和中间件？",
+   "expect_sources": [
+    "llm_app_intro_07_algorithm_transition_path"
+   ],
+   "hard": false,
+   "note": "考路线取舍。"
+  },
+  {
+   "id": "zf20",
+   "domain": "career",
+   "q": "简历项目名称写成产品名和写成“技术加业务场景”各有什么特点？用了技术型名称后，背景里还必须补什么？",
+   "expect_sources": [
+    "rag_agent_project_packaging"
+   ],
+   "hard": false,
+   "note": "考项目命名，不是检索技术题。"
+  },
+  {
+   "id": "zf21",
+   "domain": "career",
+   "q": "项目周期写多长比较自然？为什么应该把自己最熟的项目放在时间上更靠近现在的位置？",
+   "expect_sources": [
+    "rag_agent_project_packaging"
+   ],
+   "hard": false,
+   "note": "考面试追问概率。"
+  },
+  {
+   "id": "zf22",
+   "domain": "career",
+   "q": "校招生或实习生包装项目时，角色为什么更适合写“核心成员”或“主要开发者”，而不是硬写“负责人”？",
+   "expect_sources": [
+    "rag_agent_project_packaging"
+   ],
+   "hard": false,
+   "note": "考叙事可信度。"
+  },
+  {
+   "id": "zf23",
+   "domain": "career",
+   "q": "一个用于面试讲述的项目背景，怎样交代使用对象、当前进展和团队规模，才不会像个人练手 Demo？",
+   "expect_sources": [
+    "rag_agent_project_packaging"
+   ],
+   "hard": true,
+   "note": "考“师出有名”和可使用叙事。"
+  },
+  {
+   "id": "zf24",
+   "domain": "career",
+   "q": "面试官问“为什么选这套技术而不是另一套”时，怎样说明团队沿用熟悉方案，同时又不显得自己没有技术判断？",
+   "expect_sources": [
+    "rag_agent_project_packaging"
+   ],
+   "hard": true,
+   "note": "考选型追问的表达策略。"
+  },
+  {
+   "id": "zf25",
+   "domain": "career",
+   "q": "简历里的“主要职责和实现”为什么要按真实开发顺序组织、突出核心流程，并让每个实现点有足够技术深度？",
+   "expect_sources": [
+    "rag_agent_project_packaging"
+   ],
+   "hard": false,
+   "note": "考项目段组织原则。"
+  },
+  {
+   "id": "zf26",
+   "domain": "rag_agent",
+   "q": "同一份知识库里同时写“LLM”“大语言模型”和“大模型”，入库前怎样处理才能避免检索把它们当成三个不相干的概念？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": false,
+   "note": "考实体与术语归一化。"
+  },
+  {
+   "id": "zf27",
+   "domain": "rag_agent",
+   "q": "除了正文，给知识块补摘要、时间戳和用户可能会问的问题，分别能给检索带来什么帮助？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": false,
+   "note": "考元数据增强。"
+  },
+  {
+   "id": "zf28",
+   "domain": "rag_agent",
+   "q": "知识库里有一类内容会频繁变化，怎样避免已经过时的块继续被检索并当成当前事实？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": true,
+   "note": "考时间敏感数据失效机制。"
+  },
+  {
+   "id": "zf29",
+   "domain": "rag_agent",
+   "q": "分块大小为什么不能只看模型的 token 上限，还要同时看文档类型和用户问题通常是短问还是复杂问？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": false,
+   "note": "考 chunk size 的业务依赖。"
+  },
+  {
+   "id": "zf30",
+   "domain": "rag_agent",
+   "q": "“光盘”在光盘介质和光盘行动里意思完全不同，为什么带上下文的动态嵌入比固定词向量更适合这种情况？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": false,
+   "note": "考一词多义，不复用自注意力原理题。"
+  },
+  {
+   "id": "zf31",
+   "domain": "rag_agent",
+   "q": "什么情况下会考虑让用户问题和知识库正文使用不同的嵌入模型，这种做法在材料里叫什么？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": true,
+   "note": "考混合嵌入。"
+  },
+  {
+   "id": "zf32",
+   "domain": "rag_agent",
+   "q": "多轮聊天做问题压缩时，如果新问题已经和前面的聊天完全无关，直接把历史一起嵌入为什么反而会把检索带偏？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": true,
+   "note": "考查询压缩的边界，不复用“那里”示例。"
+  },
+  {
+   "id": "zf33",
+   "domain": "rag_agent",
+   "q": "一个召回块很长，只有中间几句相关；直接整块塞给模型会产生哪些成本和质量问题，检索后该怎样压缩？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": false,
+   "note": "考上下文压缩的触发条件。"
+  },
+  {
+   "id": "zf34",
+   "domain": "rag_agent",
+   "q": "正确文档确实被召回了，却因为只允许给模型很少几个结果而没进入上下文，这属于缺内容、没排进候选，还是“没进上下文”问题？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": true,
+   "note": "考 RAG 失败阶段定位。"
+  },
+  {
+   "id": "zf35",
+   "domain": "rag_agent",
+   "q": "先生成假设答案再检索的办法，在用户说了一个缺少背景的生僻词或提出开放价值判断时，为什么可能比原问题检索得更偏？",
+   "expect_sources": [
+    "llm_app_interview_03_rag_full_chain"
+   ],
+   "hard": true,
+   "note": "考 HyDE 的两个失败边界，而非机制复述。"
+  },
+  {
+   "id": "zf36",
+   "domain": "rag_agent",
+   "q": "一个长序列规划任务如果交给 LLM 加经典规划器协作，自然语言怎样先变成 PDDL，规划结果又怎样回到自然语言？",
+   "expect_sources": [
+    "llm_app_interview_04_agent_basics"
+   ],
+   "hard": true,
+   "note": "考 LLM+P 完整转换链。"
+  },
+  {
+   "id": "zf37",
+   "domain": "rag_agent",
+   "q": "在 LLM+P 里，谁更擅长理解模糊自然语言，谁更擅长在明确规则下找长期最优步骤？两者为什么要分工？",
+   "expect_sources": [
+    "llm_app_interview_04_agent_basics"
+   ],
+   "hard": false,
+   "note": "考概率模型与经典 Planner 的互补。"
+  },
+  {
+   "id": "zf38",
+   "domain": "rag_agent",
+   "q": "给工具调用模型做全量微调后，每新增一个工具都可能要重训；为什么少样本示例配合 Schema 约束更适合快速迭代？",
+   "expect_sources": [
+    "llm_app_interview_05_agent_tool_calling"
+   ],
+   "hard": true,
+   "note": "考工程成本，不复用“怎样吐 JSON”。"
+  },
+  {
+   "id": "zf39",
+   "domain": "rag_agent",
+   "q": "MCP 的价值为什么不只是统一一个 JSON 格式，还包括运行时取上下文、权限控制、审计和跨客户端复用？",
+   "expect_sources": [
+    "llm_app_interview_05_agent_tool_calling"
+   ],
+   "hard": false,
+   "note": "考协议的系统价值。"
+  },
+  {
+   "id": "zf40",
+   "domain": "rag_agent",
+   "q": "把 LLM、Planner 和 Agent 拆开看时，谁负责理解生成、谁负责设计行动路径、谁负责把任务推进到完成？",
+   "expect_sources": [
+    "llm_app_interview_06_agent_planner"
+   ],
+   "hard": false,
+   "note": "考三层职责，避免把它们混为一谈。"
+  },
+  {
+   "id": "zf41",
+   "domain": "rag_agent",
+   "q": "Supervisor-Worker 多智能体架构里，顶层和底层分别做什么？这种分层怎样带来并行、专业化和容错？",
+   "expect_sources": [
+    "llm_app_interview_06_agent_planner"
+   ],
+   "hard": true,
+   "note": "考多智能体组织方式。"
+  },
+  {
+   "id": "zf42",
+   "domain": "rag_agent",
+   "q": "为什么说 Planner 从隐式提示走向显式调度，是单智能体升级到多智能体协作的结构性前提？",
+   "expect_sources": [
+    "llm_app_interview_06_agent_planner"
+   ],
+   "hard": true,
+   "note": "考架构演进。"
+  },
+  {
+   "id": "zf43",
+   "domain": "rag_agent",
+   "q": "一个 Skill 除了 `SKILL.md` 还能放脚本、参考资料和素材；这三个可选目录分别应该承载什么？",
+   "expect_sources": [
+    "llm_app_interview_09_agent_skills"
+   ],
+   "hard": false,
+   "note": "考目录职责。"
+  },
+  {
+   "id": "zf44",
+   "domain": "rag_agent",
+   "q": "为什么 Skill 里的脚本可以直接执行而不必把全部源码塞进上下文，长参考资料也应该按需再读？",
+   "expect_sources": [
+    "llm_app_interview_09_agent_skills"
+   ],
+   "hard": false,
+   "note": "考渐进式披露的上下文收益。"
+  },
+  {
+   "id": "zf45",
+   "domain": "rag_agent",
+   "q": "一个好 Skill 为什么既要“范围合适”，又要根据任务风险校准 Agent 的自由度？范围过大或控制过松分别会怎样？",
+   "expect_sources": [
+    "llm_app_interview_09_agent_skills"
+   ],
+   "hard": true,
+   "note": "考 well-scoped 与 calibrated。"
+  },
+  {
+   "id": "zf46",
+   "domain": "rag_agent",
+   "q": "优化 Skill 的触发描述时，为什么要把查询拆成训练集和验证集，并根据验证通过率选版本？",
+   "expect_sources": [
+    "llm_app_interview_09_agent_skills"
+   ],
+   "hard": true,
+   "note": "考触发评估过拟合。"
+  },
+  {
+   "id": "zf47",
+   "domain": "rag_agent",
+   "q": "当 Agent 反复犯同类错误时，工程师为什么应该把缺失能力沉淀成规则、脚本、检查器或反馈回路，而不只是每次亲手修掉？",
+   "expect_sources": [
+    "llm_app_interview_10_harness_engineering"
+   ],
+   "hard": true,
+   "note": "考 implementation owner 到 capability owner。"
+  },
+  {
+   "id": "zf48",
+   "domain": "rag_agent",
+   "q": "从模型权重、提示词、上下文到 Harness，四层分别解决“会什么、怎么要求、看到什么、怎样稳定执行”的哪一类问题？",
+   "expect_sources": [
+    "llm_app_interview_10_harness_engineering"
+   ],
+   "hard": false,
+   "note": "考工程重心外移。"
+  },
+  {
+   "id": "zf49",
+   "domain": "rag_agent",
+   "q": "Coding Agent 改完代码后为什么必须进入构建、测试、读完整输出、失败再修的闭环，而不能看着顺眼就结束？",
+   "expect_sources": [
+    "llm_app_interview_12_harness_scenarios"
+   ],
+   "hard": false,
+   "note": "考 build-verify loop。"
+  },
+  {
+   "id": "zf50",
+   "domain": "rag_agent",
+   "q": "一个可靠的 Agent 完成总结除了“做了什么”，还应交代怎样验证、证据在哪里和哪些限制仍存在？",
+   "expect_sources": [
+    "llm_app_interview_12_harness_scenarios"
+   ],
+   "hard": false,
+   "note": "考可审查交付证据。"
+  },
+  {
+   "id": "zf51",
+   "domain": "backend",
+   "q": "HTTP/1.0 为什么每个请求常常都要重新做一次 TCP 握手，它当时的缓存控制又为什么比较有限？",
+   "expect_sources": [
+    "backend_basic_01_01_network_http"
+   ],
+   "hard": false,
+   "note": "考 HTTP/1.0 的连接与 Expires。"
+  },
+  {
+   "id": "zf52",
+   "domain": "backend",
+   "q": "HTTP/2 把报文拆成二进制帧后，怎样在一条连接上并行传多条流，并减少重复请求头的开销？",
+   "expect_sources": [
+    "backend_basic_01_01_network_http"
+   ],
+   "hard": true,
+   "note": "考分帧、多路复用与头压缩的组合。"
+  },
+  {
+   "id": "zf53",
+   "domain": "backend",
+   "q": "浏览器输入网址到页面出现，中间为什么要先解析域名，再建连接、收响应，最后才进入页面渲染？",
+   "expect_sources": [
+    "backend_basic_01_03_network_extra"
+   ],
+   "hard": false,
+   "note": "考完整访问阶段。"
+  },
+  {
+   "id": "zf54",
+   "domain": "backend",
+   "q": "同步和异步看的是调用者要不要等结果，阻塞和非阻塞看的是线程会不会挂起；为什么这两组概念不能直接画等号？",
+   "expect_sources": [
+    "backend_basic_02_03_os_io_interrupt"
+   ],
+   "hard": false,
+   "note": "考 I/O 概念正交性。"
+  },
+  {
+   "id": "zf55",
+   "domain": "backend",
+   "q": "数据库第二范式解决联合键上的部分依赖，第三范式解决非主属性的传递依赖；这两类冗余分别是什么形状？",
+   "expect_sources": [
+    "backend_basic_03_01_mysql_normal_forms"
+   ],
+   "hard": true,
+   "note": "考 2NF 与 3NF 的真正区分。"
+  },
+  {
+   "id": "zf56",
+   "domain": "backend",
+   "q": "需要事务、行级锁和外键的业务表为什么通常选 InnoDB；只读归档、纯内存缓存又可能考虑哪些引擎？",
+   "expect_sources": [
+    "backend_basic_03_02_mysql_storage_engine"
+   ],
+   "hard": false,
+   "note": "考存储引擎按场景选型。"
+  },
+  {
+   "id": "zf57",
+   "domain": "backend",
+   "q": "查询已经走了二级索引，为什么还可能需要回主键索引取数据？覆盖索引和索引下推各自减少的是什么开销？",
+   "expect_sources": [
+    "backend_basic_03_07_mysql_index_rules_cover_pushdown"
+   ],
+   "hard": true,
+   "note": "考三个相近概念的差别。"
+  },
+  {
+   "id": "zf58",
+   "domain": "backend",
+   "q": "MySQL 的 Undo、Redo、Binary、Relay 和 Slow Query 日志各自负责回滚、崩溃恢复、复制、同步和调优中的哪一环？",
+   "expect_sources": [
+    "backend_basic_03_09_mysql_logs"
+   ],
+   "hard": true,
+   "note": "考日志职责，不与 Redis 持久化混淆。"
+  },
+  {
+   "id": "zf59",
+   "domain": "backend",
+   "q": "慢查询日志默认是否开启、默认阈值是多少、拿到慢 SQL 后通常怎样结合 EXPLAIN 和索引或 SQL 改写继续定位？",
+   "expect_sources": [
+    "backend_basic_03_10_mysql_slow_query"
+   ],
+   "hard": false,
+   "note": "考诊断链路。"
+  },
+  {
+   "id": "zf60",
+   "domain": "backend",
+   "q": "用版本号实现乐观锁时，更新语句为什么必须同时检查旧版本并递增版本号，更新行数为零又代表什么？",
+   "expect_sources": [
+    "backend_basic_03_13_mysql_cas_version"
+   ],
+   "hard": true,
+   "note": "考 CAS 式条件更新。"
+  },
+  {
+   "id": "zf61",
+   "domain": "backend",
+   "q": "Redis 的过期键为什么默认把惰性删除和定期删除结合起来，而不是给每个键都建定时器？",
+   "expect_sources": [
+    "backend_basic_04_03_redis_eviction"
+   ],
+   "hard": false,
+   "note": "考 CPU 与内存的折中。"
+  },
+  {
+   "id": "zf62",
+   "domain": "backend",
+   "q": "Redis 可选 jemalloc、libc 和 tcmalloc 时，为什么默认更偏向 jemalloc，极高并发和低性能需求又可能怎样选？",
+   "expect_sources": [
+    "backend_basic_04_04_redis_allocator"
+   ],
+   "hard": true,
+   "note": "考分配器场景。"
+  },
+  {
+   "id": "zf63",
+   "domain": "backend",
+   "q": "Redis 的 SDS 扩容时，短字符串为什么按约两倍扩，超过 1MB 后却改成每次固定多留 1MB？",
+   "expect_sources": [
+    "backend_basic_04_05a_redis_prealloc"
+   ],
+   "hard": true,
+   "note": "考预分配规则。"
+  },
+  {
+   "id": "zf64",
+   "domain": "backend",
+   "q": "Redis 字典为什么准备两个哈希表做渐进式 rehash，而不是扩容时一次性把所有键搬完？",
+   "expect_sources": [
+    "backend_basic_04_06_redis_hash_rehash"
+   ],
+   "hard": true,
+   "note": "考延迟稳定性。"
+  },
+  {
+   "id": "zf65",
+   "domain": "backend",
+   "q": "布隆过滤器为什么可能把不存在的元素误判为存在，却不应该把已经加入的元素判成不存在？",
+   "expect_sources": [
+    "backend_basic_04_08_redis_bloom_filter"
+   ],
+   "hard": false,
+   "note": "考概率型集合判断。"
+  },
+  {
+   "id": "zf66",
+   "domain": "backend",
+   "q": "Redis 单节点、主从、哨兵和集群分别优先解决简单部署、读扩展、自动故障转移和水平分片中的哪个问题？",
+   "expect_sources": [
+    "backend_basic_04_10_redis_deployment"
+   ],
+   "hard": false,
+   "note": "考部署目标，不只比较集群和哨兵。"
+  },
+  {
+   "id": "zf67",
+   "domain": "backend",
+   "q": "Redis 主从复制从建立连接、同步存量数据到传播后续写命令，三个阶段各解决什么？",
+   "expect_sources": [
+    "backend_basic_04_11_redis_replication"
+   ],
+   "hard": true,
+   "note": "考复制过程。"
+  },
+  {
+   "id": "zf68",
+   "domain": "backend",
+   "q": "Redis 故障转移时，为什么既要选出负责本次操作的领导者哨兵，又要从从节点中选一个新主节点？",
+   "expect_sources": [
+    "backend_basic_04_12_redis_sentinel"
+   ],
+   "hard": true,
+   "note": "考两层选举。"
+  },
+  {
+   "id": "zf69",
+   "domain": "backend",
+   "q": "消费者从消息队列拿消息时，推模式和拉模式在实时性、限速能力、轮询开销和消费者压力上怎么取舍？",
+   "expect_sources": [
+    "backend_basic_05_02_mq_intro_part2"
+   ],
+   "hard": false,
+   "note": "考 Consumer 与 Broker 的交互。"
+  },
+  {
+   "id": "zf70",
+   "domain": "backend",
+   "q": "创建对象的种类很多且要按条件切换时，为什么用工厂比在业务代码里到处直接 new 更利于解耦和扩展？",
+   "expect_sources": [
+    "backend_basic_06_01_design_patterns_intro"
+   ],
+   "hard": false,
+   "note": "考设计模式的使用动机。"
+  },
+  {
+   "id": "zf71",
+   "domain": "zh_interference",
+   "q": "程序明明看到的是一大段从零开始、连续又互不打架的内存，可机器上的内存并没真按这个样子给它摆好，操作系统到底是怎么映射和隔离的？",
+   "expect_sources": [
+    "backend_basic_02_02_os_memory"
+   ],
+   "hard": true,
+   "note": "易被英文“虚拟上下文/分页”论文吸走；正确来源是中文操作系统内存管理。"
+  },
+  {
+   "id": "zf72",
+   "domain": "zh_interference",
+   "q": "缓存空间已经塞满了，新数据还要往里放，这时候是只淘汰设过期时间的，还是所有键都能参与，完全不删又会发生什么？",
+   "expect_sources": [
+    "backend_basic_04_03_redis_eviction"
+   ],
+   "hard": true,
+   "note": "主题像 memory management，目标是中文 Redis 淘汰策略。"
+  },
+  {
+   "id": "zf73",
+   "domain": "zh_interference",
+   "q": "内存数据库天天申请和释放很多小块空间，选错分配器容易又慢又碎；默认那套为什么比较适合长期运行的中型对象？",
+   "expect_sources": [
+    "backend_basic_04_04_redis_allocator"
+   ],
+   "hard": true,
+   "note": "主题与 memory allocator 擦边，不考对话记忆。"
+  },
+  {
+   "id": "zf74",
+   "domain": "zh_interference",
+   "q": "一段字符串越写越长，如果每多一个字节就重新申请一次空间肯定很慢；短的直接多留一倍、长的每次多留固定空间，这套办法图什么？",
+   "expect_sources": [
+    "backend_basic_04_05a_redis_prealloc"
+   ],
+   "hard": true,
+   "note": "易被“外部记忆扩容”语义干扰。"
+  },
+  {
+   "id": "zf75",
+   "domain": "zh_interference",
+   "q": "一个装了海量键的哈希表要扩容，要是一次全搬过去服务就卡住了；怎样把搬家动作摊到后面的多次操作里慢慢做？",
+   "expect_sources": [
+    "backend_basic_04_06_redis_hash_rehash"
+   ],
+   "hard": true,
+   "note": "主题像分层搬运记忆，正确答案是中文渐进式 rehash。"
+  },
+  {
+   "id": "zf76",
+   "domain": "zh_interference",
+   "q": "我既想重启时恢复得快，又不想只靠定时快照丢掉太多最近写入，Redis 4.0 那种把快照和追加日志拼在一起的文件是怎么回事？",
+   "expect_sources": [
+    "backend_basic_04_09_redis_persistence"
+   ],
+   "hard": true,
+   "note": "不复用现有 RDB/AOF 对比题，考混合持久化。"
+  },
+  {
+   "id": "zf77",
+   "domain": "zh_interference",
+   "q": "数据库突然崩了要恢复、事务失败要撤销、还要把写操作同步给备库，这几件事分别该看哪几类日志，别把它们都当成一个“记流水”的东西？",
+   "expect_sources": [
+    "backend_basic_03_09_mysql_logs"
+   ],
+   "hard": true,
+   "note": "persistence 主题容易召回英文记忆块。"
+  },
+  {
+   "id": "zf78",
+   "domain": "zh_interference",
+   "q": "AI 干了很久以后就算把旧聊天压成摘要，新接手的那个还是不知道分支干不干净、哪些功能真测过；为什么光压缩历史还不够？",
+   "expect_sources": [
+    "llm_app_interview_12_harness_scenarios"
+   ],
+   "hard": true,
+   "note": "容易命中长上下文英文论文；目标是中文 Harness 外部状态。"
+  },
+  {
+   "id": "zf79",
+   "domain": "zh_interference",
+   "q": "AI 把代码写完扫两眼就说好了，可它没启动服务、没跑测试、也没看完整报错；怎样强制它别在“生成完”这一步就收工？",
+   "expect_sources": [
+    "llm_app_interview_12_harness_scenarios"
+   ],
+   "hard": true,
+   "note": "reasoning/acting 擦边，正确来源是 build-verify loop。"
+  },
+  {
+   "id": "zf80",
+   "domain": "zh_interference",
+   "q": "助手说任务完成了，解释写得很漂亮，却拿不出测试结果、日志、截图或提交记录；这种“只会说、不能证明”该怎么治理？",
+   "expect_sources": [
+    "llm_app_interview_12_harness_scenarios"
+   ],
+   "hard": true,
+   "note": "易被 ReAct 行动轨迹抢位；目标是中文证据链。"
+  },
+  {
+   "id": "zf81",
+   "domain": "zh_interference",
+   "q": "一个长任务越做上下文越脏，旧计划、长日志和已经失效的结论全混在一起，模型还一本正经地沿着旧信息继续做；这个现场该怎么收拾？",
+   "expect_sources": [
+    "llm_app_interview_12_harness_scenarios"
+   ],
+   "hard": true,
+   "note": "memory/context hard negative；目标是 Context Rot 治理。"
+  },
+  {
+   "id": "zf82",
+   "domain": "zh_interference",
+   "q": "给助手准备了很多办事手册，但脚本源码和长参考没必要一开场全塞进脑子里；怎样让它先看到目录，用到哪份再打开哪份？",
+   "expect_sources": [
+    "llm_app_interview_09_agent_skills"
+   ],
+   "hard": true,
+   "note": "主题像分页记忆，目标是中文 Skill 渐进式披露。"
+  },
+  {
+   "id": "zf83",
+   "domain": "zh_interference",
+   "q": "资料里一会儿写 LLM、一会儿写大语言模型，用户又只说“大模型”，如果不先统一这些叫法，搜索结果为什么容易漏？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": true,
+   "note": "纯中文业务答案，英文检索论文只是干扰。"
+  },
+  {
+   "id": "zf84",
+   "domain": "zh_interference",
+   "q": "公司制度每个月都更新，旧版本还留在库里，模型搜到后就照旧规回答；入库和维护时要给这类资料加什么失效或更新机制？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": true,
+   "note": "主题与长期记忆更新擦边。"
+  },
+  {
+   "id": "zf85",
+   "domain": "zh_interference",
+   "q": "想让资料更容易被搜到，除了正文还能预先补上摘要、时间和“大家可能会怎么问”；这些附加信息在检索里是干什么的？",
+   "expect_sources": [
+    "llm_app_interview_02_rag_basics"
+   ],
+   "hard": true,
+   "note": "metadata/alias 相近但正确来源是中文 RAG 数据优化。"
+  },
+  {
+   "id": "zf86",
+   "domain": "zh_interference",
+   "q": "一个助手既要想清楚目标，又要决定后面每一步怎么走，还得真去调用工具把事情办完；模型、规划器和执行主体到底怎么分工？",
+   "expect_sources": [
+    "llm_app_interview_06_agent_planner"
+   ],
+   "hard": true,
+   "note": "reasoning/acting 英文论文会竞争；目标是中文 Planner 文档。"
+  },
+  {
+   "id": "zf87",
+   "domain": "zh_interference",
+   "q": "模型很会听懂人话，可一遇到规则明确、步骤特别长的任务就容易越走越偏；把它理解出的目标交给经典规划器算路线，再翻回人话，具体怎么接起来？",
+   "expect_sources": [
+    "llm_app_interview_04_agent_basics"
+   ],
+   "hard": true,
+   "note": "与 ReAct 擦边，正确来源是中文 LLM+P。"
+  },
+  {
+   "id": "zf88",
+   "domain": "zh_interference",
+   "q": "病人连续问了几轮后才值得沉淀长期资料，这个项目为什么直接数消息条数，不要求客户端一直带着会话编号？",
+   "expect_sources": [
+    "patient_agent_interview_handbook"
+   ],
+   "hard": true,
+   "note": "memory 主题强干扰；目标是中文 Patient Agent 计数设计。"
+  },
+  {
+   "id": "zf89",
+   "domain": "zh_interference",
+   "q": "病例和就诊记录变化慢，聊天里的偏好变化快；为什么长期资料要分两条抽取链，而不是每次把所有数据从头扫一遍？",
+   "expect_sources": [
+    "patient_agent_interview_handbook"
+   ],
+   "hard": true,
+   "note": "目标是中文业务记忆架构。"
+  },
+  {
+   "id": "zf90",
+   "domain": "zh_interference",
+   "q": "查长期关键事件时，系统为什么先做关键词匹配，有条件再做向量相似度，最后合并打分并标出结果来自哪条通道？",
+   "expect_sources": [
+    "patient_agent_interview_handbook"
+   ],
+   "hard": true,
+   "note": "retrieval 主题强干扰；正确来源是中文项目手册。"
+  }
+ ]
+}

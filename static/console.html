@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OfferClaw · CareerFlow 流程</title>
+<style>
+  :root {
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --surface-2: #F5F5F4;
+    --surface-hover: #F0EFEE;
+    --border: #E7E5E4;
+    --border-strong: #D6D3D1;
+    --text: #1C1917;
+    --text-secondary: #57534E;
+    --text-muted: #A8A29E;
+    --accent: #D97757;
+    --accent-hover: #C56342;
+    --accent-soft: #FBEFE9;
+    --success: #10B981;
+    --success-soft: #ECFDF5;
+    --warning: #F59E0B;
+    --warning-soft: #FFFBEB;
+    --error: #EF4444;
+    --error-soft: #FEF2F2;
+    --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.04);
+    --shadow: 0 1px 3px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.04);
+    --shadow-lg: 0 8px 24px rgba(28, 25, 23, 0.08), 0 2px 6px rgba(28, 25, 23, 0.04);
+    --radius-sm: 6px;
+    --radius: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme="auto"] {
+      --bg: #1A1A1A;
+      --surface: #262626;
+      --surface-2: #2D2D2D;
+      --surface-hover: #333333;
+      --border: #404040;
+      --border-strong: #525252;
+      --text: #FAFAF9;
+      --text-secondary: #D4D4D8;
+      --text-muted: #78716C;
+      --accent: #E09975;
+      --accent-hover: #ECAB87;
+      --accent-soft: #3D2920;
+      --success-soft: #064E3B;
+      --warning-soft: #451A03;
+      --error-soft: #450A0A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1A1A1A;
+    --surface: #262626;
+    --surface-2: #2D2D2D;
+    --surface-hover: #333333;
+    --border: #404040;
+    --border-strong: #525252;
+    --text: #FAFAF9;
+    --text-secondary: #D4D4D8;
+    --text-muted: #78716C;
+    --accent: #E09975;
+    --accent-hover: #ECAB87;
+    --accent-soft: #3D2920;
+    --success-soft: #064E3B;
+    --warning-soft: #451A03;
+    --error-soft: #450A0A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 15px; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  button { font: inherit; cursor: pointer; }
+  input, textarea { font: inherit; color: inherit; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  pre { font-family: var(--font-mono); font-size: 12.5px; }
+
+  .page { max-width: 980px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ===== Header ===== */
+  .page-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .page-mark {
+    width: 40px; height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #fffbf1;
+    display: block;
+    object-fit: contain;
+    padding: 2px;
+    box-shadow: var(--shadow-sm);
+  }
+  .page-title { font-size: 22px; font-weight: 600; }
+  .page-meta { font-size: 13px; color: var(--text-secondary); margin-top: 4px; margin-bottom: 24px; }
+  .page-meta code { background: var(--surface-2); padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+  .page-nav { display: flex; gap: 16px; margin-bottom: 32px; font-size: 13px; }
+  .page-nav a { color: var(--text-secondary); display: inline-flex; align-items: center; gap: 6px; }
+  .page-nav a:hover { color: var(--accent); text-decoration: none; }
+  .page-nav a svg { width: 14px; height: 14px; }
+
+  /* ===== Input panel ===== */
+  .input-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .input-panel-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+    font-size: 13px; color: var(--text-secondary);
+  }
+  .input-panel-head .label {
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; font-size: 11.5px;
+  }
+  .input-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-start; }
+  textarea.jd {
+    flex: 1;
+    min-width: 280px;
+    min-height: 110px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font-size: 13.5px;
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    resize: vertical;
+    outline: none;
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  textarea.jd:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  input.title {
+    width: 220px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    font-size: 13px;
+    outline: none;
+    color: var(--text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input.title:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+  .btn {
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 9px 18px;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: background 0.12s, transform 0.05s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn:hover { background: var(--accent-hover); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { background: var(--text-muted); border-color: var(--text-muted); cursor: not-allowed; }
+  .btn.secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+  .btn.secondary:hover { background: var(--surface-hover); }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* ===== Stepper ===== */
+  .stepper {
+    position: relative;
+    padding-left: 28px;
+  }
+  /* Connector line behind nodes */
+  .stepper::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: 16px;
+    bottom: 16px;
+    width: 2px;
+    background: var(--border);
+  }
+  .step {
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .step-node {
+    position: absolute;
+    left: -28px;
+    top: 16px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    z-index: 1;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .step.run .step-node { border-color: var(--warning); background: var(--warning-soft); color: var(--warning); animation: pulse-ring 1.4s ease-in-out infinite; }
+  .step.done .step-node { border-color: var(--success); background: var(--success); color: #fff; }
+  .step.err .step-node { border-color: var(--error); background: var(--error); color: #fff; }
+  @keyframes pulse-ring {
+    0%, 100% { box-shadow: 0 0 0 0 var(--warning-soft); }
+    50% { box-shadow: 0 0 0 6px var(--warning-soft); }
+  }
+  .step-node svg { width: 12px; height: 12px; }
+
+  .step-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .step:hover .step-card { border-color: var(--border-strong); }
+  .step.done .step-card { border-left: 3px solid var(--success); }
+  .step.err .step-card { border-left: 3px solid var(--error); }
+  .step.run .step-card { border-left: 3px solid var(--warning); }
+
+  .step-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .step-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .step-status-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .step.run .step-status-tag { background: var(--warning-soft); color: var(--warning); }
+  .step.done .step-status-tag { background: var(--success-soft); color: var(--success); }
+  .step.err .step-status-tag { background: var(--error-soft); color: var(--error); }
+  .step-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; }
+  .step-body { font-size: 13px; color: var(--text-secondary); }
+  .step-body pre {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    margin-top: 8px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 220px;
+    overflow: auto;
+  }
+  .step-body ol { padding-left: 22px; margin-top: 6px; }
+  .step-body ol li { margin: 4px 0; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    background: var(--surface-2);
+    color: var(--text-secondary);
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    border: 1px solid var(--border);
+    margin: 2px 4px 2px 0;
+  }
+  .chip.ok { background: var(--success-soft); color: var(--success); border-color: transparent; }
+  .chip.warn { background: var(--warning-soft); color: var(--warning); border-color: transparent; }
+  .chip.err { background: var(--error-soft); color: var(--error); border-color: transparent; }
+  .chip.accent { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+
+  /* ===== Summary ===== */
+  .summary {
+    margin-top: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    box-shadow: var(--shadow-sm);
+    display: none;
+  }
+  .summary.show { display: block; }
+  .summary-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-head svg { width: 18px; height: 18px; color: var(--accent); }
+  .summary-head .title { font-weight: 600; font-size: 14px; }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 720px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+  .summary-cell {
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+  }
+  .summary-cell .k { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .summary-cell .v { font-size: 18px; font-weight: 600; margin-top: 2px; color: var(--text); }
+
+  /* ===== Theme toggle (fixed corner) ===== */
+  .theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 38px; height: 38px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow);
+    color: var(--text-secondary);
+    z-index: 40;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .theme-toggle:hover { border-color: var(--border-strong); color: var(--text); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--text);
+    color: var(--bg);
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    box-shadow: var(--shadow-lg);
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="page-head">
+    <!-- Embedded 128px WebP from docs/assets/offerclaw-avatar.png; keeps the standalone UI self-contained. -->
+    <img class="page-mark" src="data:image/webp;base64,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" alt="OfferClaw 小龙虾头像" width="40" height="40">
+    <div>
+      <div class="page-title">CareerFlow 流程</div>
+      <div class="page-meta">
+        8 步流程：画像 → JD → 匹配 → 缺口 → 计划 → 今日建议 → 简历素材 → 投递判断
+      </div>
+    </div>
+  </div>
+
+  <div class="page-nav">
+    <a href="/ui?rev=latest">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      返回工作台
+    </a>
+  </div>
+
+  <!-- Input -->
+  <div class="input-panel">
+    <div class="input-panel-head">
+      <span class="label">输入 JD</span>
+      <span>粘贴公司 / 岗位 / 地点 / 要求 / 职责</span>
+    </div>
+    <div class="input-row">
+      <textarea class="jd" id="jd" placeholder="粘贴一份 JD 原文，或只贴技术要求几行也可以..."></textarea>
+      <input class="title" id="title" placeholder="JD 标题（可选）"/>
+      <button class="btn" id="run">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        运行 CareerFlow
+      </button>
+    </div>
+    <label style="display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;color:var(--text-muted);cursor:pointer">
+      <input type="checkbox" id="useLlm"/>
+      使用 LLM 深度通路（需 API Key，较慢；不勾选走规则通路，此前该开关被写死为规则通路）
+    </label>
+  </div>
+
+  <!-- Stepper -->
+  <div class="stepper" id="stepper"></div>
+
+  <!-- Summary -->
+  <div class="summary" id="summary"></div>
+
+</div>
+
+<button class="theme-toggle" id="themeToggle" title="切换主题">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STEPS = [
+  {key:"profile",             title:"加载用户画像",  desc:"读取你的求职画像"},
+  {key:"job_input",            title:"导入 JD",       desc:"整理岗位信息"},
+  {key:"match",                title:"规则版匹配",     desc:"判断当前是否适合投递"},
+  {key:"gap",                  title:"分析缺口",       desc:"拆出需要补齐的能力和经历"},
+  {key:"plan",                 title:"4 周计划骨架",   desc:"生成可执行的行动框架"},
+  {key:"today",                title:"今日执行建议",   desc:"给出今天最该做的事"},
+  {key:"resume",               title:"简历骨架",       desc:"整理可用于简历的素材"},
+  {key:"application_suggest",  title:"投递建议",       desc:"判断是否加入投递池"},
+];
+
+function escapeHtml(s){return (s||'').replace(/[&<>"']/g,c=>({
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function renderInitial(){
+  const root = document.getElementById("stepper");
+  root.innerHTML = STEPS.map((s, i) => `
+    <div class="step" id="step-${s.key}">
+      <div class="step-node" id="node-${s.key}">${i + 1}</div>
+      <div class="step-card">
+        <div class="step-head">
+          <div class="step-title">${s.title}</div>
+          <span class="step-status-tag" id="tag-${s.key}">待执行</span>
+        </div>
+        <div class="step-desc">${s.desc}</div>
+        <div class="step-body" id="body-${s.key}"><span style="color:var(--text-muted)">等待 CareerFlow 启动…</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setStep(key, status, tagText, html){
+  const card = document.getElementById('step-' + key);
+  const tag = document.getElementById('tag-' + key);
+  const node = document.getElementById('node-' + key);
+  if (!card) return;
+  card.classList.remove('done', 'run', 'err');
+  if (status) card.classList.add(status);
+  tag.textContent = tagText || '';
+  // Node icon: pending = number, done = check, err = !, run = number
+  if (status === 'done') {
+    node.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  } else if (status === 'err') {
+    node.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  } else {
+    const idx = STEPS.findIndex(s => s.key === key);
+    node.textContent = idx + 1;
+  }
+  document.getElementById('body-' + key).innerHTML = html;
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+async function run(){
+  const jd = document.getElementById('jd').value.trim();
+  const title = document.getElementById('title').value.trim() || '未命名 JD';
+  if (!jd) { showToast('请粘贴 JD 原文'); return; }
+  const btn = document.getElementById('run');
+  btn.disabled = true;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>运行中…`;
+  document.getElementById('summary').classList.remove('show');
+  STEPS.forEach(s => setStep(s.key, 'run', '运行中', '<span style="color:var(--warning)">执行中…</span>'));
+  try {
+    const r = await fetch('/api/flow/run', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({jd_text: jd, jd_title: title,
+                            skip_llm: !document.getElementById('useLlm').checked})
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status + ': ' + await r.text());
+    const d = await r.json();
+    renderResults(d);
+  } catch (e) {
+    STEPS.forEach(s => setStep(s.key, 'err', '失败', `<span style="color:var(--error)">${escapeHtml(e.message || e)}</span>`));
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>运行 CareerFlow';
+  }
+}
+
+function renderResults(d){
+  const trace = new Set((d.trace || []).map(x => x.node));
+
+  // 1 profile
+  setStep('profile', trace.has('profile') ? 'done' : 'err', trace.has('profile') ? '完成' : '未执行',
+    `<div>已加载 profile（user_profile.md）</div>
+     <div style="margin-top:8px">${d.match_report?.direction ? `<span class="chip accent">${escapeHtml(d.match_report.direction)}</span>` : ''}</div>`);
+
+  // 2 job_input
+  setStep('job_input', trace.has('job_input') ? 'done' : 'err', trace.has('job_input') ? '完成' : '未执行',
+    `<span class="chip ok">JD 已纳入流程</span>`);
+
+  // 3 match
+  const mr = d.match_report || {};
+  const kind = mr.status === '当前适合投递' ? 'ok' : mr.status === '当前暂不建议投递' ? 'err' : 'warn';
+  setStep('match', trace.has('match') ? 'done' : 'err', trace.has('match') ? '完成' : '未执行',
+    `<div><span class="chip ${kind}">${escapeHtml(mr.status || '-')}</span>
+       <span class="chip">${escapeHtml(mr.direction || '-')}</span></div>
+     <pre>${escapeHtml((mr.summary || '').slice(0, 500))}</pre>`);
+
+  // 4 gap
+  const gaps = d.gaps || {};
+  const gapTotal = Object.values(gaps).reduce((s, v) => s + (Array.isArray(v) ? v.length : 0), 0);
+  setStep('gap', trace.has('gap') ? 'done' : 'err', trace.has('gap') ? '完成' : '未执行',
+    `<div>缺口总数 <span class="chip warn">${gapTotal}</span></div>
+     <pre>${escapeHtml(JSON.stringify(gaps, null, 2).slice(0, 600))}</pre>`);
+
+  // 5 plan
+  const plan = d.plan_outline || [];
+  setStep('plan', trace.has('plan') ? 'done' : 'err', trace.has('plan') ? `${plan.length} 周` : '未执行',
+    plan.length
+      ? `<div>${plan.length} 周计划骨架：</div>
+         <ol>${plan.map(w => `<li><strong>${escapeHtml(String(w.title || w.week || ''))}</strong> · ${escapeHtml(String(w.focus || w.tasks || '').slice(0, 80))}</li>`).join('')}</ol>`
+      : `<span class="chip">无可生成内容</span>`);
+
+  // 6 today
+  const t = d.today_advice || {};
+  setStep('today', trace.has('today') ? 'done' : 'err', trace.has('today') ? '完成' : '未执行',
+    `<div><strong>${escapeHtml(t.headline || '')}</strong></div>
+     <pre>${escapeHtml((t.detail || t.next_action || '').slice(0, 350))}</pre>`);
+
+  // 7 resume
+  const rs = d.resume_skeleton || {};
+  const keywords = rs.keywords_hit || rs.matched_keywords || [];
+  setStep('resume', trace.has('resume') ? 'done' : 'err', trace.has('resume') ? `${keywords.length} 命中` : '未执行',
+    `<div>模式 <span class="chip">${escapeHtml(rs.mode || '-')}</span>
+       命中关键词 <span class="chip ok">${keywords.length}</span></div>
+     <div style="margin-top:8px">${keywords.slice(0, 16).map(k => `<span class="chip">${escapeHtml(String(k))}</span>`).join('')}</div>`);
+
+  // 8 application_suggest
+  const a = d.application_suggestion || {};
+  const conf = (d.requires_confirmation || []).filter(c => (c.target_file || '').includes('applications.md'));
+  const appKind = a.status_code === 'suitable' ? 'ok' : 'warn';
+  setStep('application_suggest', trace.has('application_suggest') ? 'done' : 'err', trace.has('application_suggest') ? '完成' : '未执行',
+    `<div>决策 <span class="chip ${appKind}">${escapeHtml(a.decision || '-')}</span></div>
+     <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">待确认 patch：${conf.length}</div>
+     ${conf.length ? `<pre>${escapeHtml(JSON.stringify(conf[0], null, 2).slice(0, 500))}</pre>` : ''}`);
+
+  // Summary
+  const s = document.getElementById('summary');
+  s.classList.add('show');
+  s.innerHTML = `
+    <div class="summary-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span class="title">运行总览</span>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-cell"><div class="k">Trace 节点</div><div class="v">${(d.trace || []).length} / 8</div></div>
+      <div class="summary-cell"><div class="k">缺口总数</div><div class="v">${gapTotal}</div></div>
+      <div class="summary-cell"><div class="k">计划周数</div><div class="v">${plan.length}</div></div>
+      <div class="summary-cell"><div class="k">简历关键词</div><div class="v">${keywords.length}</div></div>
+      <div class="summary-cell"><div class="k">待确认 patch</div><div class="v">${(d.requires_confirmation || []).length}</div></div>
+      <div class="summary-cell"><div class="k">错误数</div><div class="v" style="color:${(d.errors || []).length ? 'var(--error)' : 'var(--success)'}">${(d.errors || []).length}</div></div>
+    </div>`;
+}
+
+document.getElementById('run').addEventListener('click', run);
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : (cur === 'light' ? 'auto' : 'dark');
+  html.setAttribute('data-theme', next);
+  showToast(`主题：${next === 'auto' ? '跟随系统' : (next === 'dark' ? '深色' : '浅色')}`);
+});
+
+renderInitial();
+</script>
+</body>
+</html>

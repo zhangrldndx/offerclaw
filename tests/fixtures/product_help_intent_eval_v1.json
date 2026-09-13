@@ -1,0 +1,42 @@
+{
+  "version": "product-help-intent-v1",
+  "positive": [
+    {"q": "当前我有新的项目你可以帮助我添加进去嘛？", "topic": "project", "action": "create"},
+    {"q": "我有一个新项目，怎么放进个人项目记忆？", "topic": "project", "action": "create"},
+    {"q": "怎么给已有投递关联JD？", "topic": "application_jd", "action": "link"},
+    {"q": "你能帮我更新这条投递绑定的JD吗？", "topic": "application_jd", "action": "link"},
+    {"q": "在哪里新增一条投递记录？", "topic": "application", "action": "create"},
+    {"q": "我想要记录我的新投递简历该怎么操作？", "topic": "application", "action": "create"},
+    {"q": "新的投递记录要怎么录入？", "topic": "application", "action": "create"},
+    {"q": "我想修改个人画像，入口在哪里？", "topic": "profile", "action": "update"},
+    {"q": "怎么只调整学习计划中的一个计划任务？", "topic": "plan", "action": "update"},
+    {"q": "我想补记今天的学习记录，应该去哪里？", "topic": "reflection", "action": "create"},
+    {"q": "你可以帮我生成复盘吗？", "topic": "reflection", "action": "generate"},
+    {"q": "能不能把经验总结加入知识库？", "topic": "experience", "action": "create"},
+    {"q": "面试经验该怎么记录到对应投递？", "topic": "experience", "action": "create"},
+    {"q": "简历模板在哪里上传？", "topic": "resume_template", "action": "upload"},
+    {"q": "怎样把一篇论文加入知识库？", "topic": "knowledge", "action": "create"},
+    {"q": "系统支持删除投递记录吗？", "topic": "application", "action": "delete"},
+    {"q": "如何上传新的学习资料？", "topic": "knowledge", "action": "upload"}
+  ],
+  "negative": [
+    "我的项目有哪些？",
+    "我刚才添加了哪些项目？",
+    "我的项目用了哪些技术？",
+    "如何在简历中写项目经历？",
+    "一般应该如何管理软件项目？",
+    "什么是知识库增量索引？",
+    "请只从我的知识库查：状态刷新采用什么替换策略？失败时旧块怎么处理？",
+    "我投了哪些公司？",
+    "我这次新投递的状态怎么样？",
+    "新投递的岗位应该怎么准备面试？",
+    "投递简历一般应该怎么写？",
+    "我记录过哪些投递？",
+    "我的学习计划应该怎么安排？",
+    "我今天的学习记录里做了什么？",
+    "解释JD里的RAG要求。",
+    "帮我判断这个项目是否适合华为岗位。",
+    "根据我的画像给学习计划建议。",
+    "我之前修改了哪些计划任务？"
+  ]
+}

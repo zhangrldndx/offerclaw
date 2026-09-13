@@ -1,0 +1,26 @@
+{
+  "dataset_id": "router_blind_v1",
+  "set_kind": "private_blind",
+  "dataset_file": "router_blind_v1.json",
+  "expected_count": 240,
+  "sha256": null,
+  "status": "not_provisioned",
+  "schema_file": "router_blind_v1.schema.json",
+  "minimum_coverage": {
+    "semantic_role_pair": 60,
+    "multi_turn": 40,
+    "multi_source_dag": 60,
+    "negative_or_conflict": 20,
+    "real_user": 120,
+    "independent_author": 120
+  },
+  "quotas": {
+    "guide": 40,
+    "recall": 50,
+    "explain": 40,
+    "advise": 70,
+    "diagnose": 20,
+    "clarify": 20
+  },
+  "note": "Set sha256 only after an independent author freezes the repository-external corpus. Do not commit questions or gold labels."
+}

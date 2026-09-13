@@ -1,0 +1,77 @@
+{
+  "config": {
+    "days": 10,
+    "personas": 3,
+    "escalate_after": 2,
+    "scenario": "连续无推进(最坏情况)"
+  },
+  "A_execution_tracking": {
+    "ON": {
+      "repeat_days": 9,
+      "repeat_rate": 0.333,
+      "escalations": 9,
+      "per_persona_head": {
+        "p1_ai": [
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "已连续 3 天给出同一建议「先粘贴一",
+          "30 分钟最小步 v3"
+        ],
+        "p2_backend": [
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "已连续 3 天给出同一建议「先粘贴一",
+          "30 分钟最小步 v3"
+        ],
+        "p3_algo": [
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "已连续 3 天给出同一建议「先粘贴一",
+          "30 分钟最小步 v3"
+        ]
+      }
+    },
+    "OFF": {
+      "repeat_days": 27,
+      "repeat_rate": 1.0,
+      "escalations": 0,
+      "per_persona_head": {
+        "p1_ai": [
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配"
+        ],
+        "p2_backend": [
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配"
+        ],
+        "p3_algo": [
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配",
+          "先粘贴一份目标 JD 跑匹配"
+        ]
+      }
+    }
+  },
+  "B_memory_injection": {
+    "ON": {
+      "sops": 1,
+      "lessons": 3,
+      "injected_chars": 211,
+      "injected_tokens_est": 105,
+      "sample": "- [SOP] 「大模型应用开发」方向历史已 2/2 次命中「适合」——投该方向 JD 时优先复用既有项目段、强调命中关键词，可直接进入投递准备。\n- [近期复盘] 2026-08-01 偏离度 2，未完成 2 项（如：RAG 评测扩集）\n"
+    },
+    "OFF": {
+      "sops": 0,
+      "lessons": 0,
+      "injected_chars": 0,
+      "injected_tokens_est": 0,
+      "sample": ""
+    }
+  },
+  "honesty": "A 为机制级消融(确定性纯函数模拟);B 只证明回流成立并核算注入成本,不声称计划质量提升(需 LLM judge,超出本实验范围)。"
+}

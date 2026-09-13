@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OfferClaw private router blind set v1",
+  "type": "object",
+  "required": ["version", "items"],
+  "properties": {
+    "version": {"const": "router_blind_v1"},
+    "items": {
+      "type": "array",
+      "minItems": 240,
+      "maxItems": 240,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "question", "category", "service_mode", "decision", "coverage_tags", "required_routes", "forbidden_routes"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "question": {"type": "string", "minLength": 1},
+          "context": {"type": "array", "maxItems": 3, "items": {"type": "string"}},
+          "category": {"enum": ["guide", "recall", "explain", "advise", "diagnose", "clarify"]},
+          "service_mode": {"enum": ["guide", "recall", "explain", "advise", "diagnose"]},
+          "decision": {"enum": ["answer", "clarify"]},
+          "coverage_tags": {
+            "type": "array",
+            "items": {"enum": ["semantic_role_pair", "multi_turn", "multi_source_dag", "negative_or_conflict", "real_user", "independent_author"]}
+          },
+          "answer_objects": {"type": "array", "items": {"type": "string"}},
+          "operations": {"type": "array", "items": {"type": "string"}},
+          "required_routes": {"type": "array", "items": {"type": "string"}},
+          "allowed_optional_routes": {"type": "array", "items": {"type": "string"}},
+          "forbidden_routes": {"type": "array", "items": {"type": "string"}},
+          "acceptable_plans": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {"type": "array", "items": {"type": "string"}},
+                {
+                  "type": "object",
+                  "required": ["required_routes"],
+                  "properties": {
+                    "required_routes": {"type": "array", "items": {"type": "string"}},
+                    "allowed_optional_routes": {"type": "array", "items": {"type": "string"}},
+                    "source_roles": {"type": ["object", "array"]},
+                    "depends_on": {"type": ["object", "array"]}
+                  }
+                }
+              ]
+            }
+          },
+          "source_roles": {"type": ["object", "array"]},
+          "depends_on": {"type": ["object", "array"]},
+          "required_entities": {"type": "object"}
+        }
+      }
+    }
+  }
+}

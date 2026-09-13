@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://offerclaw.local/schemas/rag-graded-qrels-v2.json",
+  "title": "OfferClaw graded retrieval qrels v2",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version", "dataset_id", "index", "items"],
+  "properties": {
+    "schema_version": {"const": "rag-graded-qrels-v2"},
+    "dataset_id": {"type": "string", "minLength": 1},
+    "index": {
+      "type": "object",
+      "required": ["collection", "count", "fingerprint"],
+      "properties": {
+        "collection": {"type": "string", "minLength": 1},
+        "count": {"type": "integer", "minimum": 0},
+        "fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "query_id", "anchor_id", "split", "case_kind", "query_style",
+          "question", "phenomena", "answer_requirements", "relevant_targets",
+          "hard_negatives", "review_status", "review_note"
+        ],
+        "properties": {
+          "query_id": {"type": "string", "minLength": 1},
+          "anchor_id": {"type": "string", "minLength": 1},
+          "split": {"enum": ["train", "dev", "blind"]},
+          "case_kind": {"enum": ["positive", "negative"]},
+          "query_style": {
+            "enum": ["standard", "natural", "colloquial", "long_context", "negative"]
+          },
+          "question": {"type": "string", "minLength": 1},
+          "phenomena": {"type": "array", "items": {"type": "string", "minLength": 1}},
+          "answer_requirements": {
+            "type": "array", "items": {"type": "string", "minLength": 1},
+            "uniqueItems": true
+          },
+          "review_status": {
+            "enum": ["draft", "needs_adjudication", "approved", "rejected"]
+          },
+          "review_note": {"type": "string"},
+          "relevant_targets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "chunk_id", "source", "heading_path", "relevance_grade",
+                "supported_requirements", "evidence_excerpt", "evidence_span_hash"
+              ],
+              "properties": {
+                "chunk_id": {"type": "string", "minLength": 1},
+                "source": {"type": "string", "minLength": 1},
+                "heading_path": {"type": "array", "items": {"type": "string"}},
+                "relevance_grade": {"enum": [1, 2, 3]},
+                "supported_requirements": {
+                  "type": "array", "minItems": 1,
+                  "items": {"type": "string", "minLength": 1}
+                },
+                "evidence_excerpt": {"type": "string", "minLength": 1},
+                "evidence_span_hash": {
+                  "type": "string", "pattern": "^sha256:[0-9a-f]{64}$"
+                }
+              }
+            }
+          },
+          "hard_negatives": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["chunk_id", "reason"],
+              "properties": {
+                "chunk_id": {"type": "string", "minLength": 1},
+                "reason": {"type": "string", "minLength": 1}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

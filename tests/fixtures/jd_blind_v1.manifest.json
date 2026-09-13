@@ -1,0 +1,19 @@
+{
+  "dataset_id": "jd_blind_v1",
+  "set_kind": "private_blind",
+  "dataset_file": "jd_blind_v1.json",
+  "expected_count": 120,
+  "sha256": null,
+  "status": "not_provisioned",
+  "schema_file": "jd_blind_v1.schema.json",
+  "minimum_double_annotated": 24,
+  "minimum_agreement_kappa": 0.85,
+  "quotas": {
+    "zh_technical": 60,
+    "zh_nontechnical": 20,
+    "english": 15,
+    "mixed_language": 10,
+    "web_or_pdf_noise": 15
+  },
+  "note": "Set sha256 only after the full, anonymised JD corpus and adjudicated labels are frozen outside the repository."
+}

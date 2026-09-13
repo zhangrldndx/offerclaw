@@ -1,0 +1,141 @@
+{
+  "description": "跨语检索小集(2026-08-09):中文口语提问 → 答案在英文论文原文(papers/ 三篇,Docling 结构化入库)。用途:bge-m3 切换判据之三——m3 须显著优于 bge-base-zh(后者预期接近全灭,预登记的可证伪预测)。",
+  "match": "substring",
+  "items": [
+    {
+      "id": "xl01",
+      "domain": "crosslingual",
+      "q": "ReAct 把推理和行动交替着做,主要是为了解决纯思维链推理的什么问题",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl02",
+      "domain": "crosslingual",
+      "q": "ReAct 在 HotpotQA 问答任务里靠调用什么外部工具来查资料",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl03",
+      "domain": "crosslingual",
+      "q": "在 ALFWorld 和 WebShop 这两个交互决策任务上,ReAct 比模仿学习和强化学习方法的成功率高多少",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl04",
+      "domain": "crosslingual",
+      "q": "推理轨迹在 ReAct 框架里起什么作用",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl05",
+      "domain": "crosslingual",
+      "q": "ReAct 和自洽性思维链 CoT-SC 组合使用时效果怎么样",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl06",
+      "domain": "crosslingual",
+      "q": "MemGPT 借鉴了操作系统里的什么机制来突破大模型上下文窗口的限制",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl07",
+      "domain": "crosslingual",
+      "q": "MemGPT 里的大模型是怎么在主上下文和外部存储之间搬运信息的",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl08",
+      "domain": "crosslingual",
+      "q": "MemGPT 在哪两类场景上验证了它的设计",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl09",
+      "domain": "crosslingual",
+      "q": "为什么说直接把 transformer 的上下文窗口加长代价很大",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl10",
+      "domain": "crosslingual",
+      "q": "什么是虚拟上下文管理",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl11",
+      "domain": "crosslingual",
+      "q": "Memory Sandbox 把对话记忆变成了什么东西让用户可以直接看到和操作",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl12",
+      "domain": "crosslingual",
+      "q": "聊天机器人的记忆管理策略藏在界面后面会给用户带来什么问题",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl13",
+      "domain": "crosslingual",
+      "q": "Memory Sandbox 允许用户对记忆对象做哪些操作",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl14",
+      "domain": "crosslingual",
+      "q": "Memory Sandbox 系统的界面用什么框架实现、背后接的什么模型",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "xl15",
+      "domain": "crosslingual",
+      "q": "Memory Sandbox 论文声称的两个主要贡献是什么",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    }
+  ]
+}

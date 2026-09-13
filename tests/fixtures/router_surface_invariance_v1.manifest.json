@@ -1,0 +1,8 @@
+{
+  "dataset_id": "router_surface_invariance_v1",
+  "set_kind": "surface_invariance_dev",
+  "dataset_file": "rag_router_heldout_v1.json",
+  "expected_count": 480,
+  "sha256": "a874d92ae7757d1c63d73a3d9bfc64448efe7d133fd9c069e7bbaa69906f0fd9",
+  "note": "48 semantic seeds expanded with 10 fixed request wrappers. Development invariance suite only; not blind evidence."
+}

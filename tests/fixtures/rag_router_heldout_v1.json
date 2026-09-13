@@ -1,0 +1,90 @@
+{
+  "version": "rag-router-heldout-v1",
+  "note": "冻结语义角色、操作、多轮指代与复合来源对照。seed × 10 固定表述外壳；禁止按失败样例追加专用规则。",
+  "wrappers": [
+    "{q}",
+    "请回答：{q}",
+    "我想确认一下，{q}",
+    "麻烦帮我看看：{q}",
+    "请帮我核对，{q}",
+    "有个问题：{q}",
+    "请直接说明，{q}",
+    "我需要了解：{q}",
+    "能否告诉我，{q}",
+    "请按现有信息回答：{q}"
+  ],
+  "suites": [
+    {
+      "id": "semantic_role_contrast",
+      "expected_count": 200,
+      "seeds": [
+        {"q": "我当前可用于投递的开源项目有哪些？", "routes": ["project_memory.list_catalog"], "objects": ["project"], "operations": ["list"]},
+        {"q": "我已经投递过哪些公司？", "routes": ["application_state.list_ever_applied"], "objects": ["application"], "operations": ["list"]},
+        {"q": "我接下来还要去哪些公司官网投递？", "routes": ["application_state.list_pending_submission", "application_state.get_next_actions"], "objects": ["application"], "operations": ["list"]},
+        {"q": "我的 OfferClaw 项目里用了哪些检索技术？", "routes": ["project_memory.search"], "objects": ["project_detail"], "operations": ["list"]},
+        {"q": "我投了哪些开源项目相关岗位？", "routes": ["application_state.list_ever_applied", "project_memory.search"], "objects": ["application"], "operations": ["list"]},
+        {"q": "总结我以前做过的学习工作。", "routes": ["reflection_memory.get_history_overview"], "objects": ["reflection"], "operations": ["summarize"]},
+        {"q": "总结我的投递经验和失败原因。", "routes": ["application_experience.search"], "objects": ["application_experience"], "operations": ["summarize"]},
+        {"q": "我现在的正式能力画像是什么？", "routes": ["profile_plan.get_profile"], "objects": ["profile"], "operations": ["search"]},
+        {"q": "根据知识库资料解释 BM25 原理。", "routes": ["reference_kb.search"], "objects": ["reference_knowledge"], "operations": ["search"]},
+        {"q": "我有哪些已经审批入库的个人项目？", "routes": ["project_memory.list_approved"], "objects": ["project"], "operations": ["list"]},
+        {"q": "按照我的简历模板应该怎样写项目经历？", "routes": ["resume_rules.search"], "objects": ["resume_rule"], "operations": ["search"]},
+        {"q": "结合论文解释 ReAct 的研究依据。", "routes": ["paper_kb.search"], "objects": ["paper_knowledge"], "operations": ["search"]},
+        {"q": "我当前学习计划安排了什么？", "routes": ["profile_plan.get_plan"], "objects": ["plan"], "operations": ["search"]},
+        {"q": "我目前还存在哪些能力缺口？", "routes": ["profile_plan.get_gaps"], "objects": ["profile"], "operations": ["list"]},
+        {"q": "我以前学习 LangGraph 时在哪里卡住？", "routes": ["reflection_memory.search_topic"], "objects": ["reflection"], "operations": ["search"]},
+        {"q": "我目前所有投递记录的状态是什么？", "routes": ["application_state.list_current"], "objects": ["application"], "operations": ["search"]},
+        {"q": "我有哪些已经被拒绝的企业？", "routes": ["application_state.list_failed"], "objects": ["application"], "operations": ["list"]},
+        {"q": "我的投递对应 JD 中要求哪些核心能力？", "routes": ["application_jd.search_bound_jd"], "objects": ["application_jd"], "operations": ["list"]},
+        {"q": "根据以前的学习记录判断我是否掌握 LangGraph。", "routes": ["profile_plan.get_profile", "reflection_memory.get_profile_evidence"], "objects": ["reflection", "profile"], "operations": ["lookup"]},
+        {"q": "一般应届生怎样优化简历？", "routes": ["reference_kb.search"], "objects": ["reference_knowledge"], "operations": ["search"]}
+      ]
+    },
+    {
+      "id": "operation_contrast",
+      "expected_count": 100,
+      "seeds": [
+        {"q": "列出我的个人项目目录。", "routes": ["project_memory.list_catalog"], "objects": ["project"], "operations": ["list"]},
+        {"q": "我的项目有哪些量化结果？", "routes": ["project_memory.search"], "objects": ["project_detail"], "operations": ["list"]},
+        {"q": "列出已批准的项目材料。", "routes": ["project_memory.list_approved"], "objects": ["project"], "operations": ["list"]},
+        {"q": "最近我学习了什么？", "routes": ["reflection_memory.get_recent"], "objects": ["reflection"], "operations": ["search"]},
+        {"q": "昨天我完成了什么？", "routes": ["reflection_memory.get_by_date"], "objects": ["reflection"], "operations": ["search"]},
+        {"q": "我以前为什么总在重排评测上卡住？", "routes": ["reflection_memory.search_topic"], "objects": ["reflection"], "operations": ["search"]},
+        {"q": "回顾我一路以来的学习经历。", "routes": ["reflection_memory.get_history_overview"], "objects": ["reflection"], "operations": ["summarize"]},
+        {"q": "判断我掌握 RAG 的历史证据是否充分。", "routes": ["profile_plan.get_profile", "reflection_memory.get_profile_evidence"], "objects": ["reflection", "profile"], "operations": ["lookup"]},
+        {"q": "比较我的投递中这个岗位 JD 的新旧版本。", "routes": ["application_jd.compare_versions"], "objects": ["application_jd"], "operations": ["compare"]},
+        {"q": "列出每条投递记录保存的下一步动作。", "routes": ["application_state.get_next_actions"], "objects": ["application"], "operations": ["list"]}
+      ]
+    },
+    {
+      "id": "multi_turn_reference",
+      "expected_count": 80,
+      "seeds": [
+        {"context": ["请总结我的 OfferClaw 项目实现。"], "q": "这个呢？", "routes": ["project_memory.search"], "objects": ["project_detail"], "operations": ["search"]},
+        {"context": ["我想查看自己的简历写作规则。"], "q": "前面那个具体怎么用？", "routes": ["resume_rules.search"], "objects": ["resume_rule"], "operations": ["search"]},
+        {"context": ["请回顾我的长期学习复盘。"], "q": "上述内容里我哪里卡住？", "routes": ["reflection_memory.search_topic"], "objects": ["reflection"], "operations": ["search"]},
+        {"context": ["我目前准备投哪些公司？"], "q": "这些公司下一步呢？", "routes": ["application_state.list_pending_submission", "application_state.get_next_actions"], "objects": ["application"], "operations": ["lookup"]},
+        {"context": ["我想看当前个人画像。"], "q": "这个呢？", "routes": ["profile_plan.get_profile"], "objects": ["profile"], "operations": ["search"]},
+        {"context": ["解释知识库中的混合检索资料。"], "q": "上面那个原理是什么？", "routes": ["reference_kb.search"], "objects": ["reference_knowledge"], "operations": ["search"]},
+        {"context": ["查看我投递绑定的 JD。"], "q": "这个部分有哪些要求？", "routes": ["application_jd.search_bound_jd"], "objects": ["application_jd"], "operations": ["list"]},
+        {"context": ["总结我的面试经验。"], "q": "前面那个失败原因是什么？", "routes": ["application_experience.search"], "objects": ["application_experience"], "operations": ["search"]}
+      ]
+    },
+    {
+      "id": "composite_multi_source",
+      "expected_count": 100,
+      "seeds": [
+        {"q": "根据失败投递和经验总结分析能力缺口，再结合参考资料解释相关技术。", "routes": ["application_state.list_failed", "application_experience.search", "profile_plan.get_gaps", "reference_kb.search"], "objects": ["application_experience", "profile", "reference_knowledge"], "operations": ["search"]},
+        {"q": "我准备投哪些公司？分别结合绑定 JD 和资料说明准备重点。", "routes": ["application_state.list_pending_submission", "application_jd.search_bound_jd", "reference_kb.search"], "objects": ["application", "application_jd", "reference_knowledge"], "operations": ["list", "search"]},
+        {"q": "结合当前画像和以前学习记录判断我是否掌握 LangGraph。", "routes": ["profile_plan.get_profile", "reflection_memory.get_profile_evidence"], "objects": ["reflection", "profile"], "operations": ["lookup"]},
+        {"q": "根据我的项目材料和简历规则说明 OfferClaw 应该怎么写。", "routes": ["project_memory.search", "resume_rules.search"], "objects": ["project_detail", "resume_rule"], "operations": ["search"]},
+        {"q": "我投过哪些公司？这些公司的岗位要求和注意事项是什么？", "routes": ["application_state.list_ever_applied", "application_jd.search_bound_jd", "application_experience.search", "reference_kb.search"], "objects": ["application", "application_jd", "reference_knowledge"], "operations": ["list"]},
+        {"q": "结合我的学习复盘和知识库资料解释为什么建议我减少任务量。", "routes": ["reflection_memory.search_topic", "reference_kb.search"], "objects": ["reflection", "reference_knowledge"], "operations": ["search"]},
+        {"q": "查看当前计划，并根据正式画像指出哪些任务可能需要调整。", "routes": ["profile_plan.get_plan", "profile_plan.get_profile"], "objects": ["plan", "profile"], "operations": ["list"]},
+        {"q": "根据投递经验和对应 JD 分析失败原因，但不要使用通用资料。", "routes": ["application_experience.search", "application_jd.search_bound_jd"], "objects": ["application_experience", "application_jd"], "operations": ["search"]},
+        {"q": "结合我的项目记录和学习复盘，总结我近期做过的 RAG 工作。", "routes": ["project_memory.search", "reflection_memory.get_recent"], "objects": ["project_detail", "reflection"], "operations": ["summarize"]},
+        {"q": "根据论文和普通学习资料比较 Agent 与 Workflow 的适用场景。", "routes": ["paper_kb.search", "reference_kb.search"], "objects": ["paper_knowledge", "reference_knowledge"], "operations": ["compare"]}
+      ]
+    }
+  ]
+}

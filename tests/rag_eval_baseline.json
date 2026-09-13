@@ -1,0 +1,32 @@
+{
+  "k": 5,
+  "n": 50,
+  "timestamp": "2026-04-26 01:52:07",
+  "overall": {
+    "n": 50,
+    "recall_at_k": 0.96,
+    "mrr": 0.743,
+    "hits": 48
+  },
+  "by_category": {
+    "cross_doc": {
+      "n": 15,
+      "recall_at_k": 1.0,
+      "mrr": 0.8444444444444444,
+      "hits": 15
+    },
+    "explain": {
+      "n": 18,
+      "recall_at_k": 0.9444444444444444,
+      "mrr": 0.7101851851851851,
+      "hits": 17
+    },
+    "fact": {
+      "n": 17,
+      "recall_at_k": 0.9411764705882353,
+      "mrr": 0.6882352941176471,
+      "hits": 16
+    }
+  },
+  "note": "baseline for regression check; use: python eval_rag.py --baseline tests/rag_eval_baseline.json"
+}

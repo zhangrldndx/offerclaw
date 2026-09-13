@@ -1,0 +1,140 @@
+{
+  "version": "jd_phenomena_dev_v1",
+  "set_kind": "phenomena_development",
+  "expected_count": 120,
+  "note": "Twelve labelled phenomena with ten evidence lines each. Development set only; these are not 120 full real-world blind JDs.",
+  "groups": [
+    {
+      "id": "hard_required", "heading": "任职要求", "kind": "hard", "modality": "required",
+      "prefix": "岗位名称：平台工程师\n公司名称：甲公司\n工作地点：上海",
+      "lines": [
+        "必须取得计算机相关专业本科及以上学历。", "要求硕士学历，计算机或软件工程专业。",
+        "需具备大学英语六级证书。", "至少三年后端研发工作经验。",
+        "必须能够在深圳现场办公。", "要求 2027 届应届毕业生。",
+        "须持有有效的网络安全职业资格证书。", "本科以上学历且能接受北京轮岗。",
+        "必须具备两年以上生产系统运维经验。", "要求英语可作为日常工作语言。"
+      ]
+    },
+    {
+      "id": "preferred", "heading": "加分项", "kind": "nice_to_have", "modality": "preferred",
+      "prefix": "职位名称：AI 应用工程师\n招聘公司：乙实验室\n职位地点：北京",
+      "lines": [
+        "有 LangGraph 项目经验者优先。", "熟悉 Kubernetes 为加分项。",
+        "发表过机器学习论文者优先考虑。", "有开源社区贡献经历更佳。",
+        "具备英文技术写作能力者优先。", "熟悉向量数据库者优先。",
+        "有大模型评测经验将获得加分。", "了解多模态模型者优先。",
+        "参加过 Kaggle 竞赛为佳。", "有 ToB 产品交付经验者优先录用。"
+      ]
+    },
+    {
+      "id": "alternatives", "heading": "岗位要求", "kind": "skill", "modality": "alternative",
+      "prefix": "岗位名称：研发工程师\n公司：丙科技\n城市：杭州",
+      "lines": [
+        "熟练掌握 Python 或 Java。", "至少掌握 Go、Rust 中的一门语言。",
+        "熟悉 PyTorch 或 TensorFlow 任一框架。", "能够使用 MySQL 或 PostgreSQL 完成数据建模。",
+        "React 与 Vue 至少熟悉一种。", "Kafka、Pulsar 任一消息系统均可。",
+        "候选人可选择 C++ 或 CUDA 作为主要开发栈。", "至少会使用一种云平台：AWS、Azure 或阿里云。",
+        "熟悉 LangChain 或 LlamaIndex。", "英文或日文能够满足工作沟通即可。"
+      ]
+    },
+    {
+      "id": "negated", "heading": "任职要求", "kind": "experience", "modality": "context",
+      "prefix": "岗位名称：校招开发工程师\n公司名称：丁网络\n地点：南京",
+      "lines": [
+        "不要求工作经验，欢迎应届生。", "无需具备大模型训练经历。",
+        "没有论文发表要求。", "本岗位不要求候选人掌握 Java。",
+        "不限制本科专业背景。", "无需有海外学习经历。",
+        "不要求独立带队经验。", "没有云计算证书也可以申请。",
+        "无需掌握全部编程语言。", "不要求到岗前熟悉公司内部框架。"
+      ]
+    },
+    {
+      "id": "responsibilities", "heading": "岗位职责", "kind": "responsibility", "modality": "unknown",
+      "prefix": "岗位名称：智能体研发\n公司名称：戊智能\n工作地点：深圳",
+      "lines": [
+        "负责设计和实现多 Agent 协作工作流。", "维护 RAG 检索与重排服务。",
+        "建设离线评测集并分析失败样本。", "与产品团队共同完成需求澄清。",
+        "优化模型调用成本和端到端延迟。", "编写可审计的技术方案与运行文档。",
+        "搭建提示词版本管理和灰度发布流程。", "跟踪线上指标并定位回答质量退化。",
+        "推动知识库增量更新与数据治理。", "参与简历生成模块的事实一致性检查。"
+      ]
+    },
+    {
+      "id": "technical_skills", "heading": "任职要求", "kind": "skill", "modality": "required",
+      "prefix": "职位名称：大模型应用开发\nCompany: Zeta AI\nLocation: Shanghai",
+      "lines": [
+        "熟练使用 Python 和 FastAPI 构建服务。", "要求理解 BM25、Dense Retrieval 与 RRF。",
+        "需要掌握 Docker 和 Linux 基础。", "熟悉 Chroma、Milvus 等向量存储。",
+        "要求能够使用 LangGraph 实现有状态工作流。", "需要理解 Transformer 与 Embedding。",
+        "熟练编写 SQL 并进行查询优化。", "能够使用 Git 和 CI/CD 流程协作。",
+        "要求掌握 PyTorch 模型推理。", "熟悉 MCP 与 Function Calling 协议。"
+      ]
+    },
+    {
+      "id": "nontechnical_skills", "heading": "岗位要求", "kind": "skill", "modality": "required",
+      "prefix": "岗位名称：用户运营\n公司名称：庚内容\n工作地点：广州",
+      "lines": [
+        "要求具备用户分层和生命周期运营能力。", "能够独立完成活动策划与复盘。",
+        "需要使用数据分析定位留存问题。", "具备跨团队项目推进能力。",
+        "能够撰写清晰的需求文档。", "要求理解渠道运营和转化漏斗。",
+        "具备用户研究与访谈能力。", "能够规划内容选题和发布节奏。",
+        "需要建立业务指标体系。", "要求具备客户沟通与异议处理能力。"
+      ]
+    },
+    {
+      "id": "experience", "heading": "任职要求", "kind": "experience", "modality": "required",
+      "prefix": "岗位名称：高级算法工程师\n公司名称：辛数据\n地点：北京",
+      "lines": [
+        "要求有两年以上推荐系统研发经验。", "具有搜索排序项目落地经历。",
+        "需要有大规模模型训练实践经验。", "要求独立负责过至少一个线上服务。",
+        "有从零搭建数据平台的经历。", "需要参与过高并发系统性能优化。",
+        "具备模型压缩与部署项目经验。", "要求有跨语言检索研究经历。",
+        "拥有完整的 A/B 实验设计经验。", "需要有生产事故复盘和治理经历。"
+      ]
+    },
+    {
+      "id": "english", "heading": "Requirements", "kind": "skill", "modality": "required",
+      "prefix": "Job Title: Applied AI Engineer\nCompany: Iota Labs\nLocation: Remote",
+      "lines": [
+        "Required: build production services with Python and FastAPI.", "Must understand retrieval, reranking, and evaluation.",
+        "You should be proficient in SQL data modelling.", "Required experience with Docker-based delivery.",
+        "Must be able to design observable agent workflows.", "Required knowledge of prompt injection defenses.",
+        "You should write maintainable automated tests.", "Must understand vector similarity and embeddings.",
+        "Required ability to communicate technical trade-offs.", "You should be comfortable reviewing model outputs for grounding."
+      ]
+    },
+    {
+      "id": "english_preferred", "heading": "Nice to have", "kind": "nice_to_have", "modality": "preferred",
+      "prefix": "Job Title: ML Platform Engineer\nCompany: Kappa\nLocation: Singapore",
+      "lines": [
+        "Experience with Kubernetes is preferred.", "Open-source contributions are a bonus.",
+        "Publications in information retrieval are preferred.", "Experience with multilingual models is a plus.",
+        "Familiarity with Ray is nice to have.", "Prior work on GPU scheduling is preferred.",
+        "Knowledge of Terraform would be a bonus.", "Experience mentoring junior engineers is preferred.",
+        "Familiarity with feature stores is nice to have.", "Conference speaking experience is a plus."
+      ]
+    },
+    {
+      "id": "web_noise", "heading": "职位要求", "kind": "skill", "modality": "required",
+      "prefix": "首页 > 校园招聘 > 职位详情\n登录 注册 收藏 分享\n职位详情\n检索算法实习生\n公司信息\nLambda 科技\n北京 | 校招 | 技术部",
+      "lines": [
+        "要求熟悉信息检索基础。", "需要使用 Python 完成算法实验。",
+        "要求理解召回率和准确率指标。", "需要具备基础的数据结构知识。",
+        "要求能够阅读英文论文。", "熟悉常见的向量索引方法。",
+        "需要完成检索系统误差分析。", "要求掌握基本的概率统计。",
+        "能够复现实验并记录配置。", "需要具备清晰的技术表达能力。"
+      ]
+    },
+    {
+      "id": "context_only", "heading": "技术背景", "kind": "skill", "modality": "context",
+      "prefix": "岗位名称：业务研发\n公司名称：Mu 服务\n工作地点：成都",
+      "lines": [
+        "团队目前使用 Java 作为主要服务语言。", "现有技术栈包括 Redis 和 Kafka。",
+        "项目使用 React 构建内部管理页面。", "部门正在探索大模型客服应用。",
+        "当前服务部署在 Kubernetes 集群。", "团队日常采用 GitHub Flow 协作。",
+        "现有数据主要存储在 PostgreSQL。", "项目目前使用 Prometheus 监控指标。",
+        "团队内部框架基于 Spring Boot。", "现有检索链路包含 BM25 和向量召回。"
+      ]
+    }
+  ]
+}

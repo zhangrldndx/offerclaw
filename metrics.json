@@ -1,0 +1,237 @@
+{
+  "_README": "OfferClaw 指标单一事实源(single source of truth)。改任何对外指标：只改这里的 current，然后跑 `python verify_docs.py` 巡检各文档是否还残留旧值。verify_docs 读本文件做门禁（并交叉核对 rag_api 路由数 + 激活 collection chunks 数）。历史/旧值写进文档时必须用 <!--HIST--> ... <!--/HIST--> 围栏包裹，否则会被判为漂移。",
+  "current": {
+    "routes": "91",
+    "pytest": 1659,
+    "chunks": "3327",
+    "R@1": 89,
+    "R@3": 95,
+    "Recall@5": 0.97,
+    "MRR": 0.9195,
+    "realworld_R1": 75,
+    "realworld_R3": 80.8,
+    "realworld_R5": 84.6,
+    "realworld_MRR": 0.7875,
+    "realworld_set": "52",
+    "strict_final_candidate": "73/80",
+    "strict_final_R1": "59/80",
+    "strict_final_R3": "70/80",
+    "strict_final_R5": "72/80",
+    "strict_final_MRR": 0.8083,
+    "strict_final_nDCG5": 0.8317,
+    "strict_final_effective": "59/80",
+    "strict_final_false_accept": "1/28",
+    "abstention_trivial": "12/12",
+    "abstention_adversarial": "11/12",
+    "retrieval_p50_ms": 13857,
+    "retrieval_p95_ms": 29758,
+    "faithfulness": "96.9%-97.1%",
+    "faithfulness_status": "answer-quality-v2 冻结历史开发回归集,n=48(40 正例+8 负例),非盲集/非 organic；两个独立裁判配置对同一不可变答案完成 96/96 裁判。40 正例 claim 忠实度 96.875%/97.0675%，答案要求完整度 81.25%/65.0%，有效完整度 81.25%/63.75%，引用 precision 80.0%/70.33%，recall 77.08%/87.65%。39/40 进入 KB grounded，28/40 命中冻结 exact-gold chunk。8 负例 pipeline 路由动作 8/8，但端到端动作合同 6/8；4 个 correct_premise 中最终答案 2/4 真正按要求纠错。原始证据保存在本地私有评估包。",
+    "answer_quality_total_p50_ms": 37560,
+    "answer_quality_total_p95_ms": 97122,
+    "product_acceptance": "36/36",
+    "product_action_contract": "pipeline 24/24 · correct_premise 首句纠偏 12/12 · abstain 12/12(2026-08-31 动作合同专项集 run2;run1 曾 23/24,经查系一题缺证标注错误——库内实有 kl_coef 内容而系统带引用作答正确,已按'构造错误'留痕替换,不计系统失分。真源 docs/rag_eval/release_v5/ACTION_CONTRACT_SUMMARY.json)",
+    "strict_current_head": "120 行 strict 回归(repeats 1):Candidate 73/80 · R@1 61/80 · R@3 70/80 · R@5 71/80 · MRR 0.8156 · nDCG@5 0.834 · 有效作答 60/80 · 门控可纠 12/12 · 须拒答误纳 2/28(超 ≤1/28 门槛;配对重放证实与修复代码无关——同判据缓存下新旧代码逐位一致,系判据对边界负例的冷跑漂移,历史即记录'翻转朝放行方向';neg-027 为 2:1 非全票放行,全票制可拒之,留给预注册标定轮)。原始证据保存在本地私有评估包。",
+    "latency_fast_quality": "15 题固定集(bench 前 8 + 口语前 7)warm p50/p95:fast 17.5s/39.7s(地板=本机 CPU 精排 ~8s + 生成阶段 ~8s,未达 §10 fast≤5s 目标,如实公开)· quality 28.8s/47.7s(达标 ≤30/≤60);冷启动首题 ~47-49s。RAG_MODE 产品开关映射既有旋钮。原始证据保存在本地私有评估包。",
+    "doctor_ok": "12",
+    "eval_set": "100",
+    "langgraph_nodes": "14",
+    "personas": "3",
+    "domain_matrix": "8画像×16JD=128对:崩溃0·劫持1/112(已知)·对角11/16",
+    "paper_domain_r1": "60",
+    "retrieval_latency_note": "quality 默认含判据+门票+双通道 LLM 调用:bench100 实测 p50 13.9s/p95 29.8s(冷缓存口径),缓存命中显著更低;用户口径容忍 3min。真源 final_v4/bench{100,52}_qualitydefault.json 的 perf 段",
+    "default_profile_note": "2026-08-31 生产默认=quality包(pool28+compact32+判据v5 d12早退+HyDE双通道+三票共识门)。Final v4 历史盲集背书:R@3 68→70/R@5 69→72/MRR .791→.808/nDCG .809→.832/有效作答 29→59/真误纳 1≤A+1/门控 correct_premise 12/12;真实口径52 R@1 69.2→75.0。answer-quality-v2 进一步证明门控动作不等于最终生成动作：抽样 4 个 correct_premise 仅 2/4 在最终答案中正确纠错。回退旋钮 RAG_ANSWERABILITY_PROMPT=v4 / RAG_ANSWERABILITY_GATE=0 / RAG_HYDE_CHANNELS=0;真源 docs/rag_eval/final_v4/ 与 docs/rag_eval/answer_quality_v2/。候选 JD 已退出产品 RAG，真实 JD 只通过投递绑定的结构化读取链路使用。"
+  },
+  "_metric_notes": {
+    "R@1/R@3/Recall@5/MRR": "同分布(in-distribution)口径,n=100(2026-07-04 扩集 58→100 + 垃圾块过滤重建 3340 chunks 后实测)。题与文档标题近义偏多,仍是偏乐观上限。95% CI(Wald)≈±6.8pp。老 58 题子集同库实测 R@1 84%(对照用)。",
+    "realworld_*": "真实口径(held-out paraphrase),n=52,口语化改写、无关键词重叠。2026-08-18 于当前生产库(3346,论文路由默认关)重测:R@1 50.0 / R@3 63.5 / MRR 0.566(旧值 48 是 2026-07-04 3340 库口径)。同分布↔真实差 36pp = 污染程度实测。本次重测抓出并修复一个已推送真回归:论文域回退路由在主库弱证据时顶替中文结果,同库开/关 = 42.3/50.0(-7.7pp);已加比分门并默认关闭路由,详见 docs/rag_eval/m3_ab/REPORT.md 末章。",
+    "abstention_adversarial": "近似负样本(像是领域内但库里真没有，如 vLLM PagedAttention/MoE 负载均衡损失)，逐一 grep 验证未覆盖；对比 abstention_trivial 是明显跑题(红烧肉/天气)。R9 实测:3340 新索引基线 11/12(adv10 距离 0.7164 压 0.73 阈值线,系垃圾过滤重建引入;阈值重标定已做:{0.70..0.73} 五档联合扫描全持平,adv10 收紧后改走词法救回门进来——阈值不是旋钮,保持 0.73,11/12 记为已知局限,详见 round9/REPORT.md §8 与 threshold_calibration.json;旧 12/12 是 2607 索引口径)。doc2query ON 时 10/12+简单负 11/12——召回增强腐蚀拒答边界的实证,故 RAG_DOC2QUERY 默认关。",
+    "doc2query_verdict": "R9 A/B(heldout52):R@1 +0.0pp,R@3 +5.8pp;负样本 -2 → 默认关。查询改写同判(R@1 +0,R@5 +7.7pp)。两路线共同证据:瓶颈已从召回转移到 cross-encoder 精排的口语↔书面打分。详见 docs/rag_eval/round9/REPORT.md。",
+    "retrieval_*_ms": "Final v4 历史同分布 n=100 Quality 检索 p50/p95=13.9/29.8s。2026-08-31 answer-quality-v2 n=48 使用独立空 answerability cache、模型常驻单进程，实测检索 p50/p95=31.0/80.4s，生成=4.35/77.4s，端到端=37.6/97.1s；两口径不可混写。",
+    "latency_tradeoff": "R9 异机实测(i7-13700K CPU/WSL):RECALL_N=5/10/20/40 → heldout R@1 44.2/46.2/48.1/46.2%,p50 0.76/1.51/2.97/5.48s。N=20(现默认)=双尺精度峰值,N=40 更慢且更差;N=20 档与本机 MPS 基线分毫不差=跨机复现。数据 docs/rag_eval/round9/latency_tradeoff_codex_*.json。",
+    "scale_test": "R9 异机实测(同机):合成语料 1万/5万/10万块,纯向量查询 p50 35/39/39ms(10× 数据 +13%,无拐点),RSS 1.3/1.5/1.9GB(≈6-7KB/块),入库 14/67/136min(线性)。规模约束=内存与入库时长,非查询延迟。数据 docs/rag_eval/round9/scale_test_codex_*.json。",
+    "domain_matrix": "跨职业域泛化评测矩阵(2026-07-13 首测):8 个合成画像 × 16 份 JD(当前全部合成,corpus 预留 source=real 槽位,人工收集真实 JD 后重跑自动分层)全对全 128 对。硬指标:崩溃 0、结论合法率 100%、全矩阵两遍逐字节一致。跨域劫持 1/112——唯一案例 dm_ai_llm×jd_pd_2(AI 画像בAI 产品经理'JD 判主方向),系 legacy AI 关键词对 AI 用户宽匹配,违反预登记劫持=0 目标,记已知缺陷待收敛。对角主方向 11/16——5 个 miss 全是岗位命名变体(Web前端/固件/结构工程师/新媒体)未进同义词表,系统 fail-safe 判'不考虑'而非误归类;同义词表扩充列后续改进。诚实口径:画像全部合成并明标;不回改语料美化数字(禁对着评测集调参);真实用户数据不进入公开评测产物。快照由 tests/test_domain_matrix.py 钉死,数字漂移必须是有意识的。",
+    "paper_domain": "2026-08-25 当前激活的显式 paper_quality 路径:只在 QueryPlan 选择 paper_kb 时查询 kb_paper_bge_v1(K=5),base reranker 后用 mMiniLM ONNX 仅补英文候选,再过 tau=0.80 英文证据门。xling50 端到端复测:grounded 正确 30/50=60%,错误放行 0,p50 309ms,p95 589ms;普通中文/个人/状态查询不进入该路径,因此零额外候选与模型开销。两套论文 collection 实测各 189 chunks。历史自动论文 fallback 仍默认关,避免中文弱证据被论文顶替。完整演进见 docs/rag_eval/quota/REPORT.md。",
+    "chunk_hygiene": "2026-09-11 实测:主库 3327 chunks;已清理 21 个候选 JD 块，kb_paper_e5_v1 与 kb_paper_bge_v1 各 189 chunks。embedding 血缘、集合契约、2000 字符硬上限和分语言信息量门控继续生效。"
+  },
+  "_refresh_cmd": {
+    "routes": "grep -cE '^@(app|router)\\.' rag_api.py",
+    "pytest": "RAG_RERANK=0 python -m pytest tests/ -q  (取 passed 数)",
+    "chunks": "python doctor.py  (当前 collection chunks 数)",
+    "R@1/R@3/Recall@5/MRR": "python eval_rag_bench.py  (同分布 100 题)",
+    "realworld_*": "python eval_rag_bench.py --set tests/rag_bench_paraphrase_set.json  (真实口径 52 题)",
+    "abstention_adversarial": "gated_query 逐条跑 tests/rag_gate_adversarial_negatives.json，统计 in_kb=False 数",
+    "retrieval_*_ms": "计时 rag_gate._retrieve_and_classify × N，取 p50/p95",
+    "faithfulness": "python eval_answer_quality_v2.py run --selection docs/rag_eval/answer_quality_v2/SELECTION_MANIFEST_ISOLATED.json --publish-summary  (48 题固定分母 + 双裁判；中断用 scripts/resume_answer_quality_v2.py)",
+    "product_acceptance": "python scripts/run_product_acceptance.py --raw-dir <仓库外目录> --summary docs/rag_eval/current_head_20260831/PRODUCT_ACCEPTANCE_V2_SUMMARY.json  (清单 tests/product_acceptance_v2.json,六域各 6 例,零 LLM 零真实写入;raw 强制仓库外)",
+    "product_action_contract": "python scripts/run_action_contract_set.py --raw-dir <仓库外目录> --summary docs/rag_eval/release_v5/ACTION_CONTRACT_SUMMARY.json  (24 题固定集 tests/action_contract_v1.json;独立判据缓存;'资料外补充'维度不自动判定,raw 供人工抽查)",
+    "strict_current_head": "python scripts/freeze_current_head_release.py --output docs/rag_eval/release_v5/FROZEN_CONFIG.json --dataset docs/rag_eval/final_v4/final_v4.json && python scripts/run_current_head_regression.py --freeze docs/rag_eval/release_v5/FROZEN_CONFIG.json --outdir <仓库外目录> --summary docs/rag_eval/release_v5/CURRENT_HEAD_SUMMARY.json --repeats 1  (发布报告用 --repeats 3 取中位)",
+    "latency_fast_quality": "python scripts/run_latency_profile.py --raw-dir <仓库外目录> --summary docs/rag_eval/release_v5/LATENCY_SUMMARY.json  (RAG_MODE 每模式独立子进程)",
+    "doctor_ok": "python doctor.py",
+    "eval_set": "len(tests/rag_bench_set.json['items'])",
+    "langgraph_nodes": "RAG 4(rag_graph) + CareerFlow 10(career_flow 业务节点,不含 4 个 router 记账节点) = 14；核对命令 grep -oE 'add_node\\(\"[a-z_]+\"' career_flow.py | sort -u | grep -vc '^router_'",
+    "domain_matrix": "python eval_domain_matrix.py(纯规则零LLM,确定性;语料 tests/domain_matrix_corpus.json)"
+  },
+  "stale_blacklist": {
+    "routes": [
+      "11",
+      "16",
+      "19",
+      "20",
+      "24",
+      "28",
+      "45",
+      "46",
+      "47",
+      "49",
+      "53",
+      "62",
+      "71",
+      "72"
+    ],
+    "pytest": [
+      "17",
+      "37",
+      "64",
+      "130",
+      "347",
+      "351",
+      "354",
+      "397",
+      "413",
+      "417",
+      "418",
+      "531",
+      "543",
+      "551",
+      "559",
+      "562",
+      "567",
+      "582",
+      "583",
+      "588",
+      "591",
+      "594",
+      "596",
+      "599",
+      "604",
+      "605",
+      "618",
+      "619",
+      "630",
+      "639",
+      "734",
+      "981",
+      "990",
+      "991",
+      "1382",
+      "1392",
+      "1430",
+      "1459",
+      "1464",
+      "1526",
+      "1540",
+      "1668",
+      "1689",
+      "1691"
+    ],
+    "chunks": [
+      "118",
+      "160",
+      "1010",
+      "1024",
+      "3299",
+      "2530",
+      "2607",
+      "3340",
+      "3344",
+      "3346",
+      "3538",
+      "3540",
+      "3347",
+      "3348"
+    ],
+    "R@1": [
+      "75",
+      "84",
+      "86"
+    ],
+    "Recall@5": [
+      "0.50",
+      "0.75",
+      "0.88",
+      "0.880",
+      "0.96",
+      "0.960",
+      "1.00",
+      "1.0"
+    ],
+    "MRR": [
+      "0.66",
+      "0.67",
+      "0.69",
+      "0.74",
+      "0.886",
+      "0.896",
+      "0.897",
+      "0.913",
+      "0.905"
+    ],
+    "doctor_ok": [
+      "7",
+      "8",
+      "10"
+    ],
+    "eval_set": [
+      "8",
+      "39",
+      "50",
+      "58"
+    ],
+    "langgraph_nodes": [
+      "13",
+      "12"
+    ],
+    "realworld_R1": [
+      "50",
+      "48"
+    ],
+    "paper_domain_r1": [
+      "56",
+      "70"
+    ],
+    "R@3": [
+      "96"
+    ],
+    "realworld_R3": [
+      "63"
+    ],
+    "realworld_MRR": [
+      "0.566"
+    ],
+    "retrieval_p50_ms": [
+      "1330"
+    ],
+    "retrieval_p95_ms": [
+      "1340"
+    ],
+    "_final_v4_defaults_flip_2026_08_31": "旧口径 R@3 96/Recall@5 0.98/MRR 0.922/realworld 69·75·0.735/p50 2134/p95 16281 为 B0 默认时代数值,已被 quality 默认取代"
+  },
+  "scan_files": {
+    "canonical": [
+      "README.md",
+      "PROJECT_STATUS.md",
+      "docs/verification_report.md",
+      "docs/project_one_pager.md"
+    ],
+    "extended": [
+      "docs/interview_qa.md",
+      "docs/postmortem.md",
+      "docs/architecture.md",
+      "docs/RESUME_PROJECT.md",
+      "docs/RAG_INTERVIEW_GUIDE.md",
+      "docs/RAG_TESTING_GUIDE.md"
+    ]
+  },
+  "_not_scanned": "docs/v3_changelog.md(V3 变更日志·天然历史) / docs/test_report_2026-06-22.md(带日期快照) / docs/archive/*(已归档 V1–V2 旧文档) 不纳入巡检——它们靠顶部横幅声明为历史时点记录。"
+}

@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# pre-push 门禁 —— 补上 CI 覆盖不到的本地检索回归防线。
+#
+# 背景（2026-07-04 审查发现）：CI 只跑 pytest + verify_docs；RAG 基准回归门禁
+# `eval_rag_bench.py --fail-under` 依赖本地 chroma_db + bge/reranker 模型（均 gitignore，
+# CI 没有），此前只在注释里"声称"是本地 pre-push 门禁，却从未真正创建 hook——于是一次
+# 索引重建把 R@1 悄悄拉低都没人发现。本 hook 把那条防线真正落地。
+#
+# 激活（新 clone 必做一次）：git config core.hooksPath .githooks
+# Gitleaks 路径：git config --local offerclaw.gitleaksPath /absolute/path/to/gitleaks
+#
+# 诚实边界：--fail-under 只挡"总体 R@1 跌破地板"的**大幅**回归（n=100，
+# 地板设 0.83）；噪声级漂移（如 86→84）它挡不住——那要靠更大的
+# 评测集（见 tests/rag_bench_paraphrase_set.json 真实口径集）。
+# pre-push 只测检索排序并加 `--no-gate`：Gate 的正负样本由 pytest 确定性覆盖。
+# 否则这里会为了合成一段并不参与 R@1 的答案调用外部 LLM，使离线门禁被网关超时卡死。
+#
+# 2026-08-31 补丁：可答性判据默认翻转（RAG_ANSWERABILITY 未设=开）后，本门禁被
+# 静默变成每题 ~13 次 LLM 调用（实测 80s/题 ≈ 2 小时,且质量依赖网关在线）——
+# 与上面"离线免 LLM"的设计意图相悖。这是"默认翻转=删 env 语义反转"教训的第三次
+# 复现：靠删 env 关闭的 harness 必须改显式 "0"。判据/HyDE 通道显式关掉，门禁
+# 回到纯排序口径；判据链路的回归由 pytest（哨兵纪律测试）与 Final 终审覆盖。
+# 纯排序口径地板另测：见下方 --fail-under 处注释。
+
+set -euo pipefail
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+export PYTHONUTF8=1
+if [ -n "${OFFERCLAW_PY:-}" ]; then
+  PY=("$OFFERCLAW_PY")
+elif command -v py >/dev/null 2>&1 && uname -s | grep -qE 'MINGW|MSYS|CYGWIN'; then
+  PY=(py -3)
+elif [ -x .venv/bin/python ]; then
+  PY=(.venv/bin/python)
+elif command -v python3 >/dev/null 2>&1; then
+  PY=(python3)
+else
+  PY=(python)
+fi
+
+PUSH_REVISIONS=()
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [[ -n "$local_sha" && ! "$local_sha" =~ ^0+$ ]]; then
+    PUSH_REVISIONS+=("$local_sha")
+  fi
+done
+if [ "${#PUSH_REVISIONS[@]}" -eq 0 ]; then
+  PUSH_REVISIONS=(HEAD)
+fi
+
+resolve_gitleaks() {
+  local candidate="${GITLEAKS_BIN:-}"
+  if [ -z "$candidate" ]; then
+    candidate="$(git config --get offerclaw.gitleaksPath 2>/dev/null || true)"
+  fi
+  if [ -n "$candidate" ]; then
+    if [ -x "$candidate" ]; then
+      printf '%s\n' "$candidate"
+      return 0
+    fi
+    if command -v "$candidate" >/dev/null 2>&1; then
+      command -v "$candidate"
+      return 0
+    fi
+    return 1
+  fi
+  command -v gitleaks 2>/dev/null
+}
+
+echo "[pre-push] 1/4 仓库隐私门禁 ..."
+VERIFY_ARGS=()
+for revision in "${PUSH_REVISIONS[@]}"; do
+  VERIFY_ARGS+=(--privacy-revision "$revision")
+done
+"${PY[@]}" verify_docs.py "${VERIFY_ARGS[@]}" >/dev/null
+
+if ! GITLEAKS="$(resolve_gitleaks)"; then
+  echo "[pre-push] 阻止推送：未找到可执行的 Gitleaks。" >&2
+  echo "[pre-push] 安装后运行：git config --local offerclaw.gitleaksPath /absolute/path/to/gitleaks" >&2
+  exit 1
+fi
+
+# 每次先用拆分生成的合成 Slack token 验证规则引擎；失灵或被宽泛 allowlist
+# 清空规则时，canary 不会返回预期的发现码 1，push 必须失败。
+set +e
+printf 'token = "%s-%s-%s-%s"\n' 'xoxb' '123456789012' '123456789012' \
+  'abcdefghijklmnopqrstuvwx' | "$GITLEAKS" stdin --no-banner --redact >/dev/null 2>&1
+CANARY_STATUS=$?
+set -e
+if [ "$CANARY_STATUS" -ne 1 ]; then
+  echo "[pre-push] 阻止推送：Gitleaks 合成 canary 自检失败（exit=$CANARY_STATUS）。" >&2
+  exit 1
+fi
+
+# 由 shell 的 pipefail 同时验证 git log 与 Gitleaks 两端，避免扫描器把 Git 错误
+# 误报成“0 commits / no leaks”。只扫描本次实际推送 revision 的全部可达历史。
+git log --no-ext-diff --full-history -p "${PUSH_REVISIONS[@]}" | \
+  "$GITLEAKS" stdin --no-banner --redact
+
+echo "[pre-push] 2/4 ruff/pytest 冒烟 ..."
+OPENAI_API_KEY= ZHIPU_API_KEY= DASHSCOPE_API_KEY= BAILIAN_API_KEY= \
+  RAG_RERANK=0 "${PY[@]}" -m pytest tests/ -q --tb=short
+
+# 检索回归门禁：仅当本次推送改到检索/索引相关代码时才跑（bge+reranker 加载 ~1-2min）。
+CHANGED="$(git diff --name-only @{push} HEAD 2>/dev/null || git diff --name-only HEAD~1 HEAD)"
+if echo "$CHANGED" | grep -qE 'rag_(gate|rerank|route|bm25|hyde|tools|ingest)\.py|eval_rag_bench\.py|tests/rag_bench'; then
+  if [ -d chroma_db ]; then
+    echo "[pre-push] 3/4 检索逻辑有改动 → RAG 回归门禁 (eval_rag_bench --fail-under 0.83) ..."
+    # RAG_ANSWERABILITY=0 / RAG_HYDE_CHANNELS=0：显式关 LLM 增强，保持离线免 LLM。
+    # 纯排序口径 bench100 实测 R@1 见 metrics.json 历史（判据前时代长期 86 档），
+    # 地板 0.83 只挡大幅回归，含义不变。
+    RAG_ROUTER_MODE=legacy RAG_ANSWERABILITY=0 RAG_HYDE_CHANNELS=0 \
+      OPENAI_API_KEY= ZHIPU_API_KEY= DASHSCOPE_API_KEY= BAILIAN_API_KEY= \
+      "${PY[@]}" eval_rag_bench.py --no-gate --fail-under 0.83
+  else
+    echo "[pre-push] 3/4 检索有改动但本机无 chroma_db，跳过回归门禁（提醒：合并前需在有索引的机器上验证）"
+  fi
+else
+  echo "[pre-push] 3/4 未改检索逻辑，跳过 RAG 回归门禁"
+fi
+echo "[pre-push] 4/4 完成"
+echo "[pre-push] 全部通过 ✅"

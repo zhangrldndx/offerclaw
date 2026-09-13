@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OfferClawProfileV1",
+  "description": "OfferClaw 用户画像 13 字段的 JSON Schema。profile_loader.load_profile() 的输出必须满足此 schema。",
+  "type": "object",
+  "required": [
+    "学历",
+    "可接受地域",
+    "方向优先级",
+    "明确不做",
+    "熟练技能",
+    "会用技能",
+    "项目数量",
+    "实习数量",
+    "英语自评"
+  ],
+  "properties": {
+    "学历": {
+      "type": "string",
+      "enum": ["专科", "本科", "硕士", "博士", "高中"]
+    },
+    "专业": {
+      "type": "string"
+    },
+    "所在地": {
+      "type": "string"
+    },
+    "可接受地域": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "方向优先级": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "maxItems": 10
+    },
+    "目标岗位类型": {
+      "type": "string",
+      "description": "例如日常实习、暑期实习、校招、社招；优先不是排他条件"
+    },
+    "行业偏好": {
+      "type": "string",
+      "description": "用户行业偏好；默认只作软性排序，不作为硬门槛"
+    },
+    "明确不做": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "工作性质偏好": {
+      "type": "string"
+    },
+    "期望薪资": {
+      "type": "string"
+    },
+    "熟练技能": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "会用技能": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "技能证据": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "description": "画像技能与项目原文中明确出现的能力词，不等同于熟练度声明"
+    },
+    "项目技能": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "description": "仅从项目经历原文抽取的技术/能力证据"
+    },
+    "项目数量": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "实习数量": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 50
+    },
+    "英语自评": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "_source": {
+      "type": "string",
+      "description": "load_profile() 自动注入：标记画像来自 user_profile.md / fallback JSON / 默认值"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,20 @@
+{
+  "id": "offerclaw-direct-reply",
+  "name": "OfferClaw Direct Reply",
+  "version": "1.1.0",
+  "description": "Claims authenticated OfferClaw WeChat requests before model dispatch.",
+  "hooks": ["reply_dispatch"],
+  "activation": {"onStartup": true},
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "launcherPath": {"type": "string", "minLength": 1},
+      "accountIds": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1, "maxItems": 1, "uniqueItems": true},
+      "senderIds": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1, "maxItems": 1, "uniqueItems": true},
+      "timeoutMs": {"type": "integer", "minimum": 1000, "maximum": 45000},
+      "publicLlmFallback": {"type": "boolean"}
+    },
+    "required": ["launcherPath", "accountIds", "senderIds"]
+  }
+}

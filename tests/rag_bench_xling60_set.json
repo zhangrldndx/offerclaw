@@ -1,0 +1,553 @@
+{
+  "description": "跨语 60 题正式集(2026-08-09,方案文档 §7 配比):20 纯中文无术语/10 含术语/10 改写/10 英英(复用实测集)/10 中中守卫(复用百题集已验证条目)。用途:paper 域三臂 A/B(m3 vs multilingual-e5-base vs 现状)的裁决集;判据=+8pp/R@3≈90/中文守卫不回退/拒答不腐蚀。",
+  "match": "substring",
+  "items": [
+    {
+      "id": "wu01",
+      "domain": "xling_no_term",
+      "q": "有一种让模型一边思考一边动手查资料的方法,它相比只在脑子里推理,主要解决了编造事实和错误一路传下去的问题,这是哪篇工作",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu02",
+      "domain": "xling_no_term",
+      "q": "在网页购物和家务模拟这两个交互环境里,边想边做的方法比模仿学习和强化学习的成功率分别高多少",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu03",
+      "domain": "xling_no_term",
+      "q": "让模型把中间思考过程写出来,对制定、跟踪和调整行动计划有什么帮助",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu04",
+      "domain": "xling_no_term",
+      "q": "只让模型行动、不让它思考,会出现什么问题",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu05",
+      "domain": "xling_no_term",
+      "q": "先走边想边做、不行再退回纯思考的组合策略,在多跳问答上效果怎么样",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu06",
+      "domain": "xling_no_term",
+      "q": "边想边做范式生成的解题过程,人类评审觉得比其他方法更容易看懂和信任吗",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu07",
+      "domain": "xling_no_term",
+      "q": "纯思维推理为什么容易把中间步骤的错误一路带到最终答案",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu08",
+      "domain": "xling_no_term",
+      "q": "有一种借鉴电脑操作系统管理内存的思路来突破对话长度限制的系统,它怎么分层管理信息",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu09",
+      "domain": "xling_no_term",
+      "q": "那套记忆分层系统怎么在'眼前能看到的内容'和'外部仓库'之间搬运信息",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu10",
+      "domain": "xling_no_term",
+      "q": "为什么说无限加长模型能看到的内容窗口这条路划不来",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu11",
+      "domain": "xling_no_term",
+      "q": "在超长文档分析和多次会话聊天两类场景里验证过的记忆管理系统是哪个",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu12",
+      "domain": "xling_no_term",
+      "q": "模型通过调用函数来读写和修改自己上下文的设计出自哪篇工作",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu13",
+      "domain": "xling_no_term",
+      "q": "为什么长上下文模型即便训练出来了,也不一定能有效利用额外的上下文",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu14",
+      "domain": "xling_no_term",
+      "q": "那套系统由谁来决定什么时候把结果返回给用户",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu15",
+      "domain": "xling_no_term",
+      "q": "有一个把聊天记忆变成看得见、可以直接拖动编辑的对象的系统,它想解决什么问题",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu16",
+      "domain": "xling_no_term",
+      "q": "用户可以对那些看得见的记忆对象做哪些操作",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu17",
+      "domain": "xling_no_term",
+      "q": "聊天机器人把记忆管理藏在界面后面,会给使用者带来什么麻烦",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu18",
+      "domain": "xling_no_term",
+      "q": "研究者为什么认为把记忆管理透明地交给用户比藏起来更好",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu19",
+      "domain": "xling_no_term",
+      "q": "跨会话共享记忆在那个透明记忆系统里是怎么支持的",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "wu20",
+      "domain": "xling_no_term",
+      "q": "让用户直接查看、移动、删除和汇总对话记忆的交互设计出自哪篇工作",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "tm01",
+      "domain": "xling_term",
+      "q": "ReAct 在 HotpotQA 和 Fever 上主要克服了 CoT 推理的什么毛病",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm02",
+      "domain": "xling_term",
+      "q": "ReAct 论文在 ALFWorld 上比基线方法的绝对成功率高多少",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm03",
+      "domain": "xling_term",
+      "q": "ReAct 与 CoT-SC 结合的两种策略分别是什么",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm04",
+      "domain": "xling_term",
+      "q": "ReAct 在 WebShop 上相比模仿学习和强化学习方法提升多少",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm05",
+      "domain": "xling_term",
+      "q": "MemGPT 的 virtual context management 具体指什么",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm06",
+      "domain": "xling_term",
+      "q": "MemGPT 与操作系统 paging 分页机制的类比关系是什么",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm07",
+      "domain": "xling_term",
+      "q": "MemGPT 里 main context 和 external context 分别指什么",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm08",
+      "domain": "xling_term",
+      "q": "MemGPT 依赖 LLM 的 function calling 能力来做什么",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm09",
+      "domain": "xling_term",
+      "q": "Memory Sandbox 系统是基于 GPT-3.5-turbo 构建的吗,前端用了什么框架",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": false
+    },
+    {
+      "id": "tm10",
+      "domain": "xling_term",
+      "q": "Memory Sandbox 论文声称的两个 contribution 是什么",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": false
+    },
+    {
+      "id": "pp01",
+      "domain": "xling_para",
+      "q": "查资料式推理和闭卷式推理相结合的提示范式",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp02",
+      "domain": "xling_para",
+      "q": "在行动轨迹里穿插思考步骤的做法",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp03",
+      "domain": "xling_para",
+      "q": "让语言模型自己决定何时检索外部知识、何时继续推理",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp04",
+      "domain": "xling_para",
+      "q": "在有限窗口内制造无限上下文的错觉",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp05",
+      "domain": "xling_para",
+      "q": "分层存储并自动换入换出对话信息的机制",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp06",
+      "domain": "xling_para",
+      "q": "把大模型比作操作系统的那套架构想解决什么",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp07",
+      "domain": "xling_para",
+      "q": "上下文的分页式调度管理",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp08",
+      "domain": "xling_para",
+      "q": "记忆卡片式的可视化管理",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp09",
+      "domain": "xling_para",
+      "q": "用户主导的对话记忆编辑与整理",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "pp10",
+      "domain": "xling_para",
+      "q": "透明化展示智能体记住了什么的界面设计",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": true
+    },
+    {
+      "id": "en01",
+      "domain": "en_en",
+      "q": "What problem of chain-of-thought reasoning does ReAct address by interleaving reasoning and acting?",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en02",
+      "domain": "en_en",
+      "q": "Which external tool does ReAct use on HotpotQA to gather information?",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en03",
+      "domain": "en_en",
+      "q": "How much does ReAct improve success rates over imitation and reinforcement learning on ALFWorld and WebShop?",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en04",
+      "domain": "en_en",
+      "q": "What role do reasoning traces play in the ReAct framework?",
+      "expect_sources": [
+        "paper_react"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en05",
+      "domain": "en_en",
+      "q": "What operating system mechanism does MemGPT borrow to work beyond limited context windows?",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en06",
+      "domain": "en_en",
+      "q": "How does the LLM in MemGPT move data between main context and external storage?",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en07",
+      "domain": "en_en",
+      "q": "In which two domains is MemGPT evaluated?",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en08",
+      "domain": "en_en",
+      "q": "Why is naively extending transformer context length considered costly?",
+      "expect_sources": [
+        "paper_memgpt"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en09",
+      "domain": "en_en",
+      "q": "What does Memory Sandbox turn conversational memories into so users can manipulate them?",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": false
+    },
+    {
+      "id": "en10",
+      "domain": "en_en",
+      "q": "What operations can users perform on memory objects in Memory Sandbox?",
+      "expect_sources": [
+        "paper_memory_sandbox"
+      ],
+      "hard": false
+    },
+    {
+      "id": "rag01",
+      "domain": "zh_guard",
+      "q": "RAG 检索增强生成的完整链路包括哪些环节",
+      "expect_sources": [
+        "rag_full_chain",
+        "rag_basics"
+      ],
+      "hard": false
+    },
+    {
+      "id": "rag02",
+      "domain": "zh_guard",
+      "q": "RAG 出现的原因是什么，解决了大模型哪些问题",
+      "expect_sources": [
+        "rag_basics"
+      ],
+      "hard": false
+    },
+    {
+      "id": "rag03",
+      "domain": "zh_guard",
+      "q": "朴素 RAG、高级 RAG、模块化 RAG 三个阶段有什么区别",
+      "expect_sources": [
+        "rag_basics"
+      ],
+      "hard": false
+    },
+    {
+      "id": "rag04",
+      "domain": "zh_guard",
+      "q": "文本分块 chunking 有哪些策略，固定大小和语义分块的取舍",
+      "expect_sources": [
+        "rag_basics"
+      ],
+      "hard": false
+    },
+    {
+      "id": "rag05",
+      "domain": "zh_guard",
+      "q": "HyDE 假设性文档嵌入是怎么工作的",
+      "expect_sources": [
+        "rag_full_chain"
+      ],
+      "hard": true
+    },
+    {
+      "id": "rag06",
+      "domain": "zh_guard",
+      "q": "Multi-Query 多查询和 RAG-Fusion RRF 融合策略",
+      "expect_sources": [
+        "rag_full_chain"
+      ],
+      "hard": true
+    },
+    {
+      "id": "rag07",
+      "domain": "zh_guard",
+      "q": "重排序 rerank 为什么需要，怎么实现",
+      "expect_sources": [
+        "rag_full_chain",
+        "rag_basics"
+      ],
+      "hard": false
+    },
+    {
+      "id": "rag08",
+      "domain": "zh_guard",
+      "q": "父文档检索、句子窗口检索、自动合并怎么解决块太小丢上下文",
+      "expect_sources": [
+        "rag_basics",
+        "rag_full_chain"
+      ],
+      "hard": true
+    },
+    {
+      "id": "rag09",
+      "domain": "zh_guard",
+      "q": "混合检索 hybrid search，稀疏检索和密集检索结合",
+      "expect_sources": [
+        "rag_basics",
+        "rag_full_chain",
+        "rag技术入门"
+      ],
+      "hard": false,
+      "note": "标注随库演进：库升级后 all-in-rag(rag技术入门) 混合检索专章是更专业的合理答案，2026-06 用户裁定纳入"
+    },
+    {
+      "id": "rag10",
+      "domain": "zh_guard",
+      "q": "CRAG 和 Self-RAG 这两种 RAG 变体的核心思想",
+      "expect_sources": [
+        "rag_basics",
+        "rag_full_chain"
+      ],
+      "hard": true
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "schema_version": "offerclaw-gate-profile-registry-v1",
+  "profiles": [],
+  "note": "Intentionally empty. A profile is added only after a reranker arm passes heldout, gate, latency, and blind-test release gates."
+}

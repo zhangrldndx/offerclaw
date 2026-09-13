@@ -1,0 +1,9 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "career_flow": "./career_flow.py:build_routed_graph",
+    "career_flow_linear": "./career_flow.py:build_graph",
+    "rag_agent": "./rag_graph.py:make_graph"
+  },
+  "env": ".env.local"
+}

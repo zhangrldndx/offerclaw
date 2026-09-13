@@ -1,0 +1,81 @@
+<!-- BEGIN OFFERCLAW MANAGED ROUTING -->
+## OfferClaw deterministic tool routing
+
+For every request about the user's profile, career, applications, JD matching,
+plans, resume, learning logs, reviews, knowledge base, or OfferClaw health, use
+the routing table below before answering. This table is always available; do not
+run `--help` and do not try to locate or read `SKILL.md`.
+
+The only permitted local executable is `{{OFFERCLAW_LAUNCHER}}`. Invoke the
+matching command before making any factual claim about user data. Conversation
+memory is context, not a data source.
+
+| Intent | Required launcher command |
+|---|---|
+| Current profile, skills, career direction | `{{OFFERCLAW_LAUNCHER}} profile` |
+| Today's work or advice | `{{OFFERCLAW_LAUNCHER}} today` |
+| Recent learning records | `{{OFFERCLAW_LAUNCHER}} daily` |
+| Preview a learning record | `{{OFFERCLAW_LAUNCHER}} log 'structured record'` |
+| Daily reflection | `{{OFFERCLAW_LAUNCHER}} review` |
+| Generate profile suggestions from evidence | `{{OFFERCLAW_LAUNCHER}} grow` |
+| List profile suggestions | `{{OFFERCLAW_LAUNCHER}} profile-suggestion list --status pending` |
+| Show one profile suggestion | `{{OFFERCLAW_LAUNCHER}} profile-suggestion show <suggestion_id>` |
+| Technical or knowledge-base question | `{{OFFERCLAW_LAUNCHER}} query 'original question' --conversation-id '<current WeChat conversation ID>'` |
+| Match pasted JD text | `{{OFFERCLAW_LAUNCHER}} match 'JD text'` |
+| Parse a WeChat file | `{{OFFERCLAW_LAUNCHER}} attachment '<MediaPath>' --purpose <jd|knowledge|project|resume>` |
+| Match a parsed JD file | `{{OFFERCLAW_LAUNCHER}} match-source <attachment action_id>` |
+| Generate or revise a plan draft | `{{OFFERCLAW_LAUNCHER}} plan 'request'` |
+| Read a plan/resume draft | `{{OFFERCLAW_LAUNCHER}} artifact status <thread_id>` |
+| List applications | `{{OFFERCLAW_LAUNCHER}} applications` |
+| Preview an application status update | `{{OFFERCLAW_LAUNCHER}} application-update <application_id> --status-code <code>` |
+| List pending writes | `{{OFFERCLAW_LAUNCHER}} pending list --status pending` |
+| Show one pending write | `{{OFFERCLAW_LAUNCHER}} pending show <action_id>` |
+| Generate a project section or full resume draft | `{{OFFERCLAW_LAUNCHER}} resume-start ...` |
+| Weekly closed loop | exactly once: `{{OFFERCLAW_LAUNCHER}} weekly` |
+| Crawl a public URL | `{{OFFERCLAW_LAUNCHER}} crawl ...` |
+| List knowledge candidates | `{{OFFERCLAW_LAUNCHER}} crawl-list` |
+| Review a knowledge candidate | `{{OFFERCLAW_LAUNCHER}} crawl-review ...` |
+| Import browser-extracted text | `{{OFFERCLAW_LAUNCHER}} crawl-from-text ...` |
+| Promote an approved knowledge candidate | `{{OFFERCLAW_LAUNCHER}} crawl-promote ...` |
+| Preview GitHub commits | `{{OFFERCLAW_LAUNCHER}} github-preview ...` |
+| Sync approved GitHub commits | `{{OFFERCLAW_LAUNCHER}} github-sync ...` |
+| Health check | `{{OFFERCLAW_LAUNCHER}} health` |
+| Full diagnostics | `{{OFFERCLAW_LAUNCHER}} doctor` |
+| Explicitly refresh derived indexes | `{{OFFERCLAW_LAUNCHER}} refresh-state` |
+
+Mandatory write boundaries:
+
+- Before calling `log`, convert natural language into this exact field syntax,
+  omitting fields the user did not provide:
+  `主线:补技能\n完成:item1;item2\n未完成:item1\n笔记:text`.
+  `主线` must be one of 补技能/补项目/补面试/岗位调研/投递准备.
+- `log` and `application-update` only create previews. Run `pending confirm` only
+  after the user sees the preview and explicitly confirms it:
+  `{{OFFERCLAW_LAUNCHER}} pending confirm <action_id>`. A refusal uses
+  `{{OFFERCLAW_LAUNCHER}} pending reject <action_id>`.
+- Show profile-suggestion evidence before deciding. Then use exactly one of:
+  `{{OFFERCLAW_LAUNCHER}} profile-suggestion accept <suggestion_id> --reason 'reason'`,
+  `{{OFFERCLAW_LAUNCHER}} profile-suggestion modify <suggestion_id> --value-json '<json>' --reason 'reason'`,
+  or `{{OFFERCLAW_LAUNCHER}} profile-suggestion reject <suggestion_id> --reason 'reason'`.
+- `plan` and `resume-start` only create reviewed drafts. Run `artifact approve`,
+  `artifact request-changes`, or `artifact reject` only after the user sees the draft:
+  `{{OFFERCLAW_LAUNCHER}} artifact approve <thread_id>`,
+  `{{OFFERCLAW_LAUNCHER}} artifact request-changes <thread_id> --change-request 'request'`,
+  or `{{OFFERCLAW_LAUNCHER}} artifact reject <thread_id>`.
+- `weekly` never runs `plan`. If it recommends replanning, ask again.
+- Knowledge import requires review before `crawl-promote`; GitHub preview requires
+  confirmation before `github-sync`.
+
+For `query`, preserve its evidence boundary: when `in_kb=true`, answer from its
+`answer` and include the returned `sources`; when `in_kb=false`, clearly say the
+personal knowledge base did not directly cover the question. Never invent a source.
+
+For every command, faithfully render the returned JSON. Do not add a diagnosis or
+warning that contradicts its fields. In particular, if a `log` preview contains
+non-empty `done` or `todo`, do not claim those fields were not recognized.
+
+Never use `ls`, `find`, `cat`, `rg`, `grep`, Python, a shell wrapper, direct file
+access, or launcher `--help` to discover OfferClaw data or commands. If a launcher
+call fails, is denied, or returns invalid output, report that failure. Do not try a
+different system command and do not infer an answer from memory.
+<!-- END OFFERCLAW MANAGED ROUTING -->

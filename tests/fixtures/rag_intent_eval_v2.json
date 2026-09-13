@@ -1,0 +1,312 @@
+{
+  "schema_version": 2,
+  "families": [
+    {
+      "id": "personal_history_overview",
+      "queries": [
+        "告诉我之前我所做的工作",
+        "总结我前面完成的学习工作",
+        "复盘我的学习经历",
+        "帮我梳理过去做过的学习工作",
+        "回顾我此前完成过什么学习内容",
+        "盘点我以前练习过什么",
+        "为我概括过往的学习经历",
+        "列出我一路以来做过的工作"
+      ],
+      "must_pairs": [["reflection_memory", "get_history_overview"]],
+      "must_not_sources": ["reference_kb", "application_experience"]
+    },
+    {
+      "id": "personal_history_topic",
+      "queries": [
+        "我以前什么时候学过 BM25",
+        "我之前在哪里卡住过 LangGraph",
+        "查一下我哪次练习过向量检索",
+        "我曾经为何减少任务量",
+        "过去哪一天实现过 Chroma",
+        "我以前对 reranker 做过什么",
+        "找出我处理过 distribution shift 的记录",
+        "我之前遇到过哪些 RAG 评测问题"
+      ],
+      "must_pairs": [["reflection_memory", "search_topic"]],
+      "must_not_sources": ["reference_kb", "application_experience"]
+    },
+    {
+      "id": "general_knowledge",
+      "queries": [
+        "什么是 BM25",
+        "介绍一下向量检索原理",
+        "RAG 中的重排器如何工作",
+        "解释混合检索的概念",
+        "RRF 融合排序有什么作用",
+        "如何理解 distribution shift",
+        "介绍 Chroma collection 的用途",
+        "一般怎样评估检索系统"
+      ],
+      "must_pairs": [["reference_kb", "search"]],
+      "must_not_sources": ["reflection_memory", "profile_plan", "project_memory"]
+    },
+    {
+      "id": "current_profile",
+      "queries": [
+        "告诉我我的画像",
+        "我目前的个人情况是什么",
+        "读取我的求职方向",
+        "我的能力有哪些",
+        "我现在的技能情况如何",
+        "根据我的画像总结当前状态",
+        "我会什么技术",
+        "查看我当前的用户画像"
+      ],
+      "must_pairs": [["profile_plan", "get_profile"]],
+      "must_not_sources": ["reference_kb"]
+    },
+    {
+      "id": "current_plan",
+      "queries": [
+        "告诉我当前学习计划",
+        "我的学习计划是什么",
+        "查看我现在的计划",
+        "我今天在计划里该做什么",
+        "读取我的当前计划",
+        "本周我的学习计划怎么安排",
+        "我的下一步学习计划是什么",
+        "展示我目前的计划任务"
+      ],
+      "must_pairs": [["profile_plan", "get_plan"]],
+      "must_not_sources": ["reference_kb", "application_experience"]
+    },
+    {
+      "id": "dated_execution",
+      "queries": [
+        "我今天做了什么",
+        "我昨天学了什么",
+        "我本周完成了什么",
+        "我上周执行了哪些任务",
+        "查看我今天的执行记录",
+        "总结我昨天的学习记录",
+        "本周我的学习执行情况如何",
+        "复盘我上周完成的学习工作"
+      ],
+      "must_pairs": [["reflection_memory", "get_by_date"]],
+      "must_not_sources": ["reference_kb", "application_experience"]
+    },
+    {
+      "id": "recent_execution",
+      "queries": [
+        "我最近做了什么",
+        "我近期学了哪些内容",
+        "查看我最近的执行记录",
+        "总结我近期完成的任务",
+        "最近我的学习进展如何",
+        "这段时间我做了哪些练习",
+        "读取我最近的学习留痕",
+        "我近期在哪里卡住了"
+      ],
+      "must_pairs": [["reflection_memory", "get_recent"]],
+      "must_not_sources": ["reference_kb", "application_experience"]
+    },
+    {
+      "id": "application_state",
+      "queries": [
+        "我当前有哪些投递记录",
+        "查看我的投递状态",
+        "我的岗位进度怎么样",
+        "我目前的投递进度是什么",
+        "列出我的求职进度",
+        "我的投递池里有什么",
+        "告诉我现在的面试进度",
+        "查看我当前记录的投递"
+      ],
+      "must_pairs": [["application_state", "list_current"]],
+      "must_not_sources": ["reference_kb", "reflection_memory"]
+    },
+    {
+      "id": "application_experience",
+      "queries": [
+        "复盘我的华为面试经验",
+        "总结我的投递经验",
+        "查找我记录的笔试经验",
+        "我的面经里提到了什么",
+        "回顾我的投递教训",
+        "根据我的亲历总结面试问题",
+        "查看我的经验总结",
+        "我之前面试的复盘是什么"
+      ],
+      "must_pairs": [["application_experience", "search"]],
+      "must_not_sources": ["reflection_memory", "reference_kb"]
+    },
+    {
+      "id": "general_interview_knowledge",
+      "queries": [
+        "面试复盘一般应该怎么做",
+        "笔试经验通常如何总结",
+        "面经是什么",
+        "技术面试有哪些注意事项",
+        "应届生面试失败后如何调整",
+        "一般怎样准备行为面试",
+        "STAR 面试法怎么使用",
+        "面试流程通常包含哪些阶段"
+      ],
+      "must_pairs": [["reference_kb", "search"]],
+      "must_not_sources": ["application_experience", "reflection_memory"]
+    },
+    {
+      "id": "personal_project_memory",
+      "queries": [
+        "总结我的 OfferClaw 项目",
+        "我做的项目里有哪些技术",
+        "查看我的项目材料",
+        "我的 LocalFlow 项目实现了什么",
+        "根据我的项目内容列出成果",
+        "读取我的项目经历",
+        "我的项目记忆中有哪些评测工作"
+      ],
+      "must_pairs": [["project_memory", "search"]],
+      "must_not_sources": ["reference_kb", "reflection_memory"]
+    },
+    {
+      "id": "personal_project_inventory",
+      "queries": [
+        "我前面做过的项目有哪些"
+      ],
+      "must_pairs": [["project_memory", "list_catalog"]],
+      "must_not_sources": ["application_state", "reference_kb", "reflection_memory"]
+    },
+    {
+      "id": "general_project_knowledge",
+      "queries": [
+        "项目经历一般怎么写",
+        "一个 RAG 项目应该包含什么",
+        "如何介绍软件项目的技术架构",
+        "项目复盘通常包含哪些内容",
+        "项目成果应该如何量化",
+        "一般怎样描述个人贡献",
+        "技术项目需要哪些评测指标",
+        "AI 项目如何设计验收标准"
+      ],
+      "must_pairs": [["reference_kb", "search"]],
+      "must_not_sources": ["project_memory", "reflection_memory"]
+    },
+    {
+      "id": "personal_resume_memory",
+      "queries": [
+        "按我的简历格式怎么写项目",
+        "查看我的简历规则",
+        "读取我的简历模板",
+        "根据我的写作指导改项目经历",
+        "我的简历写法有什么要求",
+        "按我的格式组织项目成果",
+        "总结我的简历模板特点",
+        "我的项目经历应该按什么格式写"
+      ],
+      "must_pairs": [["resume_rules", "search"]],
+      "must_not_sources": ["reference_kb"]
+    },
+    {
+      "id": "general_resume_knowledge",
+      "queries": [
+        "简历格式一般有哪些要求",
+        "应届生简历怎么写",
+        "项目经历应该采用什么结构",
+        "简历中如何量化成果",
+        "一般的简历模板包含什么",
+        "技术简历有哪些写作原则",
+        "简历里如何描述个人贡献",
+        "ATS 简历格式是什么"
+      ],
+      "must_pairs": [["reference_kb", "search"]],
+      "must_not_sources": ["resume_rules", "project_memory"]
+    },
+    {
+      "id": "mixed_reflection_and_reference",
+      "queries": [
+        "根据我以前的学习记录解释 BM25 原理",
+        "结合我过去的 RAG 练习介绍 RRF",
+        "参考我之前的执行情况普及向量检索概念",
+        "根据我的学习经历解释 reranker 的作用",
+        "结合我以前卡住的地方说明 LangGraph 原理",
+        "用我之前的练习记录介绍混合检索",
+        "根据我过去做过的工作解释 distribution shift",
+        "结合我的历史学习情况介绍 Chroma"
+      ],
+      "must_pairs": [["reflection_memory", "search_topic"], ["reference_kb", "search"]],
+      "must_not_sources": ["application_experience"]
+    },
+    {
+      "id": "mixed_project_and_reference",
+      "queries": [
+        "结合我的 OfferClaw 项目解释混合检索原理",
+        "根据我的项目材料介绍 RRF 的作用",
+        "用我的 LocalFlow 项目说明 Agent 编排概念",
+        "结合我的项目内容普及 reranker 技术",
+        "根据我的项目经历解释检索评测指标",
+        "用我做的项目说明 Evidence Gate",
+        "结合我的项目成果介绍 LangGraph",
+        "根据我的项目记忆解释向量数据库"
+      ],
+      "must_pairs": [["project_memory", "search"], ["reference_kb", "search"]],
+      "must_not_sources": ["reflection_memory"]
+    },
+    {
+      "id": "mixed_application_and_reference",
+      "queries": [
+        "我准备投哪些公司，这些岗位需要哪些核心能力",
+        "我的投递状态是什么，对应岗位要求有哪些",
+        "列出我近期投递，并解释这些岗位的任职要求",
+        "查看我的岗位进度，同时说明对应 JD 的技能要求",
+        "我当前要投哪些企业，这些岗位职责是什么",
+        "告诉我投递池状态，并介绍对应岗位的核心能力",
+        "我目前的投递记录有哪些，对应 JD 要求的技术概念是什么",
+        "查看我的求职进度，同时解释这些岗位会考察什么"
+      ],
+      "must_sources": ["application_state", "application_jd", "reference_kb"],
+      "must_not_sources": ["reflection_memory"]
+    },
+    {
+      "id": "negation_general_only",
+      "queries": [
+        "不要看我的记录，只解释 BM25",
+        "我以前没学过 BM25，介绍一下",
+        "不用我的项目，说明 RAG 原理",
+        "别引用我的简历，给出通用简历建议",
+        "不查我的投递记录，介绍求职漏斗",
+        "不用个人经验，解释面试中的 STAR",
+        "我不是要学习复盘，解释复盘这个概念",
+        "不需要论文，只用一般资料介绍 Transformer"
+      ],
+      "must_pairs": [["reference_kb", "search"]],
+      "must_not_sources": ["application_state", "application_experience", "reflection_memory", "project_memory", "resume_rules", "paper_kb"]
+    },
+    {
+      "id": "personal_history_without_reference",
+      "queries": [
+        "不要引用通用资料，只总结我的学习经历",
+        "只看我的学习记录，回顾以前做过的工作",
+        "别查知识库，盘点我过去完成的学习内容",
+        "不用参考资料，复盘我的学习经历",
+        "只依据我的执行记录总结之前的进展",
+        "不要通用知识，列出我以前练习过什么",
+        "仅根据我的历史记录梳理学习过程",
+        "不要论文和资料，告诉我之前做了什么"
+      ],
+      "must_pairs": [["reflection_memory", "get_history_overview"]],
+      "must_not_sources": ["reference_kb", "paper_kb", "application_experience"]
+    },
+    {
+      "id": "explicit_paper",
+      "queries": [
+        "结合论文说明 ReAct 的研究依据",
+        "查找 RAG 评测相关文献",
+        "用 paper 解释 retrieval augmentation",
+        "给出 reranker 的学术研究依据",
+        "检索关于 Agent memory 的原论文",
+        "介绍 HyDE 的论文证据",
+        "从研究文献说明 query rewrite",
+        "查找 distribution shift 的相关论文"
+      ],
+      "must_pairs": [["paper_kb", "search"]],
+      "must_not_sources": ["reflection_memory", "project_memory", "application_experience"]
+    }
+  ]
+}

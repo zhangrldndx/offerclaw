@@ -1,0 +1,355 @@
+---
+name: offerclaw
+description: "用户的个人求职/学习知识库与求职助手。凡涉及求职、JD匹配、每日建议、学习留痕，以及大模型应用工程师方向的技术概念问答（RAG、Agent、ReAct、Planner、工具调用/Function Calling、MySQL、Redis、消息队列、Transformer、模型微调、Harness 等，含\"什么是X/解释X/X怎么做\"），都先用本技能查用户自己的知识库，命中才答、未命中要坦白。本地直接跑脚本，无需服务。"
+metadata:
+  openclaw:
+    emoji: "🦞"
+    os: ["linux"]
+    requires:
+      env: ["OPENAI_API_KEY"]
+    primaryEnv: "OPENAI_API_KEY"
+---
+
+# OfferClaw
+
+OfferClaw is a local career coaching agent. All commands run Python scripts directly — no background server needed.
+
+**CLI:** `{{OFFERCLAW_LAUNCHER}}`
+
+## When to use
+
+- Career planning, job hunting, learning progress, resume, skills gap
+- "Today's advice" / "what should I do today" / "今天该做什么"
+- Match a JD against user profile / "帮我匹配这个岗位"
+- Log daily learning progress / "记录今天学习"
+- Ask about profile, skills, career direction
+- Study plan, skill gaps
+- Anything about 求职/找工作/实习/简历/面试
+- **大模型应用工程师方向的技术/学习问题**（RAG、Agent、Planner、工具调用、
+  MySQL、Redis、消息队列、Transformer、模型微调等）—— 走 `query` 命令查知识库
+
+## 强制命令路由（最高优先级）
+
+只要用户询问下面这些信息，必须先执行对应的 OfferClaw 命令，并且只根据命令返回的 JSON
+作答。即使聊天记录或 Agent 记忆里已有类似信息，也不得跳过命令或改用记忆推断。
+
+| 用户意图 | 必须执行 |
+|---|---|
+| 当前画像、我的画像、技能或职业方向 | `{{OFFERCLAW_LAUNCHER}} profile` |
+| 今天做什么、今日安排 | `{{OFFERCLAW_LAUNCHER}} today` |
+| 最近学习记录 | `{{OFFERCLAW_LAUNCHER}} daily` |
+| 记录学习进度 | `{{OFFERCLAW_LAUNCHER}} log '结构化记录'`，确认后才执行 `{{OFFERCLAW_LAUNCHER}} pending confirm <action_id>` |
+| 当日复盘 | `{{OFFERCLAW_LAUNCHER}} review` |
+| 从近期证据生成画像建议 | `{{OFFERCLAW_LAUNCHER}} grow` |
+| 查看或决定画像建议 | `{{OFFERCLAW_LAUNCHER}} profile-suggestion ...` |
+| 技术问题或知识库问答 | `{{OFFERCLAW_LAUNCHER}} query '用户原问题' --conversation-id '<当前微信会话ID>'` |
+| 匹配粘贴的 JD | `{{OFFERCLAW_LAUNCHER}} match 'JD原文'` |
+| 匹配微信 JD 文件 | `{{OFFERCLAW_LAUNCHER}} attachment '<MediaPath>' --purpose jd`，再执行 `{{OFFERCLAW_LAUNCHER}} match-source <action_id>` |
+| 制定或修改计划 | `{{OFFERCLAW_LAUNCHER}} plan '用户要求'`，后续决定走 `{{OFFERCLAW_LAUNCHER}} artifact ...` |
+| 最近投了哪些公司、投递记录或投递进度 | `{{OFFERCLAW_LAUNCHER}} applications` |
+| 更新投递状态 | `{{OFFERCLAW_LAUNCHER}} application-update ...`，确认后才执行 `{{OFFERCLAW_LAUNCHER}} pending ...` |
+| 解析知识、项目或简历文件 | `{{OFFERCLAW_LAUNCHER}} attachment ...` |
+| 生成项目经历或完整简历 | `{{OFFERCLAW_LAUNCHER}} resume-start ...`，后续决定走 `{{OFFERCLAW_LAUNCHER}} artifact ...` |
+| 周复盘 | `{{OFFERCLAW_LAUNCHER}} weekly`，不得拆成多个命令 |
+| 查看待确认操作 | `{{OFFERCLAW_LAUNCHER}} pending list` |
+| 采集网页知识 | `{{OFFERCLAW_LAUNCHER}} crawl ...`、`{{OFFERCLAW_LAUNCHER}} crawl-list`、`{{OFFERCLAW_LAUNCHER}} crawl-review ...`、`{{OFFERCLAW_LAUNCHER}} crawl-from-text ...`、`{{OFFERCLAW_LAUNCHER}} crawl-promote ...` |
+| 查看或同步 GitHub 留痕 | 先执行 `{{OFFERCLAW_LAUNCHER}} github-preview ...`；明确确认后才执行 `{{OFFERCLAW_LAUNCHER}} github-sync ...` |
+| 检查系统 | `{{OFFERCLAW_LAUNCHER}} health`；需要完整诊断时执行 `{{OFFERCLAW_LAUNCHER}} doctor` |
+| 用户明确要求刷新派生索引 | `{{OFFERCLAW_LAUNCHER}} refresh-state` |
+
+执行命令时，第一个可执行文件必须精确为上面的 CLI 路径。不要先运行 `ls`、`find`、`cat`、
+`rg`、`grep`、Python 或 shell 包装器来寻找画像、投递或日志文件，也不要直接读取这些业务文件。
+安全白名单只允许 OfferClaw launcher。以上规则适用于所有 OfferClaw 意图，不只适用于画像和投递。
+若命令失败、被拒绝或返回无法解析的结果，应如实报告该工具错误并建议重试；不得改用另一个
+系统命令，不得用聊天记忆、周复盘摘要或猜测生成替代答案。
+
+## ⚠️ 知识库优先原则（重要）
+
+当用户问"什么是X / X怎么做 / 解释X"这类**技术或学习类**问题时，**必须先调
+`query` 命令查知识库**，不要直接用你自己的知识回答。
+
+`query` 始终返回一个 `answer`，并带 `in_kb` 字段标明来源：
+- `in_kb: true` → 答案基于知识库；**转述 `answer` 并附上 `sources` 来源文件名**。
+- `in_kb: false` → 答案是"通用知识 + 项目先验"兜底，`answer` 开头已自带
+  "⚠️ 此问题知识库未直接覆盖…"标注；**原样转述即可**（不要再删标注、也不要
+  假装它来自知识库）。
+
+即：知识库优先、命中标出处；没有就用通用知识兜底但明确标注，让用户始终拿到有用答案。
+例："什么是 RAG" → in_kb:true 带来源；"什么是 Vue3" → in_kb:false，给带标注的通用回答。
+
+## Commands
+
+All commands output JSON. Run from any directory.
+
+### Today's advice (most frequent)
+
+```bash
+{{OFFERCLAW_LAUNCHER}} today
+```
+
+Returns: headline, reason, next_actions, adjustments, **plan**, **today_plan**, **plan_drift**, stats.
+
+`plan_drift` 是计划偏离评估（计划本体只在用户主动重排时改变）：level=info/warn 时
+**必须把 `plan_drift.message` 转告用户**（如"近 2 天累计 3 项未完成，建议重排计划"），
+用户回复同意后可代为执行 `plan` 命令重排。
+
+**所有每日推送/提醒都要以最新学习计划为参考。** 返回里 `plan` 字段是当前计划（含用户手动
+调整）的本周重点：`plan.current_week = {n, theme, tags, deliverable}`、`plan.edited_by_user`、
+`plan.expired`。`next_actions[0]` 已是「本周计划·第N周」主线动作。推送时**先报本周计划重点**
+（第几周 / 主题 / 本周交付），再报投递动作与复盘调整。若 `plan.edited_by_user` 为真，说明这是
+用户自己改过的计划，按用户的版本提醒；若 `plan.expired` 为真，提示"计划已到期，建议重新生成"。
+
+### 学习计划（生成/更新 → 推送微信）
+
+用户说"制定/更新学习计划""调整一下计划""按这个补充改计划"时调用。会结合画像 + 知识库(RAG)
++ 已有项目先验(LocalFlow 等)生成 4 周计划。
+
+```bash
+{{OFFERCLAW_LAUNCHER}} plan ['可选：缺口/调整说明']
+```
+
+返回 Plan Agent / Critic 审查后的草稿、`thread_id` 与 `review_report`。此命令不会修改当前计划，
+`saved_path` 必须为空。把评审摘要和主要变化发给用户，待用户明确回复批准或提出修改后再执行：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} artifact approve <thread_id>
+{{OFFERCLAW_LAUNCHER}} artifact request-changes <thread_id> --change-request '用户原话'
+{{OFFERCLAW_LAUNCHER}} artifact reject <thread_id>
+```
+
+不得把“帮我优化一下”等生成请求视为批准。批准必须发生在用户看到本轮草稿和 Critic 结果之后。
+
+缺口来源（自动，按优先级）：显式入参 > **缺口信息库**（用户把 JD 设为目标后持续累积的
+application_jd_store 中已批准的目标 JD 快照，跨 JD 合并去重）> 画像默认。计划永远基于
+「画像 + 知识库 + 目标 JD 快照」三件套，
+与单次 JD 匹配解耦——用户多次上传 JD，缺口库会持续维护，计划随之演进。
+
+边界：计划里"推进项目"类任务只是给用户的**建议**，OfferClaw 不代为开发项目（只读）。
+
+### User profile
+
+```bash
+{{OFFERCLAW_LAUNCHER}} profile
+```
+
+### 画像更新建议（查看与审批）
+
+先列出 pending 建议，再按 ID 查看完整建议和证据。不得自动接受、修改或拒绝。
+
+```bash
+{{OFFERCLAW_LAUNCHER}} profile-suggestion list --status pending
+{{OFFERCLAW_LAUNCHER}} profile-suggestion show <id>
+```
+
+只有在用户看过建议及证据并明确选择后，才能执行对应命令：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} profile-suggestion accept <id> --reason '用户确认的理由'
+{{OFFERCLAW_LAUNCHER}} profile-suggestion modify <id> --value-json '<合法 JSON>' --reason '用户确认的理由'
+{{OFFERCLAW_LAUNCHER}} profile-suggestion reject <id> --reason '用户确认的理由'
+```
+
+`accept` / `modify` 会自动安全刷新 `user_profile.md` 的向量状态，并返回 `result_revision`
+和 `refresh_state`；`reject` 不刷新。重复的微信消息会使用稳定 operation id 幂等重放。
+
+### Job matching
+
+Three-tier verdict (适合投递 / 中长期可转向 / 暂不建议) plus skill gaps.
+
+```bash
+{{OFFERCLAW_LAUNCHER}} match '粘贴JD原文在这里'
+```
+
+微信文件形式的 JD 先走附件解析，再把返回的 `action_id` 用于匹配：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} attachment '<MediaPath>' --purpose jd
+{{OFFERCLAW_LAUNCHER}} match-source <action_id>
+```
+
+### RAG knowledge base Q&A
+
+```bash
+{{OFFERCLAW_LAUNCHER}} query '问题内容' --conversation-id '<稳定的微信会话ID>'
+```
+
+同一微信会话必须持续使用同一个 `conversation-id`，这样“这些公司”“上一条”等指代才会绑定
+OfferClaw 上一轮返回的真实实体 ID。不要拼接最近三条问题作为上下文。
+
+### Read recent daily logs
+
+```bash
+{{OFFERCLAW_LAUNCHER}} daily
+```
+
+### Append daily learning record (结构化留痕)
+
+把用户口述的今日学习整理成下面的结构化格式再传给 `log`（这样晚间复盘能正确解析）。
+支持字段：`主线`（5 选 1：补技能/补项目/补面试/岗位调研/投递准备）、`完成`、`未完成`、`笔记`；
+多项用分号 `；` 分隔。用户没说的字段可省略。
+
+```bash
+{{OFFERCLAW_LAUNCHER}} log '主线:补技能
+完成:看完RAG全链路教程;写了分块代码
+未完成:刷题2道
+笔记:LangGraph条件边文档偏少'
+```
+
+`log` 只返回预览和 `action_id`，不会立即记录。先把解析后的完成、未完成和笔记展示给用户；
+用户明确确认后再执行 `pending confirm`：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} pending confirm <action_id>
+```
+
+### Daily reflection (复盘 → 次日调整)
+
+用户说"复盘今天 / 帮我复盘 / 今天总结一下"时调用。会跑 LLM 复盘、沉淀到记忆，
+返回 `active_adjustments`（若最近连续高偏离或反复未完成，会给出减量/调整建议）。
+
+```bash
+{{OFFERCLAW_LAUNCHER}} review
+```
+
+向用户转述 `saved`（已保存复盘）和 `active_adjustments`（若非空，作为明日提醒）。
+没有当日留痕时只能提示用户补充，禁止自动写成“全部未完成”。
+
+### 微信附件与简历工坊
+
+微信网关提供的 `MediaPath` 只能先进入附件预览。支持 `.md/.txt/.markdown/.pdf/.docx`；
+图片不做 OCR，外部 Chroma/FAISS/SQLite 向量库不直接合并。知识文档采用两段确认：第一次确认
+只保存待审候选，第二次在用户看过候选全文、来源与建议分类后才提升并增量写入 OfferClaw 自己的索引：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} attachment '<MediaPath>' --purpose knowledge
+{{OFFERCLAW_LAUNCHER}} pending confirm <action_id>
+{{OFFERCLAW_LAUNCHER}} crawl-review <result.saved>
+{{OFFERCLAW_LAUNCHER}} crawl-promote <result.saved> --to <suggested_subdir> --ingest
+```
+
+`crawl-promote` 只能在用户看过 `crawl-review` 返回的来源、全文预览和目标分类并明确批准后执行。
+第一次 `pending confirm` 不能被解释为正式入库。
+
+项目材料、已有简历先分别解析为只读来源，再进入统一 Resume Agent → 硬校验 → Critic 工作流：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} attachment '<MediaPath>' --purpose project
+{{OFFERCLAW_LAUNCHER}} resume-start --scope project_section --project-action-id <action_id> [--application-id <id> --jd-version-id <id>]
+
+{{OFFERCLAW_LAUNCHER}} attachment '<MediaPath>' --purpose resume
+{{OFFERCLAW_LAUNCHER}} resume-start --scope full_resume --resume-action-id <action_id> --application-id <id> --jd-version-id <id>
+```
+
+项目经历不带投递 ID 时生成通用版；完整简历必须绑定真实投递 JD。两种产物都只生成待审批草稿，
+使用 `artifact approve/request-changes/reject` 完成后续。批准项目经历只保存满意版本；只有传入
+`--remember-project` 时才另外生成项目来源候选，仍需在知识库候选区审核。
+
+### 投递状态
+
+先读取真实 `application_id`，再用机器枚举生成变更预览。确认前不写 `applications.md`：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} applications
+{{OFFERCLAW_LAUNCHER}} application-update <application_id> --status-code applied
+{{OFFERCLAW_LAUNCHER}} pending confirm <action_id>
+```
+
+### Weekly closed loop（确定性周闭环）
+
+周任务只允许调用下面这一个命令一次。不要自行拆成 `review`、`grow`、`plan`、
+`refresh-state` 多步，也不要补跑其中任何一步：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} weekly
+```
+
+向用户转述唯一返回中的 `wechat_summary`。若 `should_replan=true`，只能说明
+`replan_reason` 并再次询问用户是否重排；本命令不会修改计划。只有用户随后明确同意，才可单独执行
+`plan`，并把新计划摘要返回给用户。
+
+### 采集网页进知识库（半自动，人在回路）
+
+**确认优先**：无论是用户主动给链接，还是你（模型）根据学习进度觉得"该补一篇某主题资料"，
+在**搜索/采集前都要先向用户确认**（"我想采集 X 来补 Y，是否可以？"）。得到同意才 crawl。
+
+用户发"把这篇加进知识库 <url>"或"采集这个链接"时，调 knowledge_crawler 抓取 + LLM 质量打分：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} crawl "<url>"
+```
+
+返回里**显式带 `source_url`（来源链接，判断文章质量）+ `saved_abs`（本地文件绝对路径，
+打开判断采集是否完整）+ `stats`（字数/行数/链接占比）+ `preview`（头尾预览）**。
+reject 自动丢弃不落盘。知乎/CSDN 等反爬站 crawl 会失败 → 见下"登录态采集"。
+
+**GitHub 仓库会自动整仓采集**：给 `crawl` 一个 GitHub 仓库/README 链接时，会自动抓取
+仓库内**真正的内容文件**（docs/notebook 下的章节 .md / .ipynb），而不是只抓 README 简介。
+返回多 `files_captured / captured_paths`。给单个 raw 文件链接则只抓该文件。
+内容里的**相对图片路径会自动重写为 GitHub raw 绝对 URL**，保证资源打开时图片正常显示。
+
+**审核命令**（把来源/路径/评分/统计/预览一次性给用户看）：
+```bash
+{{OFFERCLAW_LAUNCHER}} crawl-list                 # 列出所有待审候选（带来源+评分）
+{{OFFERCLAW_LAUNCHER}} crawl-review <_pending文件>  # 单篇审核界面
+```
+转述时**务必给出 source_url（让用户判断来源）和 saved_abs（让用户开文件验采集质量）**。
+
+**登录态/反爬页采集（飞书/知乎/CSDN）**：crawl 抓不到时，用浏览器插件（doc2kb 技能 /
+Claude-in-Chrome）在用户已登录的页面读取正文，存成文件，再接入同一质量门：
+```bash
+{{OFFERCLAW_LAUNCHER}} crawl-from-text "<原页面URL>" --file <采集到的正文文件>
+```
+
+**向用户转述评分和理由，由用户决定是否收录**。用户确认收录后再提升（`--ingest` 增量入库，
+不重建、不影响原有知识库内容，提升后立即可检索）：
+
+```bash
+{{OFFERCLAW_LAUNCHER}} crawl-promote "<_pending文件路径>" --to learning_resources --ingest
+```
+
+注意：promote 是写入正式知识库的动作，**必须用户明确确认后才执行**。
+新资料只**增量补充**，不会改动/删除已有知识库内容。
+
+### 同步 GitHub 提交为留痕
+
+用户说"同步我的 GitHub / 把今天的提交记进去"时，把当天公开 commit 写入 daily_log（主线=补项目）。
+username 可由用户给出，或已配在 .env.local 的 GITHUB_USERNAME。
+
+```bash
+# 只看不写
+{{OFFERCLAW_LAUNCHER}} github-preview <github用户名>
+# 写入今日留痕
+{{OFFERCLAW_LAUNCHER}} github-sync <github用户名>
+```
+
+返回 `synced`（写入条数）与 `items`，向用户转述同步了哪些提交。
+
+### System health check
+
+```bash
+{{OFFERCLAW_LAUNCHER}} health
+```
+
+### Full doctor check
+
+```bash
+{{OFFERCLAW_LAUNCHER}} doctor
+```
+
+## Output formatting for chat
+
+- Parse the JSON and present it naturally in Chinese.
+- For today's advice: lead with the headline, then list next actions as bullets.
+- For job matching: lead with the conclusion (适合/中长期/暂不建议), then the reason, then gaps as bullets.
+- For profile: summarize key fields (direction, skills, location).
+- Keep messages concise — WeChat/chat channels prefer short, punchy messages.
+
+## Cron tasks
+
+Schedule with OpenClaw cron for automated check-ins:
+
+| When | What | Command |
+|---|---|---|
+| Weekday 09:00 | Morning advice push | `today` 命令；**先报 `plan.current_week` 本周计划重点（第N周/主题/交付）**，再报投递动作与复盘调整 |
+| Daily 22:00 | Remind to log | Check if today has a log entry; if not, only remind user；提醒里带上「本周计划」要交付什么（`plan.current_week.deliverable`），不得代写留痕 |
+| Sunday 21:00 | Weekly review | **只调用一次 `weekly`** 并转述 `wechat_summary`。若 `should_replan=true`，询问用户是否重排；没有新的明确同意不得运行 `plan` |
